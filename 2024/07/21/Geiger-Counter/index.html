@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="I saw an activity on the EEPW (Electronic Engineering&amp;Product World) forum about playing with the “DFRobot Geiger Counter Module”. I happened to have learned about Geiger counters in textbooks, so">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Play with DFRobot Geiger Counter Module">
+<meta property="og:url" content="http://example.com/2024/07/21/Geiger-Counter/index.html">
+<meta property="og:site_name" content="Minkai-Shi&#39; Blog">
+<meta property="og:description" content="I saw an activity on the EEPW (Electronic Engineering&amp;Product World) forum about playing with the “DFRobot Geiger Counter Module”. I happened to have learned about Geiger counters in textbooks, so">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/upload/Geiger1.jpg">
+<meta property="og:image" content="http://example.com/upload/Geiger2.jpg">
+<meta property="article:published_time" content="2024-07-21T13:20:06.000Z">
+<meta property="article:modified_time" content="2024-07-21T14:02:59.812Z">
+<meta property="article:author" content="Minkai Shi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/upload/Geiger1.jpg">
+
+<link rel="canonical" href="http://example.com/2024/07/21/Geiger-Counter/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Play with DFRobot Geiger Counter Module | Minkai-Shi' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Minkai-Shi' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Study</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/21/Geiger-Counter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/touxiang.jpg">
+      <meta itemprop="name" content="Minkai Shi">
+      <meta itemprop="description" content="Study">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minkai-Shi' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Play with DFRobot Geiger Counter Module
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-07-21 21:20:06 / Modified: 22:02:59" itemprop="dateCreated datePublished" datetime="2024-07-21T21:20:06+08:00">2024-07-21</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>I saw an activity on the EEPW (Electronic Engineering&amp;Product World) forum about playing with the “DFRobot Geiger Counter Module”. I happened to have learned about Geiger counters in textbooks, so I bought a module to DIY. Place an order at the official DFrobot brand store on Taobao and it will arrive one day after placing the order.<br><img src="/upload/Geiger1.jpg" alt="pic1" title="pic1"><br>The official code provided by DFrobot Geiger counter is based on Arduino. The program architecture uses external interrupts for counting, and then refreshes the data every 3 seconds in the main loop, takes 3 data to calculate CPM value, and then converts CPM into uSv&#x2F;h or nSv&#x2F;h and displays it on OLED LCD.<br>Attempt to rewrite the code in MicroPython and optimize the count by storing data every 3 seconds and caching it 20 times for a total of 1 minute to calculate CPM. The CPM is calculated based on the cache time before reaching 1 minute, and the longer the cache time, the more stable the data changes.<br>The wiring of OLED and Geiger counters is consistent with the Arduino code mentioned earlier.<br>After obtaining the DFRobot Geiger counter module, I also bought an adapter pin so that it can be connected to the ESP32 board for debugging. The official Arduino routine uses pin D3 to connect the D of the DFRobot Geiger counter module, but it is not recommended to use pin 3 and Rx pin shared by the ESP32 development board’s digital pin. Instead, it should be debugged using pin 14.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;  </span></span><br><span class="line"><span class="string">DFrobot DFRobot Geiger Counter Module experiment</span></span><br><span class="line"><span class="string">pin assign : pin DFrobot Geiger Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         (D)--&gt;(14)  </span></span><br><span class="line"><span class="string">         (+)--&gt;(5V)  </span></span><br><span class="line"><span class="string">         (-)--&gt;(GND)  </span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">OLED(IIC) Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         GND--&gt;(GND)  </span></span><br><span class="line"><span class="string">         VCC--&gt;(5V)  </span></span><br><span class="line"><span class="string">         SCL--&gt;(18)  </span></span><br><span class="line"><span class="string">         SDA--&gt;(23)  </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>  </span><br><span class="line"><span class="comment">#Import Pin Module</span></span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> SoftI2C  </span><br><span class="line"><span class="keyword">from</span> ssd1306 <span class="keyword">import</span> SSD1306_I2C  <span class="comment">#I2C oled  </span></span><br><span class="line"><span class="comment">#Create software I2C object </span></span><br><span class="line">i2c = SoftI2C(sda=Pin(<span class="number">23</span>), scl=Pin(<span class="number">18</span>))  </span><br><span class="line"><span class="comment">#Create OLED object,Resolution of OLED,I2C interface</span></span><br><span class="line">oled = SSD1306_I2C(<span class="number">128</span>, <span class="number">64</span>, i2c)   </span><br><span class="line"><span class="comment">#Geiger in  fenbl</span></span><br><span class="line">Geiger_In=Pin(<span class="number">14</span>,Pin.IN,Pin.PULL_UP)  </span><br><span class="line"><span class="comment">#Geiger Counter external interrupt function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Geiger_In_irq</span>(<span class="params">Geiger_In</span>):  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    numPulse = numPulse + <span class="number">1</span>   </span><br><span class="line"><span class="comment">#Program entrance</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    BUFFER_SIZE = <span class="number">20</span>  </span><br><span class="line">    rows, cols = <span class="number">2</span>, BUFFER_SIZE  </span><br><span class="line">    mem_data = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(cols)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(rows)]  </span><br><span class="line">    numPulse = <span class="number">0</span>  </span><br><span class="line">    pos = <span class="number">0</span>      </span><br><span class="line">    oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen    </span></span><br><span class="line">    oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string </span></span><br><span class="line">    oled.show()  <span class="comment">#Execute Display     </span></span><br><span class="line">    Geiger_In.irq(Geiger_In_irq,Pin.IRQ_FALLING)  <span class="comment">#Configure external interrupt, trigger falling edge</span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:    </span><br><span class="line">        time.sleep_ms(<span class="number">3000</span>)  </span><br><span class="line">        mem_data[<span class="number">0</span>][pos] = time.ticks_ms()  </span><br><span class="line">        mem_data[<span class="number">1</span>][pos] = numPulse  </span><br><span class="line">        numPulse = <span class="number">0</span>  </span><br><span class="line">        cpm=<span class="number">0</span>  </span><br><span class="line">        pos_old = pos  </span><br><span class="line">        pos = (pos+<span class="number">1</span>)%BUFFER_SIZE          </span><br><span class="line">        numAll = <span class="number">0</span>  </span><br><span class="line">        time_now = mem_data[<span class="number">0</span>][pos_old]   </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, BUFFER_SIZE - <span class="number">1</span>):  </span><br><span class="line">            <span class="keyword">if</span> mem_data[<span class="number">0</span>][pos_old] != <span class="number">0</span>:  </span><br><span class="line">                numAll = numAll + mem_data[<span class="number">1</span>][pos_old]  </span><br><span class="line">                time_old = mem_data[<span class="number">0</span>][pos_old]  </span><br><span class="line">                <span class="keyword">if</span> pos_old == <span class="number">0</span>:  </span><br><span class="line">                    pos_old =  BUFFER_SIZE - <span class="number">1</span>  </span><br><span class="line">                <span class="keyword">else</span>:  </span><br><span class="line">                    pos_old = pos_old - <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">if</span> time_now-time_old &gt; <span class="number">0</span>:  </span><br><span class="line">            cpm = numAll*<span class="number">1000</span>*<span class="number">60</span>/(time_now-time_old)  </span><br><span class="line">              </span><br><span class="line">        str1 = <span class="string">&quot;&#123;:.0f&#125;&quot;</span>.<span class="built_in">format</span>(cpm)    <span class="comment">#CPM Convert to string </span></span><br><span class="line">        str2 = <span class="string">&quot;&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(cpm/<span class="number">151</span>)<span class="comment">#uSv/h Convert to string  </span></span><br><span class="line">        oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen </span></span><br><span class="line">        oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string</span></span><br><span class="line">        oled.text(<span class="string">&quot;CPM&quot;</span>,<span class="number">80</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM units  </span></span><br><span class="line">        oled.text(<span class="string">&quot;uSv/h&quot;</span>,<span class="number">80</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h uints  </span></span><br><span class="line">        oled.text(str1,<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM data</span></span><br><span class="line">        oled.text(str2,<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h data</span></span><br><span class="line">        oled.show()  <span class="comment">#Execute Display</span></span><br></pre></td></tr></table></figure>
+<p><img src="/upload/Geiger2.jpg" alt="pic2" title="pic2"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/02/Cleaning-of-the-Sailor-14K/" rel="prev" title="Cleaning of the Sailor 14K Four Seasons Weaving Dyeing Pen Rod">
+      <i class="fa fa-chevron-left"></i> Cleaning of the Sailor 14K Four Seasons Weaving Dyeing Pen Rod
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81OTUyNS8zNTk4Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Minkai Shi"
+      src="/upload/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Minkai Shi</p>
+  <div class="site-description" itemprop="description">Study</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Minkai Shi</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
