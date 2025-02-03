@@ -69,6 +69,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Snake Game Activity-1</title>
+    <url>/2024/09/16/Snake_Game_Activity-1/</url>
+    <content><![CDATA[<h1 id="Snake-Game-Activity-1"><a href="#Snake-Game-Activity-1" class="headerlink" title="Snake Game Activity-1"></a>Snake Game Activity-1</h1><p>The <strong>“Let’s do Activity”</strong> is a year-long campaign initiated by DigiKey and EEPW, titled <strong>“Learn Technology with E-Classroom, Complete Tasks for Rebates.”</strong> In 2024, there will be 4 sessions. Each session features technical experts recommending development boards&#x2F;instrument kits with strong playability and educational value, guiding participants through hands-on practice. The activity aims to help electronics enthusiasts learn practical technical knowledge, accumulate DIY experience, and become better versions of themselves!</p>
+<p>I participated in the <strong>Snake Game Activity</strong> of the <strong>2nd session</strong> of “Let’s do Activity.” Within the specified timeframe, participants place orders through the exclusive “DigiKey Purchase” link on the DigiKey official website. By completing basic tasks explained by instructors, they can receive a rebate on their order costs.</p>
+<p><strong>Highlights of This Session</strong>:<br>Implementing the Snake Game using <strong>Raspberry Pi Pico</strong>.</p>
+<p><strong>Activity Page</strong>:<br><a href="https://www.eepw.com.cn/event/action/digikey/diy_sec.html">https://www.eepw.com.cn/event/action/digikey/diy_sec.html</a></p>
+<p>As a high school student participating for the first time, I carefully selected products to meet requirements without exceeding the budget.</p>
+<p><strong>Provided Components</strong>:</p>
+<p><strong>Core Components (for basic tasks)</strong>:</p>
+<ul>
+<li><strong>Raspberry Pi Pico</strong> - ARM® Cortex®-M0+ MCU 32-bit Evaluation Board - SC0917 (Required)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM543 - RP2040 LCD 1.14” Display (Choose 1 of 3)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM580 - LCD 2” Display (Choose 1 of 3)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - 103030400 - ST7789 LCD 1.14” Display (Choose 1 of 3)</li>
+</ul>
+<p><strong>Extended Components (for advanced tasks)</strong>:</p>
+<ul>
+<li><strong>Transistor</strong> - SS8550DTA - PNP Bipolar (BJT) 25 V 1.5 A 200MHz 1 W Through-Hole TO-92-3</li>
+<li><strong>Speaker</strong> - OWS-1330TA-8 - 8Ω General Speaker 500 mW 100 Hz~20 kHz Top Round</li>
+</ul>
+<p>Among the three screens, two had smaller sizes and resolutions (1.14”). The <strong>PIM580 PIOO DISPLAY PACK 2.0</strong> was larger but had tiny directional buttons, which made it unsuitable for game development. I chose the <strong>103030400</strong> model with directional buttons. Its display quality is decent, though limited in content capacity due to the small size. Additionally, I purchased a <strong>PIOO OMNIBUS (DUAL EXPANDER)</strong> board for the Pico. This dual expansion board is highly practical—after connecting the screen, the remaining slot allowed me to freely add components. For this project, I used it to connect a speaker without soldering.</p>
+<p>The screen uses the <strong>Waveshare Pico-LCD-1.14</strong> module. Waveshare provides official drivers and pre-ported LVGL driver examples, making development straightforward.<br><img src="/upload/snake1-1.jpg" alt="snake1-1" title="snake1-1"><br><img src="/upload/snake1-2.jpg" alt="snake1-2" title="snake1-2"><br><strong>My EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
+]]></content>
+      <categories>
+        <category>EEPW Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW Activity</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Yongsheng 601 pump piston lubrication and sealing tutorial</title>
     <url>/2024/03/30/Yongsheng-601-pump-piston-renew/</url>
     <content><![CDATA[<p>Yongsheng 601 pump piston lubrication and sealing tutorial.<br><img src="/upload/pic4.jpg" alt="pic4" title="pic4"><br> Drain ink, repeatedly inhale and spit out clean water to ensure no high concentration of ink residue, use factory disassembly, wrench or pliers to unscrew the piston, clean the inner wall of the pen holder and the mixture of ink and water on the piston with a dust-free tissue.<br>  Apply a circle of silicone oil to the piston head groove, use the previous tool to rotate the pen holder back, press a few times before absorbing ink, and ensure that it is evenly distributed inside the pen holder,That’s all.</p>
