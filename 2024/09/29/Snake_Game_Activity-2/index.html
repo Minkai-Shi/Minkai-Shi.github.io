@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://uphotos.eepw.com.cn/1713930123/pics/1724036918676284.png">
 <meta property="article:published_time" content="2024-09-29T07:36:30.000Z">
-<meta property="article:modified_time" content="2025-02-04T07:41:07.249Z">
+<meta property="article:modified_time" content="2025-02-04T07:42:02.697Z">
 <meta property="article:author" content="Minkai Shi">
 <meta property="article:tag" content="EEPW Activity">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-02-04 15:41:07" itemprop="dateModified" datetime="2025-02-04T15:41:07+08:00">2025-02-04</time>
+                <time title="Modified: 2025-02-04 15:42:02" itemprop="dateModified" datetime="2025-02-04T15:42:02+08:00">2025-02-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,10 +269,15 @@
 <hr>
 <h2 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h2><h3 id="Toolchain-Setup"><a href="#Toolchain-Setup" class="headerlink" title="Toolchain Setup"></a>Toolchain Setup</h3><p>Initially, I struggled with Keil MDK due to licensing and compilation issues. After days of troubleshooting, I switched to the <strong>official Pico SDK</strong> with <strong>VS Code</strong> and <strong>Visual Studio 2022</strong>, following these steps:  </p>
 <ol>
-<li>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </li>
-<li>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </li>
-<li>Compile code using:  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">nmake  </span><br></pre></td></tr></table></figure></li>
-<li>Flashed the generated <code>.uf2</code> file to the Pico.</li>
+<li><p>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </p>
+</li>
+<li><p>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </p>
+</li>
+<li><p>Compile code using:  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">nmake  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Flashed the generated <code>.uf2</code> file to the Pico.</p>
+</li>
 </ol>
 <h3 id="LVGL-Integration-for-GUI"><a href="#LVGL-Integration-for-GUI" class="headerlink" title="LVGL Integration for GUI"></a>LVGL Integration for GUI</h3><p>The <strong>Waveshare LCD</strong> utilized LVGL (Light and Versatile Graphics Library) with optimizations:</p>
 <p>DMA Transfers: Reduced CPU usage to <strong>&lt;35%</strong> by offloading SPI data transfer.</p>
