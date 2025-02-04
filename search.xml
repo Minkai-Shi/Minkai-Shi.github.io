@@ -185,54 +185,41 @@
 </li>
 </ul>
 <h3 id="Game-Logic-Implementation"><a href="#Game-Logic-Implementation" class="headerlink" title="Game Logic Implementation"></a>Game Logic Implementation</h3><h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><ol>
-<li><p><strong>Movement Mechanics</strong></p>
-<ul>
+<li><strong>Movement Mechanics</strong><ul>
 <li>Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</li>
 </ul>
 </li>
-<li><p><strong>Speed Scaling</strong></p>
-<ul>
+<li><strong>Speed Scaling</strong><ul>
 <li>Progressive difficulty: From 300ms&#x2F;step (Level 1) to 80ms&#x2F;step (Level 8).</li>
 </ul>
 </li>
-<li><p><strong>Collision Detection</strong></p>
-<ul>
-<li><p><strong>Food Consumption</strong>: Increases snake length and triggers sound effects.</p>
-</li>
-<li><p><strong>Boundary&#x2F;Body Collision</strong>: Ends the game and resets progress.</p>
-</li>
+<li><strong>Collision Detection</strong><ul>
+<li><strong>Food Consumption</strong>: Increases snake length and triggers sound effects.</li>
+<li><strong>Boundary&#x2F;Body Collision</strong>: Ends the game and resets progress.</li>
 </ul>
 </li>
 </ol>
 <h4 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h4><ul>
-<li><p>snake_body_t: Stores coordinates of snake segments.</p>
-</li>
-<li><p>my_eat_snake: Manages snake length, position, and growth.</p>
-</li>
-<li><p>my_snake_food: Tracks food location and remaining count.</p>
-</li>
+<li><code>snake_body_t</code>: Stores coordinates of snake segments.</li>
+<li><code>my_eat_snake</code>: Manages snake length, position, and growth.</li>
+<li><code>my_snake_food</code>: Tracks food location and remaining count.</li>
 </ul>
 <hr>
 <h3 id="Personalized-Audio-System"><a href="#Personalized-Audio-System" class="headerlink" title="Personalized Audio System"></a>Personalized Audio System</h3><h4 id="PWM-Driven-Sound-Effects"><a href="#PWM-Driven-Sound-Effects" class="headerlink" title="PWM-Driven Sound Effects"></a>PWM-Driven Sound Effects</h4><p>The speaker was controlled via GPIO 27 using <strong>Pulse Width Modulation (PWM)</strong>. Key steps:</p>
 <ol>
-<li><p>PWM Configuration</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gpio_set_function(<span class="number">27</span>, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, <span class="number">1.f</span>);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, <span class="number">20000</span>);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
-<li><p>Interrupt-Driven Audio Playback</p>
-<ul>
-<li><p>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</p>
-</li>
-<li><p>Used <code>on_pwm_wrap()</code> interrupt to play:</p>
-<ul>
-<li><p><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</p>
-</li>
-<li><p><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).</p>
-</li>
+<li>PWM Configuration<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gpio_set_function(<span class="number">27</span>, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, <span class="number">1.f</span>);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, <span class="number">20000</span>);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
+<li>Interrupt-Driven Audio Playback<ul>
+<li>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</li>
+<li>Used <code>on_pwm_wrap()</code> interrupt to play:<ul>
+<li><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</li>
+<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).<br><strong>Demo Video</strong>: Bilibili</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="Demo-Video-Bilibili"><a href="#Demo-Video-Bilibili" class="headerlink" title="Demo Video: Bilibili"></a><strong>Demo Video</strong>: Bilibili</h2><h3 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h3><ol>
+<hr>
+<h3 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h3><ol>
 <li><p>Development Environment</p>
 <ul>
 <li><p>Issue: Keil MDK compatibility issues and compilation errors.</p>
