@@ -212,22 +212,24 @@
 <li>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</li>
 <li>Used <code>on_pwm_wrap()</code> interrupt to play:<ul>
 <li><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</li>
-<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).<br><strong>Demo Video</strong>: Bilibili</li>
+<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).<br><strong>Demo Video</strong>: <a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a><br><a href="https://youtu.be/m1qLWg0Lp00"><img src="https://img.youtube.com/vi/VIDEO_ID/0.jpg" alt="Video Title"></a><br>&lt;iframe width&#x3D;&quot;560&quot; height&#x3D;&quot;315&quot; src&#x3D;&quot;<a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a>&quot; frameborder&#x3D;&quot;0&quot; allow&#x3D;&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;&#x2F;iframe&gt;</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h3><ol>
-<li><p>Development Environment</p>
+<iframe width="560" height="315" src="https://youtu.be/m1qLWg0Lp00" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+---
+### Challenges & Solutions
+1. Development Environment
+
 <ul>
 <li><p>Issue: Keil MDK compatibility issues and compilation errors.</p>
 </li>
 <li><p>Solution: Migrated to Pico SDK with VS Code, reducing build time by 50%.</p>
 </li>
 </ul>
-</li>
+<ol start="2">
 <li><p>Audio Quality Limitations</p>
 <ul>
 <li><p>Issue: Distortion due to PWM signal noise.</p>
@@ -255,9 +257,7 @@
 </li>
 </ul>
 <p><strong>Full Code &amp; Documentation</strong>: GitHub Repository</p>
-<p><strong>EEPW Forum Post</strong>: <a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
-<hr>
-<h3 id="Relevance-for-Undergraduate-Studies"><a href="#Relevance-for-Undergraduate-Studies" class="headerlink" title="Relevance for Undergraduate Studies"></a>Relevance for Undergraduate Studies</h3><p>This project exemplifies my ability to:</p>
+<h2 id="EEPW-Forum-Post-https-forum-eepw-com-cn-thread-384440-1https-forum-eepw-com-cn-thread-384453-1https-forum-eepw-com-cn-thread-384471-1https-forum-eepw-com-cn-thread-384521-1"><a href="#EEPW-Forum-Post-https-forum-eepw-com-cn-thread-384440-1https-forum-eepw-com-cn-thread-384453-1https-forum-eepw-com-cn-thread-384471-1https-forum-eepw-com-cn-thread-384521-1" class="headerlink" title="EEPW Forum Post:https://forum.eepw.com.cn/thread/384440/1https://forum.eepw.com.cn/thread/384453/1https://forum.eepw.com.cn/thread/384471/1https://forum.eepw.com.cn/thread/384521/1"></a><strong>EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a><br><a href="https://forum.eepw.com.cn/thread/384453/1">https://forum.eepw.com.cn/thread/384453/1</a><br><a href="https://forum.eepw.com.cn/thread/384471/1">https://forum.eepw.com.cn/thread/384471/1</a><br><a href="https://forum.eepw.com.cn/thread/384521/1">https://forum.eepw.com.cn/thread/384521/1</a></h2><h3 id="Relevance-for-Undergraduate-Studies"><a href="#Relevance-for-Undergraduate-Studies" class="headerlink" title="Relevance for Undergraduate Studies"></a>Relevance for Undergraduate Studies</h3><p>This project exemplifies my ability to:</p>
 <ul>
 <li><p>Apply theoretical concepts to practical implementations.</p>
 </li>
