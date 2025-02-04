@@ -219,7 +219,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h3><ol>
+<h2 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h2><ol>
 <li><p>Development Environment</p>
 <ul>
 <li><p>Issue: Keil MDK compatibility issues and compilation errors.</p>
@@ -245,7 +245,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="Conclusion-Learning-Outcomes"><a href="#Conclusion-Learning-Outcomes" class="headerlink" title="Conclusion &amp; Learning Outcomes"></a>Conclusion &amp; Learning Outcomes</h3><p>This project enhanced my expertise in <strong>embedded systems, real-time programming</strong>, and <strong>GUI development</strong>. Key takeaways:</p>
+<h2 id="Conclusion-Learning-Outcomes"><a href="#Conclusion-Learning-Outcomes" class="headerlink" title="Conclusion &amp; Learning Outcomes"></a>Conclusion &amp; Learning Outcomes</h2><p>This project enhanced my expertise in <strong>embedded systems, real-time programming</strong>, and <strong>GUI development</strong>. Key takeaways:</p>
 <ul>
 <li><p><strong>Adaptability</strong>: Successfully pivoted toolsets to overcome environmental hurdles.</p>
 </li>
