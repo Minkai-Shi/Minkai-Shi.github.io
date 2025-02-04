@@ -212,12 +212,13 @@
 <li>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</li>
 <li>Used <code>on_pwm_wrap()</code> interrupt to play:<ul>
 <li><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</li>
-<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).<br><strong>Demo Video</strong>: <a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a><iframe width="560" height="315" src="https://youtu.be/m1qLWg0Lp00" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
+<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
+<p><strong>Demo Video</strong>: <a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a></p>
 <hr>
 <h2 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h2><ol>
 <li><p>Development Environment</p>
