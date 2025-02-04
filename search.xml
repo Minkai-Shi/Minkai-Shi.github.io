@@ -156,12 +156,62 @@
 <hr>
 <h2 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h2><h3 id="Toolchain-Setup"><a href="#Toolchain-Setup" class="headerlink" title="Toolchain Setup"></a>Toolchain Setup</h3><p>Initially, I struggled with Keil MDK due to licensing and compilation issues. After days of troubleshooting, I switched to the <strong>official Pico SDK</strong> with <strong>VS Code</strong> and <strong>Visual Studio 2022</strong>, following these steps:  </p>
 <ol>
-<li><p>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </p>
+<li>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </li>
+<li>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </li>
+<li>Compile code using:  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">nmake  </span><br></pre></td></tr></table></figure></li>
+<li>Flashed the generated <code>.uf2</code> file to the Pico.</li>
+</ol>
+<h3 id="LVGL-Integration-for-GUI"><a href="#LVGL-Integration-for-GUI" class="headerlink" title="LVGL Integration for GUI"></a>LVGL Integration for GUI</h3><p>The <strong>Waveshare LCD</strong> utilized LVGL (Light and Versatile Graphics Library) with optimizations:</p>
+<p>DMA Transfers: Reduced CPU usage to <strong>&lt;35%</strong> by offloading SPI data transfer.</p>
+<ul>
+<li><p><strong>Double Buffering</strong>: Ensured smooth animations by rendering in one buffer while transferring another.</p>
 </li>
-<li><p>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </p>
+<li><p><strong>Custom Widgets</strong>: Designed four interactive pages:</p>
+<ul>
+<li><p><strong>Splash Screen</strong>: Displays the game logo.</p>
 </li>
-<li><p>Compile code using:  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">   <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">   cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">   nmake  </span><br><span class="line">4. Flashed the generated `.uf2` file to the Pico.</span><br><span class="line"></span><br><span class="line"><span class="comment">### LVGL Integration for GUI</span></span><br><span class="line">The **Waveshare LCD** utilized LVGL (Light and Versatile Graphics Library) with optimizations:</span><br><span class="line"></span><br><span class="line">DMA Transfers: Reduced CPU usage to **&lt;35%** by offloading SPI data transfer.</span><br><span class="line"></span><br><span class="line">- **Double Buffering**: Ensured smooth animations by rendering <span class="keyword">in</span> one buffer <span class="keyword">while</span> transferring another.</span><br><span class="line"></span><br><span class="line">- **Custom Widgets**: Designed four interactive pages:</span><br><span class="line"></span><br><span class="line">  - **Splash Screen**: Displays the game logo.</span><br><span class="line"></span><br><span class="line">  - **Level Selection**: Allows <span class="built_in">users</span> to choose difficulty (Level 1-8).</span><br><span class="line"></span><br><span class="line">  - **Gameplay Interface**: Renders the snake, food, and collision logic.</span><br><span class="line"></span><br><span class="line">  - **Results Page**: Shows scores and game-over messages.</span><br><span class="line"></span><br><span class="line"><span class="comment">### Game Logic Implementation</span></span><br><span class="line"><span class="comment">#### Key Features</span></span><br><span class="line">1. **Movement Mechanics**</span><br><span class="line"></span><br><span class="line">   - Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</span><br><span class="line"></span><br><span class="line">2. **Speed Scaling**</span><br><span class="line"></span><br><span class="line">   - Progressive difficulty: From 300ms/step (Level 1) to 80ms/step (Level 8).</span><br><span class="line"></span><br><span class="line">3. **Collision Detection**</span><br><span class="line"></span><br><span class="line">   - **Food Consumption**: Increases snake length and triggers sound effects.</span><br><span class="line"></span><br><span class="line">   - **Boundary/Body Collision**: Ends the game and resets progress.</span><br><span class="line"></span><br><span class="line"><span class="comment">#### Data Structures</span></span><br><span class="line">- snake_body_t: Stores coordinates of snake segments.</span><br><span class="line"></span><br><span class="line">- my_eat_snake: Manages snake length, position, and growth.</span><br><span class="line"></span><br><span class="line">- my_snake_food: Tracks food location and remaining count.</span><br><span class="line">---</span><br><span class="line"><span class="comment">### Personalized Audio System</span></span><br><span class="line"><span class="comment">#### PWM-Driven Sound Effects</span></span><br><span class="line">The speaker was controlled via GPIO 27 using **Pulse Width Modulation (PWM)**. Key steps:</span><br><span class="line"></span><br><span class="line">1. PWM Configuration</span><br><span class="line">```c</span><br><span class="line">gpio_set_function(27, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, 1.f);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, 20000);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Level Selection</strong>: Allows users to choose difficulty (Level 1-8).</p>
+</li>
+<li><p><strong>Gameplay Interface</strong>: Renders the snake, food, and collision logic.</p>
+</li>
+<li><p><strong>Results Page</strong>: Shows scores and game-over messages.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Game-Logic-Implementation"><a href="#Game-Logic-Implementation" class="headerlink" title="Game Logic Implementation"></a>Game Logic Implementation</h3><h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><ol>
+<li><p><strong>Movement Mechanics</strong></p>
+<ul>
+<li>Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</li>
+</ul>
+</li>
+<li><p><strong>Speed Scaling</strong></p>
+<ul>
+<li>Progressive difficulty: From 300ms&#x2F;step (Level 1) to 80ms&#x2F;step (Level 8).</li>
+</ul>
+</li>
+<li><p><strong>Collision Detection</strong></p>
+<ul>
+<li><p><strong>Food Consumption</strong>: Increases snake length and triggers sound effects.</p>
+</li>
+<li><p><strong>Boundary&#x2F;Body Collision</strong>: Ends the game and resets progress.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h4><ul>
+<li><p>snake_body_t: Stores coordinates of snake segments.</p>
+</li>
+<li><p>my_eat_snake: Manages snake length, position, and growth.</p>
+</li>
+<li><p>my_snake_food: Tracks food location and remaining count.</p>
+</li>
+</ul>
+<hr>
+<h3 id="Personalized-Audio-System"><a href="#Personalized-Audio-System" class="headerlink" title="Personalized Audio System"></a>Personalized Audio System</h3><h4 id="PWM-Driven-Sound-Effects"><a href="#PWM-Driven-Sound-Effects" class="headerlink" title="PWM-Driven Sound Effects"></a>PWM-Driven Sound Effects</h4><p>The speaker was controlled via GPIO 27 using <strong>Pulse Width Modulation (PWM)</strong>. Key steps:</p>
+<ol>
+<li><p>PWM Configuration</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gpio_set_function(<span class="number">27</span>, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, <span class="number">1.f</span>);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, <span class="number">20000</span>);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
 <li><p>Interrupt-Driven Audio Playback</p>
 <ul>
 <li><p>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</p>
