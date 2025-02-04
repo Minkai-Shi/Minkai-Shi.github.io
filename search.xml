@@ -141,4 +141,96 @@
         <tag>camera</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Snake Game Activity-2</title>
+    <url>/2024/09/29/Snake_Game_Activity-2/</url>
+    <content><![CDATA[<h1 id="Snake-Game-Activity-2"><a href="#Snake-Game-Activity-2" class="headerlink" title="Snake Game Activity-2"></a>Snake Game Activity-2</h1><h1 id="Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements"><a href="#Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements" class="headerlink" title="Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements"></a>Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This project was part of the <strong>“Let’s Do Activity”</strong> (Session 2) organized by DigiKey and EEPW, focusing on developing a <em>Snake Game</em> using the <strong>Raspberry Pi Pico</strong> microcontroller. The goal was to implement core game mechanics, integrate a custom GUI with LVGL, and add personalized audio effects using PWM-driven speakers. Below, I detail my journey through hardware setup, software development, and creative customization.</p>
+<hr>
+<h2 id="Hardware-Setup"><a href="#Hardware-Setup" class="headerlink" title="Hardware Setup"></a>Hardware Setup</h2><h3 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h3><ul>
+<li><strong>Raspberry Pi Pico</strong> (ARM Cortex-M0+ MCU)  </li>
+<li><strong>Waveshare Pico-LCD-1.14</strong> (1.14” LCD with directional buttons)  </li>
+<li><strong>PIOO Omnibus (Dual Expander Board)</strong> for extended I&#x2F;O  </li>
+<li><strong>8Ω Speaker</strong> connected via PWM for audio effects</li>
+</ul>
+<p><strong>System Architecture</strong><br>The Pico was mounted on the Dual Expander Board’s central slot. The LCD occupied <strong>Deck 1</strong>, while <strong>Deck 2</strong> hosted the speaker via GPIO 27 (PWM output).<br><img src="http://uphotos.eepw.com.cn/1713930123/pics/1724036918676284.png" alt="System Diagram"></p>
+<hr>
+<h2 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h2><h3 id="Toolchain-Setup"><a href="#Toolchain-Setup" class="headerlink" title="Toolchain Setup"></a>Toolchain Setup</h3><p>Initially, I struggled with Keil MDK due to licensing and compilation issues. After days of troubleshooting, I switched to the <strong>official Pico SDK</strong> with <strong>VS Code</strong> and <strong>Visual Studio 2022</strong>, following these steps:  </p>
+<ol>
+<li><p>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </p>
+</li>
+<li><p>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </p>
+</li>
+<li><p>Compile code using:  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">   <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">   cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">   nmake  </span><br><span class="line">4. Flashed the generated `.uf2` file to the Pico.</span><br><span class="line"></span><br><span class="line"><span class="comment">### LVGL Integration for GUI</span></span><br><span class="line">The **Waveshare LCD** utilized LVGL (Light and Versatile Graphics Library) with optimizations:</span><br><span class="line"></span><br><span class="line">DMA Transfers: Reduced CPU usage to **&lt;35%** by offloading SPI data transfer.</span><br><span class="line"></span><br><span class="line">- **Double Buffering**: Ensured smooth animations by rendering <span class="keyword">in</span> one buffer <span class="keyword">while</span> transferring another.</span><br><span class="line"></span><br><span class="line">- **Custom Widgets**: Designed four interactive pages:</span><br><span class="line"></span><br><span class="line">  - **Splash Screen**: Displays the game logo.</span><br><span class="line"></span><br><span class="line">  - **Level Selection**: Allows <span class="built_in">users</span> to choose difficulty (Level 1-8).</span><br><span class="line"></span><br><span class="line">  - **Gameplay Interface**: Renders the snake, food, and collision logic.</span><br><span class="line"></span><br><span class="line">  - **Results Page**: Shows scores and game-over messages.</span><br><span class="line"></span><br><span class="line"><span class="comment">### Game Logic Implementation</span></span><br><span class="line"><span class="comment">#### Key Features</span></span><br><span class="line">1. **Movement Mechanics**</span><br><span class="line"></span><br><span class="line">   - Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</span><br><span class="line"></span><br><span class="line">2. **Speed Scaling**</span><br><span class="line"></span><br><span class="line">   - Progressive difficulty: From 300ms/step (Level 1) to 80ms/step (Level 8).</span><br><span class="line"></span><br><span class="line">3. **Collision Detection**</span><br><span class="line"></span><br><span class="line">   - **Food Consumption**: Increases snake length and triggers sound effects.</span><br><span class="line"></span><br><span class="line">   - **Boundary/Body Collision**: Ends the game and resets progress.</span><br><span class="line"></span><br><span class="line"><span class="comment">#### Data Structures</span></span><br><span class="line">- snake_body_t: Stores coordinates of snake segments.</span><br><span class="line"></span><br><span class="line">- my_eat_snake: Manages snake length, position, and growth.</span><br><span class="line"></span><br><span class="line">- my_snake_food: Tracks food location and remaining count.</span><br><span class="line">---</span><br><span class="line"><span class="comment">### Personalized Audio System</span></span><br><span class="line"><span class="comment">#### PWM-Driven Sound Effects</span></span><br><span class="line">The speaker was controlled via GPIO 27 using **Pulse Width Modulation (PWM)**. Key steps:</span><br><span class="line"></span><br><span class="line">1. PWM Configuration</span><br><span class="line">```c</span><br><span class="line">gpio_set_function(27, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, 1.f);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, 20000);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
+<li><p>Interrupt-Driven Audio Playback</p>
+<ul>
+<li><p>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</p>
+</li>
+<li><p>Used <code>on_pwm_wrap()</code> interrupt to play:</p>
+<ul>
+<li><p><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</p>
+</li>
+<li><p><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Demo-Video-Bilibili"><a href="#Demo-Video-Bilibili" class="headerlink" title="Demo Video: Bilibili"></a><strong>Demo Video</strong>: Bilibili</h2><h3 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h3><ol>
+<li><p>Development Environment</p>
+<ul>
+<li><p>Issue: Keil MDK compatibility issues and compilation errors.</p>
+</li>
+<li><p>Solution: Migrated to Pico SDK with VS Code, reducing build time by 50%.</p>
+</li>
+</ul>
+</li>
+<li><p>Audio Quality Limitations</p>
+<ul>
+<li><p>Issue: Distortion due to PWM signal noise.</p>
+</li>
+<li><p>Solution: Implemented frequency modulation and fade effects to minimize noise.</p>
+</li>
+</ul>
+</li>
+<li><p>Memory Optimization</p>
+<ul>
+<li><p>Issue: LVGL memory spikes during animations.</p>
+</li>
+<li><p>Solution: Reduced buffer sizes and simplified widget hierarchies.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Conclusion-Learning-Outcomes"><a href="#Conclusion-Learning-Outcomes" class="headerlink" title="Conclusion &amp; Learning Outcomes"></a>Conclusion &amp; Learning Outcomes</h3><p>This project enhanced my expertise in <strong>embedded systems, real-time programming</strong>, and <strong>GUI development</strong>. Key takeaways:</p>
+<ul>
+<li><p><strong>Adaptability</strong>: Successfully pivoted toolsets to overcome environmental hurdles.</p>
+</li>
+<li><p><strong>Problem-Solving</strong>: Debugged hardware-software integration challenges.</p>
+</li>
+<li><p><strong>Creativity</strong>: Designed a responsive GUI and dynamic audio system within resource constraints.</p>
+</li>
+</ul>
+<p><strong>Full Code &amp; Documentation</strong>: GitHub Repository</p>
+<p><strong>EEPW Forum Post</strong>: <a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
+<hr>
+<h3 id="Relevance-for-Undergraduate-Studies"><a href="#Relevance-for-Undergraduate-Studies" class="headerlink" title="Relevance for Undergraduate Studies"></a>Relevance for Undergraduate Studies</h3><p>This project exemplifies my ability to:</p>
+<ul>
+<li><p>Apply theoretical concepts to practical implementations.</p>
+</li>
+<li><p>Innovate under technical constraints.</p>
+</li>
+<li><p>Collaborate with open-source communities (e.g., LVGL, Pico SDK).</p>
+</li>
+</ul>
+<p>I look forward to expanding these skills in a university setting, particularly in courses related to embedded systems and human-computer interaction.</p>
+]]></content>
+      <categories>
+        <category>EEPW Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW Activity</tag>
+      </tags>
+  </entry>
 </search>
