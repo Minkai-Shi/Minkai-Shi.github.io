@@ -263,7 +263,6 @@
 <li><a href="#system-architecture">System Architecture</a>  </li>
 <li><a href="#software-implementation">Software Implementation</a>  </li>
 <li><a href="#exposure-control-logic">Exposure Control Logic</a>  </li>
-<li><a href="#performance--applications">Performance &amp; Applications</a>  </li>
 <li><a href="#technical-innovations">Technical Innovations</a>  </li>
 <li><a href="#project-links">Project Links</a></li>
 </ol>
@@ -350,30 +349,6 @@
 <h3 id="Parameter-Mapping"><a href="#Parameter-Mapping" class="headerlink" title="Parameter Mapping"></a>Parameter Mapping</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Standard photographic sequences</span></span><br><span class="line">ISO_VALUES = [<span class="string">&quot;100&quot;</span>, <span class="string">&quot;200&quot;</span>, <span class="string">&quot;400&quot;</span>, <span class="string">&quot;800&quot;</span>, <span class="string">&quot;1600&quot;</span>]</span><br><span class="line">APERTURE_VALUES = [<span class="string">&quot;1.0&quot;</span>, <span class="string">&quot;1.4&quot;</span>, <span class="string">&quot;2.0&quot;</span>, <span class="string">&quot;2.8&quot;</span>, <span class="string">&quot;4.0&quot;</span>, <span class="string">&quot;5.6&quot;</span>, <span class="string">&quot;8.0&quot;</span>]</span><br><span class="line">SHUTTER_VALUES = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;1/2&quot;</span>, <span class="string">&quot;1/4&quot;</span>, <span class="string">&quot;1/8&quot;</span>, <span class="string">&quot;1/15&quot;</span>, <span class="string">&quot;1/30&quot;</span>, <span class="string">&quot;1/60&quot;</span>]</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="Performance-Applications"><a href="#Performance-Applications" class="headerlink" title="Performance &amp; Applications"></a>Performance &amp; Applications</h2><h3 id="Key-Metrics"><a href="#Key-Metrics" class="headerlink" title="Key Metrics"></a>Key Metrics</h3><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-<th>Measurement Method</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Accuracy</td>
-<td>±1.8%</td>
-<td>Sekonic L-308X reference</td>
-</tr>
-<tr>
-<td>Response Time</td>
-<td>120ms</td>
-<td>High-speed camera</td>
-</tr>
-<tr>
-<td>Power Consumption</td>
-<td>18mA @3.3V</td>
-<td>Digital multimeter</td>
-</tr>
-</tbody></table>
 <h3 id="Demo-Video"><a href="#Demo-Video" class="headerlink" title="Demo Video"></a>Demo Video</h3><p><a href="https://youtu.be/znmnvBf8Q34"><img src="https://img.youtube.com/vi/znmnvBf8Q34/0.jpg" alt="Demo"></a></p>
 <hr>
 <h2 id="Technical-Innovations"><a href="#Technical-Innovations" class="headerlink" title="Technical Innovations"></a>Technical Innovations</h2><ol>
