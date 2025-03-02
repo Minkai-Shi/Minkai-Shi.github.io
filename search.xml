@@ -403,40 +403,6 @@
 <hr>
 <h2 id="Relevance-for-Imperial-College-EEE"><a href="#Relevance-for-Imperial-College-EEE" class="headerlink" title="Relevance for Imperial College EEE"></a>Relevance for Imperial College EEE</h2><p>This project demonstrates:<br>✅ Embedded system design with real-time constraints<br>✅ Signal processing and sensor fusion techniques<br>✅ IoT implementation using WebSocket protocol  </p>
 <p>The EEPW jury highlighted its <em>“effective translation of photographic theory into embedded practice”</em> - an approach I aim to refine through rigorous engineering curriculum.</p>
-<h3 id="Key-Improvements"><a href="#Key-Improvements" class="headerlink" title="Key Improvements:"></a>Key Improvements:</h3><ol>
-<li><p><strong>Structural Optimization</strong>  </p>
-<ul>
-<li>Unified heading hierarchy (H2&#x2F;H3 levels)  </li>
-<li>Added performance comparison table  </li>
-<li>Streamlined technical descriptions</li>
-</ul>
-</li>
-<li><p><strong>Technical Accuracy</strong>  </p>
-<ul>
-<li>Fixed code indentation and syntax highlighting  </li>
-<li>Added parameter units and measurement methods</li>
-</ul>
-</li>
-<li><p><strong>Visual Enhancements</strong>  </p>
-<ul>
-<li>Replaced placeholder images with descriptive captions  </li>
-<li>Added YouTube video embed template</li>
-</ul>
-</li>
-<li><p><strong>Award Integration</strong>  </p>
-<ul>
-<li>Added EEPW Excellence Prize badge in overview  </li>
-<li>Included jury commentary section</li>
-</ul>
-</li>
-<li><p><strong>Readability Improvements</strong>  </p>
-<ul>
-<li>Shortened code blocks to essential functions  </li>
-<li>Used emoji icons for key features  </li>
-<li>Added quick-reference tables</li>
-</ul>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>EEPW Activity</category>
