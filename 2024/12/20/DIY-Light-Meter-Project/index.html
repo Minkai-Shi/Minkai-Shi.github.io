@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/upload/hardware_assembly2.jpg">
 <meta property="og:image" content="https://img.youtube.com/vi/znmnvBf8Q34/0.jpg">
 <meta property="article:published_time" content="2024-12-20T07:21:30.000Z">
-<meta property="article:modified_time" content="2025-03-02T13:27:36.587Z">
+<meta property="article:modified_time" content="2025-03-02T13:44:02.745Z">
 <meta property="article:author" content="Minkai Shi">
 <meta property="article:tag" content="EEPW Activity">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-03-02 21:27:36" itemprop="dateModified" datetime="2025-03-02T21:27:36+08:00">2025-03-02</time>
+                <time title="Modified: 2025-03-02 21:44:02" itemprop="dateModified" datetime="2025-03-02T21:44:02+08:00">2025-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,16 +314,11 @@
 </tr>
 </tbody></table>
 <h3 id="Key-Challenges-Solutions"><a href="#Key-Challenges-Solutions" class="headerlink" title="Key Challenges &amp; Solutions"></a>Key Challenges &amp; Solutions</h3><ol>
-<li><strong>I2C Address Conflict</strong>  <ul>
-<li>Modified sensor address through hardware configuration  </li>
-<li>Added I2C bus termination resistors (4.7kΩ)</li>
+<li><strong>Debugging of Remote Control Methods</strong>  <ul>
+<li>When the mobile phone can be used for control, Bluetooth or MQTT methods are planned to be adopted. However, the official manual of this version of the firmware does not support Bluetooth, and there is too little reference information for MQTT setup on io.adafruit. Later, the code for controlling WS2812B via the network found on the Internet was referenced and modified.<br>-The WiFi control part exchanges data with the web page through WebSocket. The websocket.send_message function transmits the measured and calculated data such as light intensity to the web page for display. The websocket.receive function receives the instructions from the buttons on the web page and calls the mode switching, parameter adjustment, and shooting functions respectively to realize the mobile phone remote control function.Enter <a target="_blank" rel="noopener" href="http://192.168.66.121:1080/client">http://192.168.66.121:1080/client</a> in the browser of a computer or mobile phone to access the control website. Replace the IP address with the IP address output by the console.</li>
 </ul>
 </li>
-<li><strong>Power Stability</strong>  <ul>
-<li>Implemented LC filter for servo power supply  </li>
-<li>Used separate 3.3V rail for sensors</li>
-</ul>
-</li>
+<li><strong>Selection of Exposure Parameter Calculation Method</strong><br>-Direct calculation requires multiple mathematical operations, which slows down the processing speed and affects the shooting effect. When using exposure calculation formulas that involve complex mathematical operations such as logarithms and exponents, the code complexity is high.<br>-The lookup table method is chosen for calculation. Looking up a table only requires directly finding the corresponding output value based on the input value, avoiding complex mathematical operations. Therefore, the calculation speed is very fast, which is especially suitable for applications with high real-time requirements. In embedded systems, due to limited resources, simple lookup table code is easier to implement and debug.</li>
 </ol>
 <hr>
 <h2 id="Software-Implementation"><a href="#Software-Implementation" class="headerlink" title="Software Implementation"></a>Software Implementation</h2><h3 id="Development-Stack"><a href="#Development-Stack" class="headerlink" title="Development Stack"></a>Development Stack</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Core dependencies</span></span><br><span class="line"><span class="keyword">import</span> adafruit_bh1750  <span class="comment"># Light sensor driver</span></span><br><span class="line"><span class="keyword">from</span> adafruit_motor <span class="keyword">import</span> servo  <span class="comment"># PWM control</span></span><br><span class="line"><span class="keyword">import</span> socketpool  <span class="comment"># Network communication</span></span><br></pre></td></tr></table></figure>
