@@ -492,7 +492,7 @@
 <li><strong>Accessibility Event Filtering | 无障碍事件过滤</strong><br>Improve efficiency by filtering irrelevant <code>AccessibilityEvent</code> data.<br><strong>性能优化：</strong> 通过过滤无关的无障碍事件提升效率。</li>
 </ol>
 <hr>
-<p><strong>GitHub Repository:</strong> <a href="https://github.com/your-repo-link">AutoClicker</a><br><strong>License:</strong> Apache 2.0  </p>
+<p><strong>GitHub Repository:</strong> <a href="https://github.com/Minkai-Shi/AutoClicker">AutoClicker</a><br><strong>License:</strong> Apache 2.0  </p>
 ]]></content>
       <categories>
         <category>Android Studio Kotlin</category>
