@@ -384,4 +384,121 @@
         <tag>EEPW Activity</tag>
       </tags>
   </entry>
+  <entry>
+    <title>AutoClick</title>
+    <url>/2025/04/05/AutoClick/</url>
+    <content><![CDATA[<h1 id="AutoClicker-自动点击器应用"><a href="#AutoClicker-自动点击器应用" class="headerlink" title="AutoClicker - 自动点击器应用"></a>AutoClicker - 自动点击器应用</h1><hr>
+<h2 id="Project-Background-项目背景"><a href="#Project-Background-项目背景" class="headerlink" title="Project Background | 项目背景"></a><strong>Project Background | 项目背景</strong></h2><p>My mother often participates in time-limited sales, but manual operations are too slow. To solve this, I developed AutoClicker—an Android app that simulates screen clicks at user-defined times and coordinates. This project was optimized with AI-assisted debugging and is open-sourced on GitHub,.This app was developed to solve the challenge of time-sensitive operations (e.g., flash sales) by automating screen clicks at user-defined times and coordinates. Inspired by <strong>floating clock apps</strong> that display real-time information, this project adds a critical innovation: <strong>automated clicking functionality</strong> while showing precise timing in a floating window.<br><strong>开发背景：</strong> 我妈妈经常参与整点抢购，但由于手动操作速度有限，成功率低。为此，我开发了 AutoClicker，一款安卓自动点击工具，支持在设定的时间和坐标自动执行点击。灵感来源于悬浮时钟类APP的实时信息展示功能，但增加了关键创新：<strong>自动点击功能</strong>，并在悬浮窗中显示精确时间。此项目通过AI辅助完成代码优化和问题调试，现开源在GitHub。</p>
+<hr>
+<h2 id="Technical-Highlights-技术亮点"><a href="#Technical-Highlights-技术亮点" class="headerlink" title="Technical Highlights | 技术亮点"></a><strong>Technical Highlights | 技术亮点</strong></h2><ol>
+<li><p><strong>Real-Time Floating Window | 实时悬浮窗</strong><br>Displays current time with <strong>second precision</strong> (e.g., <code>08:29:29</code>) before triggering clicks.<br><strong>功能亮点：</strong> 执行点击前，悬浮窗实时显示精确到<strong>秒级</strong>的当前时间（如 <code>08:29:29</code>）。  </p>
+</li>
+<li><p><strong>Hybrid Design | 混合设计</strong><br>Combines the time-display logic of floating clock apps with automated click simulation, addressing a gap in existing tools.<br><strong>设计创新：</strong> 融合悬浮时钟类APP的时间显示逻辑与自动点击功能，填补了现有工具的空白。  </p>
+</li>
+<li><p><strong>Precision Timing | 精准时序控制</strong><br>Uses <code>AlarmManager</code> and <code>RTC_WAKEUP</code> to achieve click timing with &lt;10ms error margin.<br><strong>技术优势：</strong> 基于 <code>AlarmManager</code> 和 <code>RTC_WAKEUP</code> 实现误差小于10毫秒的精准触发。  </p>
+</li>
+<li><p><strong>Cross-Process Coordination | 跨进程协同</strong><br>Coordinates between the floating window (UI), background service, and accessibility service.<br><strong>系统集成：</strong> 实现悬浮窗（UI）、后台服务和无障碍服务的跨进程协同。</p>
+</li>
+</ol>
+<hr>
+<h2 id="Core-Features-核心功能"><a href="#Core-Features-核心功能" class="headerlink" title="Core Features | 核心功能"></a><strong>Core Features | 核心功能</strong></h2><h3 id="1-Floating-Window-with-Time-Display-带时间显示的悬浮窗"><a href="#1-Floating-Window-with-Time-Display-带时间显示的悬浮窗" class="headerlink" title="1. Floating Window with Time Display | 带时间显示的悬浮窗"></a>1. Floating Window with Time Display | 带时间显示的悬浮窗</h3><ul>
+<li><strong>Real-Time Updates | 实时更新</strong><br>Continuously updates time using a <code>Handler</code> loop, synchronized with system clocks.<br><strong>实现原理：</strong> 通过 <code>Handler</code> 循环与系统时钟同步，持续更新时间。  </li>
+<li><strong>Visual Feedback | 视觉反馈</strong><br>Shows countdown or real-time clock to enhance user trust in timing accuracy.<br><strong>用户体验：</strong> 显示倒计时或实时时钟，增强用户对时间精度的信任。</li>
+</ul>
+<h3 id="2-Automated-Click-Workflow-自动点击流程"><a href="#2-Automated-Click-Workflow-自动点击流程" class="headerlink" title="2. Automated Click Workflow | 自动点击流程"></a>2. Automated Click Workflow | 自动点击流程</h3><h3 id="Demo-Video"><a href="#Demo-Video" class="headerlink" title="Demo Video"></a>Demo Video</h3><p><a href="https://youtu.be/znmnvBf8Q34"><img src="https://img.youtube.com/vi/znmnvBf8Q34/0.jpg" alt="Demo"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[用户设置时间/坐标] --&gt; B[悬浮窗显示实时时间]</span><br><span class="line">    B --&gt; C&#123;到达指定时间?&#125;</span><br><span class="line">    C --&gt;|是| D[隐藏悬浮窗]</span><br><span class="line">    D --&gt; E[触发无障碍服务执行点击]</span><br><span class="line">    E --&gt; F[显示点击完成提示]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Technical-Implementation-技术实现"><a href="#Technical-Implementation-技术实现" class="headerlink" title="Technical Implementation | 技术实现"></a><strong>Technical Implementation | 技术实现</strong></h2><h3 id="1-Floating-Window-Design-悬浮窗设计"><a href="#1-Floating-Window-Design-悬浮窗设计" class="headerlink" title="1. Floating Window Design | 悬浮窗设计"></a>1. Floating Window Design | 悬浮窗设计</h3><ul>
+<li><strong>参考悬浮时钟APP的架构：</strong><br>Used <code>WindowManager</code> to create an overlay view, similar to floating clock apps, but added dynamic time formatting and click-trigger logic.<br><strong>实现细节：</strong> 基于 <code>WindowManager</code> 创建覆盖层视图（参考悬浮时钟APP），但新增动态时间格式化和点击触发逻辑。  </li>
+<li><strong>代码片段：</strong>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 更新悬浮窗时间</span></span><br><span class="line">handler.postDelayed(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        textView.setText(getCurrentTimeWithMillis());</span><br><span class="line">        handler.postDelayed(<span class="built_in">this</span>, <span class="number">10</span>); <span class="comment">// 每10ms更新一次</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="number">10</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进"><a href="#2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进" class="headerlink" title="2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进"></a>2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进</h3><table>
+<thead>
+<tr>
+<th>Feature Comparison</th>
+<th>Floating Clock App</th>
+<th>AutoClicker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Core Functionality</strong></td>
+<td>Time display only</td>
+<td>Time display + <strong>Auto-clicking</strong></td>
+</tr>
+<tr>
+<td><strong>Trigger Logic</strong></td>
+<td>None</td>
+<td>Millisecond-level timed triggering</td>
+</tr>
+<tr>
+<td><strong>System Permissions</strong></td>
+<td>Only requires floating window access</td>
+<td>Requires floating window + accessibility service permissions</td>
+</tr>
+</tbody></table>
+<p>Key differences explained:  </p>
+<ol>
+<li><strong>Core Functionality</strong>: Floating clock apps focus solely on time visualization with various display styles, while AutoClickers integrate timing functions with automated click operations for tasks like gaming&#x2F;shopping assistance.  </li>
+<li><strong>Trigger Mechanism</strong>: AutoClickers require precise timing configuration (millisecond accuracy) to execute automated actions, unlike passive clock displays.  </li>
+<li><strong>Permissions</strong>: AutoClickers need deeper system access (accessibility services) to simulate user interactions, whereas floating clocks only need basic overlay permissions.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>功能对比</th>
+<th>悬浮时钟APP</th>
+<th>AutoClicker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心功能</strong></td>
+<td>仅显示时间</td>
+<td>时间显示 + <strong>自动点击</strong></td>
+</tr>
+<tr>
+<td><strong>触发逻辑</strong></td>
+<td>无</td>
+<td>毫秒级定时触发</td>
+</tr>
+<tr>
+<td><strong>系统权限</strong></td>
+<td>仅需悬浮窗权限</td>
+<td>需悬浮窗 + 无障碍服务权限</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Challenges-Solutions-开发挑战与解决方案"><a href="#Challenges-Solutions-开发挑战与解决方案" class="headerlink" title="Challenges &amp; Solutions | 开发挑战与解决方案"></a><strong>Challenges &amp; Solutions | 开发挑战与解决方案</strong></h2><ol>
+<li><p><strong>悬浮窗与点击服务的协同</strong>  </p>
+<ul>
+<li><strong>Challenge:</strong> Coordinating floating window visibility with click execution.  </li>
+<li><strong>Solution:</strong> Hide the window via <code>Broadcast</code> before clicking and restore it afterward.  </li>
+<li>问题：悬浮窗需持续显示时间，但点击时需隐藏以避免遮挡。  </li>
+<li>解决：通过 <code>Broadcast</code> 在点击前隐藏悬浮窗，完成后恢复显示。</li>
+</ul>
+</li>
+<li><p><strong>跨版本兼容性</strong>  </p>
+<ul>
+<li><strong>Challenge:</strong> Android 12+ restrictions on exact alarms.  </li>
+<li><strong>Solution:</strong> Dynamically detect OS version and switch between <code>setExact()</code> and <code>setAlarmClock()</code>.  </li>
+<li>问题：Android 12+ 对精确闹钟的限制。  </li>
+<li>解决：动态检测版本并适配 <code>setExact()</code> 或 <code>setAlarmClock()</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Future-Plans-未来计划"><a href="#Future-Plans-未来计划" class="headerlink" title="Future Plans | 未来计划"></a><strong>Future Plans | 未来计划</strong></h2><ol>
+<li><strong>Multi-Window Support | 多悬浮窗支持</strong><br>Allow users to track multiple countdowns simultaneously.<br><strong>功能扩展：</strong> 支持同时追踪多个倒计时任务。  </li>
+<li><strong>Accessibility Event Filtering | 无障碍事件过滤</strong><br>Improve efficiency by filtering irrelevant <code>AccessibilityEvent</code> data.<br><strong>性能优化：</strong> 通过过滤无关的无障碍事件提升效率。</li>
+</ol>
+<hr>
+<p><strong>GitHub Repository:</strong> <a href="https://github.com/your-repo-link">AutoClicker</a><br><strong>License:</strong> Apache 2.0  </p>
+]]></content>
+      <categories>
+        <category>Android Studio Kotlin</category>
+      </categories>
+      <tags>
+        <tag>Android Studio Kotlin</tag>
+      </tags>
+  </entry>
 </search>
