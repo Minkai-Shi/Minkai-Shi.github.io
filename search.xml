@@ -1,6 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AutoClick</title>
+    <url>/2025/04/05/AutoClick/</url>
+    <content><![CDATA[<h1 id="AutoClicker-自动点击器应用"><a href="#AutoClicker-自动点击器应用" class="headerlink" title="AutoClicker - 自动点击器应用"></a>AutoClicker - 自动点击器应用</h1><hr>
+<h2 id="Project-Background-项目背景"><a href="#Project-Background-项目背景" class="headerlink" title="Project Background | 项目背景"></a><strong>Project Background | 项目背景</strong></h2><p>My mother often participates in time-limited sales, but manual operations are too slow. To solve this, I developed AutoClicker—an Android app that simulates screen clicks at user-defined times and coordinates. This project was optimized with AI-assisted debugging and is open-sourced on GitHub,.This app was developed to solve the challenge of time-sensitive operations (e.g., flash sales) by automating screen clicks at user-defined times and coordinates. Inspired by <strong>floating clock apps</strong> that display real-time information, this project adds a critical innovation: <strong>automated clicking functionality</strong> while showing precise timing in a floating window.<br>Since my mom started using this APP, snapping up items at the exact hour has become a piece of cake for her, and the success rate has soared. Every time she successfully grabs the desirable goods she wants, my mom can’t help but praise me, saying, “This kid is so smart! He developed such a useful APP for me!”<br><strong>开发背景：</strong> 我妈妈经常参与整点抢购，但由于手动操作速度有限，成功率低。为此，我开发了 AutoClicker，一款安卓自动点击工具，支持在设定的时间和坐标自动执行点击。灵感来源于悬浮时钟类APP的实时信息展示功能，但增加了关键创新：<strong>自动点击功能</strong>，并在悬浮窗中显示精确时间。此项目通过AI辅助完成代码优化和问题调试，现开源在GitHub。<br>自从妈妈开始用这款 APP，整点抢购对她来说就变得轻而易举，成功率直线上升。每次成功抢购到心仪好物，妈妈都忍不住夸我：“这孩子，可真机灵，给我开发了这么好用的APP！”</p>
+<hr>
+<h2 id="Technical-Highlights-技术亮点"><a href="#Technical-Highlights-技术亮点" class="headerlink" title="Technical Highlights | 技术亮点"></a><strong>Technical Highlights | 技术亮点</strong></h2><ol>
+<li><p><strong>Real-Time Floating Window | 实时悬浮窗</strong><br>Displays current time with <strong>second precision</strong> (e.g., <code>08:29:29</code>) before triggering clicks.<br><strong>功能亮点：</strong> 执行点击前，悬浮窗实时显示精确到<strong>秒级</strong>的当前时间（如 <code>08:29:29</code>）。  </p>
+</li>
+<li><p><strong>Hybrid Design | 混合设计</strong><br>Combines the time-display logic of floating clock apps with automated click simulation, addressing a gap in existing tools.<br><strong>设计创新：</strong> 融合悬浮时钟类APP的时间显示逻辑与自动点击功能，填补了现有工具的空白。  </p>
+</li>
+<li><p><strong>Precision Timing | 精准时序控制</strong><br>Uses <code>AlarmManager</code> and <code>RTC_WAKEUP</code> to achieve click timing with &lt;10ms error margin.<br><strong>技术优势：</strong> 基于 <code>AlarmManager</code> 和 <code>RTC_WAKEUP</code> 实现误差小于10毫秒的精准触发。  </p>
+</li>
+<li><p><strong>Cross-Process Coordination | 跨进程协同</strong><br>Coordinates between the floating window (UI), background service, and accessibility service.<br><strong>系统集成：</strong> 实现悬浮窗（UI）、后台服务和无障碍服务的跨进程协同。</p>
+</li>
+</ol>
+<hr>
+<h2 id="Core-Features-核心功能"><a href="#Core-Features-核心功能" class="headerlink" title="Core Features | 核心功能"></a><strong>Core Features | 核心功能</strong></h2><h3 id="1-Floating-Window-with-Time-Display-带时间显示的悬浮窗"><a href="#1-Floating-Window-with-Time-Display-带时间显示的悬浮窗" class="headerlink" title="1. Floating Window with Time Display | 带时间显示的悬浮窗"></a>1. Floating Window with Time Display | 带时间显示的悬浮窗</h3><ul>
+<li><strong>Real-Time Updates | 实时更新</strong><br>Continuously updates time using a <code>Handler</code> loop, synchronized with system clocks.<br><strong>实现原理：</strong> 通过 <code>Handler</code> 循环与系统时钟同步，持续更新时间。  </li>
+<li><strong>Visual Feedback | 视觉反馈</strong><br>Shows countdown or real-time clock to enhance user trust in timing accuracy.<br><strong>用户体验：</strong> 显示倒计时或实时时钟，增强用户对时间精度的信任。</li>
+</ul>
+<h3 id="2-Automated-Click-Workflow-自动点击流程"><a href="#2-Automated-Click-Workflow-自动点击流程" class="headerlink" title="2. Automated Click Workflow | 自动点击流程"></a>2. Automated Click Workflow | 自动点击流程</h3><p><strong>Demo Video</strong>:<a href="https://youtube.com/shorts/9eFLo0zvitk">https://youtube.com/shorts/9eFLo0zvitk</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[用户设置时间/坐标] --&gt; B[悬浮窗显示实时时间]</span><br><span class="line">    B --&gt; C&#123;到达指定时间?&#125;</span><br><span class="line">    C --&gt;|是| D[隐藏悬浮窗]</span><br><span class="line">    D --&gt; E[触发无障碍服务执行点击]</span><br><span class="line">    E --&gt; F[显示点击完成提示]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Technical-Implementation-技术实现"><a href="#Technical-Implementation-技术实现" class="headerlink" title="Technical Implementation | 技术实现"></a><strong>Technical Implementation | 技术实现</strong></h2><h3 id="1-Floating-Window-Design-悬浮窗设计"><a href="#1-Floating-Window-Design-悬浮窗设计" class="headerlink" title="1. Floating Window Design | 悬浮窗设计"></a>1. Floating Window Design | 悬浮窗设计</h3><ul>
+<li><strong>参考悬浮时钟APP的架构：</strong><br>Used <code>WindowManager</code> to create an overlay view, similar to floating clock apps, but added dynamic time formatting and click-trigger logic.<br><strong>实现细节：</strong> 基于 <code>WindowManager</code> 创建覆盖层视图（参考悬浮时钟APP），但新增动态时间格式化和点击触发逻辑。  </li>
+<li><strong>代码片段：</strong>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 更新悬浮窗时间</span></span><br><span class="line">handler.postDelayed(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        textView.setText(getCurrentTimeWithMillis());</span><br><span class="line">        handler.postDelayed(<span class="built_in">this</span>, <span class="number">10</span>); <span class="comment">// 每10ms更新一次</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="number">10</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进"><a href="#2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进" class="headerlink" title="2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进"></a>2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进</h3><table>
+<thead>
+<tr>
+<th>Feature Comparison</th>
+<th>Floating Clock App</th>
+<th>AutoClicker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Core Functionality</strong></td>
+<td>Time display only</td>
+<td>Time display + <strong>Auto-clicking</strong></td>
+</tr>
+<tr>
+<td><strong>Trigger Logic</strong></td>
+<td>None</td>
+<td>Millisecond-level timed triggering</td>
+</tr>
+<tr>
+<td><strong>System Permissions</strong></td>
+<td>Only requires floating window access</td>
+<td>Requires floating window + accessibility service permissions</td>
+</tr>
+</tbody></table>
+<p>Key differences explained:  </p>
+<ol>
+<li><strong>Core Functionality</strong>: Floating clock apps focus solely on time visualization with various display styles, while AutoClickers integrate timing functions with automated click operations for tasks like gaming&#x2F;shopping assistance.  </li>
+<li><strong>Trigger Mechanism</strong>: AutoClickers require precise timing configuration (millisecond accuracy) to execute automated actions, unlike passive clock displays.  </li>
+<li><strong>Permissions</strong>: AutoClickers need deeper system access (accessibility services) to simulate user interactions, whereas floating clocks only need basic overlay permissions.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>功能对比</th>
+<th>悬浮时钟APP</th>
+<th>AutoClicker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心功能</strong></td>
+<td>仅显示时间</td>
+<td>时间显示 + <strong>自动点击</strong></td>
+</tr>
+<tr>
+<td><strong>触发逻辑</strong></td>
+<td>无</td>
+<td>毫秒级定时触发</td>
+</tr>
+<tr>
+<td><strong>系统权限</strong></td>
+<td>仅需悬浮窗权限</td>
+<td>需悬浮窗 + 无障碍服务权限</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Challenges-Solutions-开发挑战与解决方案"><a href="#Challenges-Solutions-开发挑战与解决方案" class="headerlink" title="Challenges &amp; Solutions | 开发挑战与解决方案"></a><strong>Challenges &amp; Solutions | 开发挑战与解决方案</strong></h2><ol>
+<li><p><strong>悬浮窗与点击服务的协同</strong>  </p>
+<ul>
+<li><strong>Challenge:</strong> Coordinating floating window visibility with click execution.  </li>
+<li><strong>Solution:</strong> Hide the window via <code>Broadcast</code> before clicking and restore it afterward.  </li>
+<li>问题：悬浮窗需持续显示时间，但点击时需隐藏以避免遮挡。  </li>
+<li>解决：通过 <code>Broadcast</code> 在点击前隐藏悬浮窗，完成后恢复显示。</li>
+</ul>
+</li>
+<li><p><strong>跨版本兼容性</strong>  </p>
+<ul>
+<li><strong>Challenge:</strong> Android 12+ restrictions on exact alarms.  </li>
+<li><strong>Solution:</strong> Dynamically detect OS version and switch between <code>setExact()</code> and <code>setAlarmClock()</code>.  </li>
+<li>问题：Android 12+ 对精确闹钟的限制。  </li>
+<li>解决：动态检测版本并适配 <code>setExact()</code> 或 <code>setAlarmClock()</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Future-Plans-未来计划"><a href="#Future-Plans-未来计划" class="headerlink" title="Future Plans | 未来计划"></a><strong>Future Plans | 未来计划</strong></h2><ol>
+<li><strong>Multi-Window Support | 多悬浮窗支持</strong><br>Allow users to track multiple countdowns simultaneously.<br><strong>功能扩展：</strong> 支持同时追踪多个倒计时任务。  </li>
+<li><strong>Accessibility Event Filtering | 无障碍事件过滤</strong><br>Improve efficiency by filtering irrelevant <code>AccessibilityEvent</code> data.<br><strong>性能优化：</strong> 通过过滤无关的无障碍事件提升效率。</li>
+</ol>
+<hr>
+<p><strong>GitHub Repository:</strong> <a href="https://github.com/Minkai-Shi/AutoClicker">AutoClicker</a><br><strong>License:</strong> Apache 2.0  </p>
+]]></content>
+      <categories>
+        <category>Android Studio Kotlin</category>
+      </categories>
+      <tags>
+        <tag>Android Studio Kotlin</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cleaning of the Sailor 14K Four Seasons Weaving Dyeing Pen Rod</title>
     <url>/2024/07/02/Cleaning-of-the-Sailor-14K/</url>
     <content><![CDATA[<p>Cleaning of the Sailor 14K Four Seasons Weaving Dyeing Pen Rod. Inject ink and repeatedly inhale clean water, seal the pen cap with a tissue, and remove the pen tip seal sleeve. For the assembly part, use rubber to pinch the plastic pen holder and unscrew the metal thread separately. Take out the pen tip and tongue from the tip sleeve, loosen the metal sleeve at the waist of the ink dispenser, and remove the screw piston head. All the above parts should be cleaned of the mixture of ink and water, as well as dust and silicone oil, and air dried. Silicone oil should be applied around the piston head, and the thread of the pen grip should be fixed with insect glue. The remaining parts should be reinstalled in their original state.That’s all<br><img src="/upload/Sailor1.jpg" alt="pic1" title="pic1"></p>
@@ -10,247 +127,6 @@
       </categories>
       <tags>
         <tag>pen</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Play with DFRobot Geiger Counter Module</title>
-    <url>/2024/07/21/Geiger-Counter/</url>
-    <content><![CDATA[<p>I saw an activity on the EEPW (Electronic Engineering&amp;Product World) forum about playing with the “DFRobot Geiger Counter Module”. I happened to have learned about Geiger counters in textbooks, so I bought a module to DIY. Place an order at the official DFrobot brand store on Taobao and it will arrive one day after placing the order.<br><img src="/upload/Geiger1.jpg" alt="pic1" title="pic1"><br>The official code provided by DFrobot Geiger counter is based on Arduino. The program architecture uses external interrupts for counting, and then refreshes the data every 3 seconds in the main loop, takes 3 data to calculate CPM value, and then converts CPM into uSv&#x2F;h or nSv&#x2F;h and displays it on OLED LCD.<br>Attempt to rewrite the code in MicroPython and optimize the count by storing data every 3 seconds and caching it 20 times for a total of 1 minute to calculate CPM. The CPM is calculated based on the cache time before reaching 1 minute, and the longer the cache time, the more stable the data changes.<br>The wiring of OLED and Geiger counters is consistent with the Arduino code mentioned earlier.<br>After obtaining the DFRobot Geiger counter module, I also bought an adapter pin so that it can be connected to the ESP32 board for debugging. The official Arduino routine uses pin D3 to connect the D of the DFRobot Geiger counter module, but it is not recommended to use pin 3 and Rx pin shared by the ESP32 development board’s digital pin. Instead, it should be debugged using pin 14.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;  </span></span><br><span class="line"><span class="string">DFrobot DFRobot Geiger Counter Module experiment</span></span><br><span class="line"><span class="string">pin assign : pin DFrobot Geiger Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         (D)--&gt;(14)  </span></span><br><span class="line"><span class="string">         (+)--&gt;(5V)  </span></span><br><span class="line"><span class="string">         (-)--&gt;(GND)  </span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">OLED(IIC) Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         GND--&gt;(GND)  </span></span><br><span class="line"><span class="string">         VCC--&gt;(5V)  </span></span><br><span class="line"><span class="string">         SCL--&gt;(18)  </span></span><br><span class="line"><span class="string">         SDA--&gt;(23)  </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>  </span><br><span class="line"><span class="comment">#Import Pin Module</span></span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> SoftI2C  </span><br><span class="line"><span class="keyword">from</span> ssd1306 <span class="keyword">import</span> SSD1306_I2C  <span class="comment">#I2C oled  </span></span><br><span class="line"><span class="comment">#Create software I2C object </span></span><br><span class="line">i2c = SoftI2C(sda=Pin(<span class="number">23</span>), scl=Pin(<span class="number">18</span>))  </span><br><span class="line"><span class="comment">#Create OLED object,Resolution of OLED,I2C interface</span></span><br><span class="line">oled = SSD1306_I2C(<span class="number">128</span>, <span class="number">64</span>, i2c)   </span><br><span class="line"><span class="comment">#Geiger in  fenbl</span></span><br><span class="line">Geiger_In=Pin(<span class="number">14</span>,Pin.IN,Pin.PULL_UP)  </span><br><span class="line"><span class="comment">#Geiger Counter external interrupt function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Geiger_In_irq</span>(<span class="params">Geiger_In</span>):  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    numPulse = numPulse + <span class="number">1</span>   </span><br><span class="line"><span class="comment">#Program entrance</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    BUFFER_SIZE = <span class="number">20</span>  </span><br><span class="line">    rows, cols = <span class="number">2</span>, BUFFER_SIZE  </span><br><span class="line">    mem_data = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(cols)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(rows)]  </span><br><span class="line">    numPulse = <span class="number">0</span>  </span><br><span class="line">    pos = <span class="number">0</span>      </span><br><span class="line">    oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen    </span></span><br><span class="line">    oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string </span></span><br><span class="line">    oled.show()  <span class="comment">#Execute Display     </span></span><br><span class="line">    Geiger_In.irq(Geiger_In_irq,Pin.IRQ_FALLING)  <span class="comment">#Configure external interrupt, trigger falling edge</span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:    </span><br><span class="line">        time.sleep_ms(<span class="number">3000</span>)  </span><br><span class="line">        mem_data[<span class="number">0</span>][pos] = time.ticks_ms()  </span><br><span class="line">        mem_data[<span class="number">1</span>][pos] = numPulse  </span><br><span class="line">        numPulse = <span class="number">0</span>  </span><br><span class="line">        cpm=<span class="number">0</span>  </span><br><span class="line">        pos_old = pos  </span><br><span class="line">        pos = (pos+<span class="number">1</span>)%BUFFER_SIZE          </span><br><span class="line">        numAll = <span class="number">0</span>  </span><br><span class="line">        time_now = mem_data[<span class="number">0</span>][pos_old]   </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, BUFFER_SIZE - <span class="number">1</span>):  </span><br><span class="line">            <span class="keyword">if</span> mem_data[<span class="number">0</span>][pos_old] != <span class="number">0</span>:  </span><br><span class="line">                numAll = numAll + mem_data[<span class="number">1</span>][pos_old]  </span><br><span class="line">                time_old = mem_data[<span class="number">0</span>][pos_old]  </span><br><span class="line">                <span class="keyword">if</span> pos_old == <span class="number">0</span>:  </span><br><span class="line">                    pos_old =  BUFFER_SIZE - <span class="number">1</span>  </span><br><span class="line">                <span class="keyword">else</span>:  </span><br><span class="line">                    pos_old = pos_old - <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">if</span> time_now-time_old &gt; <span class="number">0</span>:  </span><br><span class="line">            cpm = numAll*<span class="number">1000</span>*<span class="number">60</span>/(time_now-time_old)  </span><br><span class="line">              </span><br><span class="line">        str1 = <span class="string">&quot;&#123;:.0f&#125;&quot;</span>.<span class="built_in">format</span>(cpm)    <span class="comment">#CPM Convert to string </span></span><br><span class="line">        str2 = <span class="string">&quot;&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(cpm/<span class="number">151</span>)<span class="comment">#uSv/h Convert to string  </span></span><br><span class="line">        oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen </span></span><br><span class="line">        oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string</span></span><br><span class="line">        oled.text(<span class="string">&quot;CPM&quot;</span>,<span class="number">80</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM units  </span></span><br><span class="line">        oled.text(<span class="string">&quot;uSv/h&quot;</span>,<span class="number">80</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h uints  </span></span><br><span class="line">        oled.text(str1,<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM data</span></span><br><span class="line">        oled.text(str2,<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h data</span></span><br><span class="line">        oled.show()  <span class="comment">#Execute Display</span></span><br></pre></td></tr></table></figure>
-<p><img src="/upload/Geiger2.jpg" alt="pic2" title="pic2"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>My Experience of Imperial College Summer School</title>
-    <url>/2024/08/30/IC-SummerSchool/</url>
-    <content><![CDATA[<p>&emsp;&emsp;I had an exciting time attending Imperial College London’s Summer School from 5-16 August 2024. I participated in the engineering group, and the whole summer school was mainly composed of four parts: introduction of each engineering major, master classes, group activities, and cultural and sports activities.<br>&emsp;&emsp;On the first day of summer school, The geology professor introduced us to the classification and composition of engineering, including electrical and electronic engineering, computer science, bio-pharmaceuticals, civil engineering, aerospace engineering, etc., involving knowledge in mathematics, physics, chemistry, biology, computers, earth sciences, and so on. Then she shared her relationship with engineering from the perspective of enlightenment learning and coaching. In the following study, we began to understand and experience various engineering majors.<br>1.Design engineering:Engineering Challenge<br>&emsp;&emsp;The design engineering student introduced the campus layout, followed by his own learning content about instrument modification. He also showed several examples of his work, such as a piano with permanent magnets replacing the hammer, a six-string pickup that relies entirely on electronics to adjust tone and pitch, and touchscreens on the keys for changing pitch. We were then asked to visualize an imagined sound and use the provided materials to make a model of an instrument that could produce it, explaining how it works. Finally, we connected the microcontroller, microphone, and speaker with wires under instructions to create a device that relies on vibrating the microphone to produce sound and reliably changes pitch by short-circuiting the contact points.<br>2.Civil Engineering: Designning a High Speed Railway Bridge<br>&emsp;&emsp;After the mentor explained the subject content, application scenarios, and employment situation, a railway bridge design case activity was conducted, which provided us with the local terrain, transportation, population and vegetation density, crop distribution, and flood risk map. It was required to limit the slope and transition radius to maintain maximum speed and minimize the impact on the local environment and residents. While saving materials and facilitating construction, it ensured survival rate in floods. In group collaboration, we focused on analyzing geological and cultural material factors, dividing tasks, mapping, making models, and preparing report content. At the beginning, we attempted to overlap all the terrain and affected areas onto the same map in order to avoid all of these areas and achieve the optimal route. But soon we found that it was difficult to achieve this ideal state in practical situations, as demonstrated in the case presented this time. We adjusted the plan to avoid the route as a supplement, and directly resolved the conflict between the railway bridge and the natural and cultural environment. For example, we increased the height of the bridge in narrow flood areas and used more steel bars in vegetation cultivation areas to ensure strength while reducing the damage and occupation of land by bridge piers.<br>3.Mechanical Engineering: Heavy Lifting Challenge<br>&emsp;&emsp;The supervisor explained the classification of the discipline and provided us with a visual experience of the architecture related categories through examples. Subsequently, we were given the materials to complete the task of making a crane model. During the process, continuous improvements were made to the structure to meet the requirements, but the final result was not ideal. The root cause was the lack of clear and explicit design, which led to the consumption of material durability due to constant modifications. At the same time, the structure was too complex and neglected the analysis of the essential principles, increasing the difficulty of production and the failure rate.<br>4.Aerospace Engineering: Learn how to think like an Aeronautical Engineer<br>&emsp;&emsp;The aerospace engineering class is taught by a structural and material engineering professor, who introduces the sub disciplines under this discipline, the courses to be completed, annual activities, and location arrangements. At the beginning of the visit, we were taken to the wind tunnel to understand its purpose and operating principle. We used force analysis, wind tunnel data, and relevant aerodynamic formulas to determine the error between theoretical resistance and actual experimental resistance on site. Subsequently, we visited the rocket, aircraft, control test flight laboratory, and flight test simulation equipment to understand the important parameters and stall causes of aircraft during flight, as well as solutions. In the 3D printing laboratory, we visited relevant facilities and our mentor introduced us to some energy-saving solutions for hollowing out large solid parts during printing, and asked us to complete the design of the structure and support with minimal consumables. Finally, the senior answered the students’ questions and solved their problems.<br>5.Earth Science Engineering: Space Misson Planning<br>&emsp;&emsp;In the class, we used given formulas to calculate the selection of fuel and weight in the Earth Moon and Moon Earth orbits, understands the three stages of the entire rocket mission, and listened to the professor’s research on asteroids.<br>6.Electronic and Electrical Engineering: Information Session<br>&emsp;&emsp;The professor explained to us the subjects and academic activities that college students need to learn every year, and showed us the results of one of the activities over the years. This was originally a major that I was very interested in, but it seems that I did not get enough understanding through the arrangement of the course, and the course time was very short.<br>7.Chemical Engineering: introduction to Chemical Engineering<br>&emsp;&emsp;At the Huxley Lecture Theatre, the mentor gave a lecture on the learning content arrangement of chemical engineering and the work content of chemists. Afterwards, we visited the school’s carbon capture experimental factory and its monitoring and control room, and learned about the functions and operations of the instruments. Returning to the auditorium, we experienced a digital experiment that simulated the control of high-temperature environments in the production process using computer programs. By adjusting the upper and lower limits of temperature control and heating power, we achieved the minimum energy consumption, low-temperature practice, and triggering of programs. Finally, the mentor led us to conduct a hydrogen explosion experiment and explained some common chemical knowledge in class and production life.<br>&emsp;&emsp;In the process of learning about various engineering majors, we also took 2 master classes, Master class 1: application score requirements, process timetable, pre-examination arrangement, some voluntary declaration mechanisms and misunderstandings, subject selection, etc. Master’s Course 2: Self awareness, Opportunity Awareness, Decision making, and Plan Implementation. We discussed the factors above that should be considered in the plans and combined with the university schedule, provided us with the execution time for each stage of the  employment plan in our discipline. This is very helpful for me to make a long-term study plan.<br>&emsp;&emsp;What impressed me was the ideation workshops. In the last three days, each academic group will be disrupted and reorganized. Each new group will observe and discover a pain point in their daily life, and then design products to solve it, while considering the target audience, product characteristics, and significance of existence. After determining the product, each group develops a production and testing process plan, sketches and models, and colleagues shoot advertisements and promote them. At the beginning of the group activity, the school explained how to find pain points and design products that fit the scene. Before the presentation, they introduced how to relax the whole body to ensure better speaking effectiveness.<br>&emsp;&emsp;In the early design stage of group collaboration, I provided suggestions for product structure design and assisted in drawing sketches. In the preparation stage of the report, I designed and drew the logo of the group company to participate in the shooting of the advertisement, and participated in the PPT presentation in the final report. My group mentor recommended foreign mapping software to me, and I learned the relevant operation tutorials myself. With my own exploration and creativity, I successfully completed the design task. On the morning of the presentation, a teacher specializing in performance explained the essentials of relaxing the whole body before a speech, how to maintain a natural and appropriate posture during the speech, and how to control breath and volume. The most important thing is to relax the whole body, stretch the neck and throat, and ensure that the vocal cords relax and produce natural sounds; The relaxation of shoulders and cervical spine makes the speech posture more upright and straight; Relax the limbs to make the coordination of movements and expressions smoother. My mentor personally led everyone to practice related relaxation exercises. During the group presentation that day, I put the speech skills I learned into practice.<br>&emsp;&emsp;In addition to this, we also held a lot of activities such as ten pin bowling, Thames cruises, theatre, bus tours, and trips to the beach in Brighton. We got together, met different people in the world, and experienced the unique scenery and culture of United Kingdom, which made summer school life full of joy.<br>&emsp;&emsp;Overall impression of Imperial College London and its engineering. There is no clear boundary between Imperial College London’s campus and society, and you can experience various customs and traditions. The ancient museum auditorium and the brand new modern teaching building are intertwined, reflecting the diversity and development of a country’s history. The precise and complete equipment and tools in the laboratory building, as well as rigorous and serious rules and regulations, ensure that subject learning and scientific research activities can be carried out safely, standardly, and efficiently. The professor’s knowledge is beyond doubt, and as a mentor, the students in school are also enthusiastic and patient, with excellent academic abilities. Our life mentor is an outgoing and enthusiastic young man, with an African style hairstyle and a habit of patting the forehead, making him particularly prominent among the group gathering. For students from non English speaking countries, he is very tolerant and patiently guides them to participate in everyone’s English communication. During some driving or waiting times, he also enlivens the atmosphere, organizing everyone to play games or sing.<br>&emsp;&emsp;During the summer school period, I gained a deeper understanding of the engineering major, which is a comprehensive application of mathematics and physics, including many specific applications and combinations in subdivided fields. It is a discipline that applies theoretical knowledge such as mathematics, physics, chemistry, geology, and astronomy to daily life and production. In addition to proficient application of mathematical knowledge, this subject also requires us to have the observation ability to discover opportunities for knowledge application in life, the creativity to associate design solutions, and the execution ability to solve practical problems.<br>&emsp;&emsp;After attending the summer school, I felt that I require new requirements and goals for my self-development.<br>&emsp;&emsp;First, Oral expression still needs improvement, as I was unable to fully express my ideas in a timely and clear manner during group activities.<br>&emsp;&emsp;Second, In terms of daily life, I have not fully utilized the substitute items and clothing. In the future, I need to train and organize the use of items to enhance my storage ability.<br>&emsp;&emsp;Third, Culturally, I need to understand and respect local customs and religions, and try local entertainment projects appropriately in order to integrate into the collective.<br>&emsp;&emsp;Last, In terms of subjects, I will conduct in-depth exploration and research in various fields of interest to ensure that I have sufficient advance knowledge of the university subjects I am interested in.<br><img src="/upload/IC1.jpg" alt="IC1" title="IC1"><br><img src="/upload/IC2.jpg" alt="IC2" title="IC2"><br><img src="/upload/IC3.jpg" alt="IC3" title="IC3"><br><img src="/upload/IC4.jpg" alt="IC4" title="IC4"><br><img src="/upload/IC5.jpg" alt="IC5" title="IC5"><br><img src="/upload/IC6.jpg" alt="IC6" title="IC6"><br><img src="/upload/IC7.jpg" alt="IC7" title="IC7"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Making Pilot 743Pen tip suitable in Chinese made vacuum filler pen body</title>
-    <url>/2024/06/28/MakingPilot743Pen/</url>
-    <content><![CDATA[<p>Making Pilot 743Pen tip suitable in Chinese made vacuum filler pen body .<br>Remove the pen tip and tongue from the original pen for later use. The pen tip can be self polished and electroplated to make it look better. Choose a domestically produced pen holder of the same size and size as the 35th model. Remove the nib and tongue of the pen, and groove them on both sides of the back of the tongue to fit the 743 nib positioning buckle. Polish the surface curvature to attach the alloy plate to ensure normal use. After polishing, clean the plastic particles on the tongue to ensure fine and clean bristles. Use a blade to expand the ink guide groove and reinstall the nib together, and then fine tune them together.That’s all.<br><img src="/upload/Pilot1.jpg" alt="pic1" title="pic1"></p>
-]]></content>
-      <categories>
-        <category>pen</category>
-      </categories>
-      <tags>
-        <tag>pen</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sheaffer&#39;s Snorkel Pen Filling Structure Renew</title>
-    <url>/2024/04/28/Sheaffer-Snorkel-Pen-Renew/</url>
-    <content><![CDATA[<p>Sheaffer’s Snorkel Pen Filling Structure Renew </p>
-<ol>
-<li>Assembly sealing gasket: Unscrew the pen tip assembly, unscrew the breathing tube and take out the aging gasket, remove it and put on a new gasket</li>
-<li>Water dispenser assembly: Unscrew the pen holder, remove the water dispenser assembly from the pen holder end, use a screwdriver to completely push out the connector and aging ink cartridge from the small hole at the tail, clean and soak in hot water, remove the ink cartridge connection key and the insect glue that fixes the breathing tube, put on a new ink cartridge, and fix it with insect glue. Remove the breathing tube and clean the ink guide strip before reinstalling it in its original state<br><img src="/upload/Sheaffer1.jpg" alt="pic1" title="pic1"></li>
-<li>With a long straight screwdriver, unscrew the tail button screw, push out the TD tube from the pen holder, pick out the aging O-ring with a toothpick, clean the exhaust hole O-ring groove, apply a little glue, and use a toothpick to fully insert the new O-ring into the O-ring groove. When installing the tail button, replace the screw hole sealing gasket, and finally reinstall it in its original state</li>
-<li>Overall: Finally, apply lubricating oil to the threads of the water assembly, and also apply silicone oil to other threads to prevent water and air leakage.<br><img src="/upload/Sheaffer2.jpg" alt="pic2" title="pic2"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>pen</category>
-      </categories>
-      <tags>
-        <tag>pen</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sheaffer&#39;s vaccum filling structure renew</title>
-    <url>/2024/06/26/Sheaffer-vaccum-Renew/</url>
-    <content><![CDATA[<p>Sheaffer’s vaccum filling structure renew , soaked in hot water at around 60 degrees Celsius to dissolve the tail seal insect glue. After tightening the tail button, continue to rotate clockwise to remove the tail seal. Unscrew the hard rubber screw on the piston head, clean the gap between the pen rod piston head and the original rubber of the tail seal, replace with a new piston plate, and reinstall the original tail seal sample. If the tail seal thread cannot be fixed by friction and becomes loose, stick it with insect glue<br><img src="/upload/Sheaffer3.jpg" alt="pic3" title="pic3"></p>
-]]></content>
-      <categories>
-        <category>pen</category>
-      </categories>
-      <tags>
-        <tag>pen</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Snake Game Activity-1</title>
-    <url>/2024/09/16/Snake_Game_Activity-1/</url>
-    <content><![CDATA[<h1 id="Snake-Game-Activity-1"><a href="#Snake-Game-Activity-1" class="headerlink" title="Snake Game Activity-1"></a>Snake Game Activity-1</h1><p>The <strong>“Let’s do Activity”</strong> is a year-long campaign initiated by DigiKey and EEPW, titled <strong>“Learn Technology with E-Classroom, Complete Tasks for Rebates.”</strong> In 2024, there will be 4 sessions. Each session features technical experts recommending development boards&#x2F;instrument kits with strong playability and educational value, guiding participants through hands-on practice. The activity aims to help electronics enthusiasts learn practical technical knowledge, accumulate DIY experience, and become better versions of themselves!</p>
-<p>I participated in the <strong>Snake Game Activity</strong> of the <strong>2nd session</strong> of “Let’s do Activity.” Within the specified timeframe, participants place orders through the exclusive “DigiKey Purchase” link on the DigiKey official website. By completing basic tasks explained by instructors, they can receive a rebate on their order costs.</p>
-<p><strong>Highlights of This Session</strong>:<br>Implementing the Snake Game using <strong>Raspberry Pi Pico</strong>.</p>
-<p><strong>Activity Page</strong>:<br><a href="https://www.eepw.com.cn/event/action/digikey/diy_sec.html">https://www.eepw.com.cn/event/action/digikey/diy_sec.html</a></p>
-<p>As a high school student participating for the first time, I carefully selected products to meet requirements without exceeding the budget.</p>
-<p><strong>Provided Components</strong>:</p>
-<p><strong>Core Components (for basic tasks)</strong>:</p>
-<ul>
-<li><strong>Raspberry Pi Pico</strong> - ARM® Cortex®-M0+ MCU 32-bit Evaluation Board - SC0917 (Required)</li>
-<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM543 - RP2040 LCD 1.14” Display (Choose 1 of 3)</li>
-<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM580 - LCD 2” Display (Choose 1 of 3)</li>
-<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - 103030400 - ST7789 LCD 1.14” Display (Choose 1 of 3)</li>
-</ul>
-<p><strong>Extended Components (for advanced tasks)</strong>:</p>
-<ul>
-<li><strong>Transistor</strong> - SS8550DTA - PNP Bipolar (BJT) 25 V 1.5 A 200MHz 1 W Through-Hole TO-92-3</li>
-<li><strong>Speaker</strong> - OWS-1330TA-8 - 8Ω General Speaker 500 mW 100 Hz~20 kHz Top Round</li>
-</ul>
-<p>Among the three screens, two had smaller sizes and resolutions (1.14”). The <strong>PIM580 PIOO DISPLAY PACK 2.0</strong> was larger but had tiny directional buttons, which made it unsuitable for game development. I chose the <strong>103030400</strong> model with directional buttons. Its display quality is decent, though limited in content capacity due to the small size. Additionally, I purchased a <strong>PIOO OMNIBUS (DUAL EXPANDER)</strong> board for the Pico. This dual expansion board is highly practical—after connecting the screen, the remaining slot allowed me to freely add components. For this project, I used it to connect a speaker without soldering.</p>
-<p>The screen uses the <strong>Waveshare Pico-LCD-1.14</strong> module. Waveshare provides official drivers and pre-ported LVGL driver examples, making development straightforward.<br><img src="/upload/snake1-1.jpg" alt="snake1-1" title="snake1-1"><br><img src="/upload/snake1-2.jpg" alt="snake1-2" title="snake1-2"><br><strong>My EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
-]]></content>
-      <categories>
-        <category>EEPW Activity</category>
-      </categories>
-      <tags>
-        <tag>EEPW Activity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Yongsheng 601 pump piston lubrication and sealing tutorial</title>
-    <url>/2024/03/30/Yongsheng-601-pump-piston-renew/</url>
-    <content><![CDATA[<p>Yongsheng 601 pump piston lubrication and sealing tutorial.<br><img src="/upload/pic4.jpg" alt="pic4" title="pic4"><br> Drain ink, repeatedly inhale and spit out clean water to ensure no high concentration of ink residue, use factory disassembly, wrench or pliers to unscrew the piston, clean the inner wall of the pen holder and the mixture of ink and water on the piston with a dust-free tissue.<br>  Apply a circle of silicone oil to the piston head groove, use the previous tool to rotate the pen holder back, press a few times before absorbing ink, and ensure that it is evenly distributed inside the pen holder,That’s all.</p>
-]]></content>
-      <categories>
-        <category>pen</category>
-      </categories>
-      <tags>
-        <tag>pen</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2024/02/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Leica Barnac minor repairs (iiic)</title>
-    <url>/2024/02/16/repairs/</url>
-    <content><![CDATA[<p>   sometimes cause slow doors to fail and fail to trigger damping, resulting in 1~20 and B doors always being at a speed of 1&#x2F;30. It is possible that a small spring has pushed against the top cover.<br><img src="/upload/pic1.jpg" alt="pic1" title="pic1"><br>   Open the top cover, find it, and press it in the direction of the arrow in the diagram to make it slightly straight. Before reinstalling the cover, test the shutter speed to ensure that the spring tube is not too straight, causing damping to be triggered when the speed is above 1&#x2F;20<br><img src="/upload/pic2.jpg" alt="pic2" title="pic2"><br><img src="/upload/pic3.jpg" alt="pic3" title="pic3"></p>
-]]></content>
-      <categories>
-        <category>camera</category>
-      </categories>
-      <tags>
-        <tag>camera</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Snake Game Activity-2</title>
-    <url>/2024/09/29/Snake_Game_Activity-2/</url>
-    <content><![CDATA[<h1 id="Snake-Game-Activity-2"><a href="#Snake-Game-Activity-2" class="headerlink" title="Snake Game Activity-2"></a>Snake Game Activity-2</h1><h1 id="Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements"><a href="#Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements" class="headerlink" title="Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements"></a>Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="This-project-was-part-of-the-“Let’s-Do-Activity”-Session-2-organized-by-DigiKey-and-EEPW-focusing-on-developing-a-Snake-Game-using-the-Raspberry-Pi-Pico-microcontroller-The-goal-was-to-implement-core-game-mechanics-integrate-a-custom-GUI-with-LVGL-and-add-personalized-audio-effects-using-PWM-driven-speakers-Below-I-detail-my-journey-through-hardware-setup-software-development-and-creative-customization-This-project-was-awarded-the-EEPW-Excellence-Prize-for-its-innovative-integration-of-embedded-systems-recognized-for-technical-rigor-This-project-won-the-Excellence-Prize-of-Electronic-Engineering-World-EEPW-for-its-innovative-technical-implementation-The-prize-is-a-200-yuan-JD-com-e-voucher"><a href="#This-project-was-part-of-the-“Let’s-Do-Activity”-Session-2-organized-by-DigiKey-and-EEPW-focusing-on-developing-a-Snake-Game-using-the-Raspberry-Pi-Pico-microcontroller-The-goal-was-to-implement-core-game-mechanics-integrate-a-custom-GUI-with-LVGL-and-add-personalized-audio-effects-using-PWM-driven-speakers-Below-I-detail-my-journey-through-hardware-setup-software-development-and-creative-customization-This-project-was-awarded-the-EEPW-Excellence-Prize-for-its-innovative-integration-of-embedded-systems-recognized-for-technical-rigor-This-project-won-the-Excellence-Prize-of-Electronic-Engineering-World-EEPW-for-its-innovative-technical-implementation-The-prize-is-a-200-yuan-JD-com-e-voucher" class="headerlink" title="This project was part of the “Let’s Do Activity” (Session 2) organized by DigiKey and EEPW, focusing on developing a Snake Game using the Raspberry Pi Pico microcontroller. The goal was to implement core game mechanics, integrate a custom GUI with LVGL, and add personalized audio effects using PWM-driven speakers. Below, I detail my journey through hardware setup, software development, and creative customization.This project was awarded the EEPW Excellence Prize for its innovative integration of embedded systems, recognized for technical rigor.This project won the Excellence Prize of Electronic Engineering World (EEPW) for its innovative technical implementation. The prize is a 200-yuan JD.com e-voucher."></a>This project was part of the <a href="https://www.eepw.com.cn/event/action/digikey/diy_sec.html">“Let’s Do Activity” (Session 2)</a> organized by DigiKey and EEPW, focusing on developing a <em>Snake Game</em> using the <strong>Raspberry Pi Pico</strong> microcontroller. The goal was to implement core game mechanics, integrate a custom GUI with LVGL, and add personalized audio effects using PWM-driven speakers. Below, I detail my journey through hardware setup, software development, and creative customization.This project was awarded the <strong>EEPW Excellence Prize</strong> for its innovative integration of embedded systems, recognized for technical rigor.<br>This project won the Excellence Prize of Electronic Engineering World (EEPW) for its innovative technical implementation. The prize is a 200-yuan JD.com e-voucher.</h2><h2 id="Hardware-Setup"><a href="#Hardware-Setup" class="headerlink" title="Hardware Setup"></a>Hardware Setup</h2><h3 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h3><ul>
-<li><strong>Raspberry Pi Pico</strong> (ARM Cortex-M0+ MCU)  </li>
-<li><strong>Waveshare Pico-LCD-1.14</strong> (1.14” LCD with directional buttons)  </li>
-<li><strong>PIOO Omnibus (Dual Expander Board)</strong> for extended I&#x2F;O  </li>
-<li><strong>8Ω Speaker</strong> connected via PWM for audio effects</li>
-</ul>
-<p><strong>System Architecture</strong><br>The Pico was mounted on the Dual Expander Board’s central slot. The LCD occupied <strong>Deck 1</strong>, while <strong>Deck 2</strong> hosted the speaker via GPIO 27 (PWM output).<br><img src="http://uphotos.eepw.com.cn/1713930123/pics/1724036918676284.png" alt="System Diagram"></p>
-<hr>
-<h2 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h2><h3 id="Toolchain-Setup"><a href="#Toolchain-Setup" class="headerlink" title="Toolchain Setup"></a>Toolchain Setup</h3><p>Initially, I struggled with Keil MDK due to licensing and compilation issues. After days of troubleshooting, I switched to the <strong>official Pico SDK</strong> with <strong>VS Code</strong> and <strong>Visual Studio 2022</strong>, following these steps:  </p>
-<ol>
-<li><p>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </p>
-</li>
-<li><p>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </p>
-</li>
-<li><p>Compile code using:  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">nmake  </span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Flashed the generated <code>.uf2</code> file to the Pico.</p>
-</li>
-</ol>
-<h3 id="LVGL-Integration-for-GUI"><a href="#LVGL-Integration-for-GUI" class="headerlink" title="LVGL Integration for GUI"></a>LVGL Integration for GUI</h3><p>The <strong>Waveshare LCD</strong> utilized LVGL (Light and Versatile Graphics Library) with optimizations:</p>
-<p>DMA Transfers: Reduced CPU usage to <strong>&lt;35%</strong> by offloading SPI data transfer.</p>
-<ul>
-<li><strong>Double Buffering</strong>: Ensured smooth animations by rendering in one buffer while transferring another.</li>
-<li><strong>Custom Widgets</strong>: Designed four interactive pages:<ul>
-<li><strong>Splash Screen</strong>: Displays the game logo.</li>
-<li><strong>Level Selection</strong>: Allows users to choose difficulty (Level 1-8).</li>
-<li><strong>Gameplay Interface</strong>: Renders the snake, food, and collision logic.</li>
-<li><strong>Results Page</strong>: Shows scores and game-over messages.</li>
-</ul>
-</li>
-</ul>
-<h3 id="Game-Logic-Implementation"><a href="#Game-Logic-Implementation" class="headerlink" title="Game Logic Implementation"></a>Game Logic Implementation</h3><h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><ol>
-<li><strong>Movement Mechanics</strong><ul>
-<li>Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</li>
-</ul>
-</li>
-<li><strong>Speed Scaling</strong><ul>
-<li>Progressive difficulty: From 300ms&#x2F;step (Level 1) to 80ms&#x2F;step (Level 8).</li>
-</ul>
-</li>
-<li><strong>Collision Detection</strong><ul>
-<li><strong>Food Consumption</strong>: Increases snake length and triggers sound effects.</li>
-<li><strong>Boundary&#x2F;Body Collision</strong>: Ends the game and resets progress.</li>
-</ul>
-</li>
-</ol>
-<h4 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h4><ul>
-<li><code>snake_body_t</code>: Stores coordinates of snake segments.</li>
-<li><code>my_eat_snake</code>: Manages snake length, position, and growth.</li>
-<li><code>my_snake_food</code>: Tracks food location and remaining count.</li>
-</ul>
-<hr>
-<h3 id="Personalized-Audio-System"><a href="#Personalized-Audio-System" class="headerlink" title="Personalized Audio System"></a>Personalized Audio System</h3><h4 id="PWM-Driven-Sound-Effects"><a href="#PWM-Driven-Sound-Effects" class="headerlink" title="PWM-Driven Sound Effects"></a>PWM-Driven Sound Effects</h4><p>The speaker was controlled via GPIO 27 using <strong>Pulse Width Modulation (PWM)</strong>. Key steps:</p>
-<ol>
-<li>PWM Configuration<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gpio_set_function(<span class="number">27</span>, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, <span class="number">1.f</span>);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, <span class="number">20000</span>);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
-<li>Interrupt-Driven Audio Playback<ul>
-<li>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</li>
-<li>Used <code>on_pwm_wrap()</code> interrupt to play:<ul>
-<li><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</li>
-<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h2><ol>
-<li>Development Environment<ul>
-<li>Issue: Keil MDK compatibility issues and compilation errors.</li>
-<li>Solution: Migrated to Pico SDK with VS Code, reducing build time by 50%.</li>
-</ul>
-</li>
-<li>Audio Quality Limitations<ul>
-<li>Issue: Distortion due to PWM signal noise.</li>
-<li>Solution: Implemented frequency modulation and fade effects to minimize noise.</li>
-</ul>
-</li>
-<li>Memory Optimization<ul>
-<li>Issue: LVGL memory spikes during animations.</li>
-<li>Solution: Reduced buffer sizes and simplified widget hierarchies.</li>
-</ul>
-</li>
-</ol>
-<h2 id="Conclusion-Learning-Outcomes"><a href="#Conclusion-Learning-Outcomes" class="headerlink" title="Conclusion &amp; Learning Outcomes"></a>Conclusion &amp; Learning Outcomes</h2><p>This project enhanced my expertise in <strong>embedded systems, real-time programming</strong>, and <strong>GUI development</strong>. Key takeaways:</p>
-<ul>
-<li><strong>Adaptability</strong>: Successfully pivoted toolsets to overcome environmental hurdles.</li>
-<li><strong>Problem-Solving</strong>: Debugged hardware-software integration challenges.</li>
-<li><strong>Creativity</strong>: Designed a responsive GUI and dynamic audio system within resource constraints.</li>
-</ul>
-<p><strong>Full Code &amp; Documentation</strong>: <a href="https://github.com/Minkai-Shi/Snake-Game">GitHub Repository</a></p>
-<p><strong>Demo Video</strong>: <a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a></p>
-<p><strong>EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a><br><a href="https://forum.eepw.com.cn/thread/384453/1">https://forum.eepw.com.cn/thread/384453/1</a><br><a href="https://forum.eepw.com.cn/thread/384471/1">https://forum.eepw.com.cn/thread/384471/1</a><br><a href="https://forum.eepw.com.cn/thread/384521/1">https://forum.eepw.com.cn/thread/384521/1</a></p>
-<hr>
-<h2 id="Relevance-for-Undergraduate-Studies"><a href="#Relevance-for-Undergraduate-Studies" class="headerlink" title="Relevance for Undergraduate Studies"></a>Relevance for Undergraduate Studies</h2><p>This project exemplifies my ability to:</p>
-<ul>
-<li>Apply theoretical concepts to practical implementations.</li>
-<li>Innovate under technical constraints.</li>
-<li>Collaborate with open-source communities (e.g., LVGL, Pico SDK).</li>
-</ul>
-<p>I look forward to expanding these skills in a university setting, particularly in courses related to embedded systems and human-computer interaction.</p>
-]]></content>
-      <categories>
-        <category>EEPW Activity</category>
-      </categories>
-      <tags>
-        <tag>EEPW Activity</tag>
       </tags>
   </entry>
   <entry>
@@ -385,120 +261,29 @@
       </tags>
   </entry>
   <entry>
-    <title>AutoClick</title>
-    <url>/2025/04/05/AutoClick/</url>
-    <content><![CDATA[<h1 id="AutoClicker-自动点击器应用"><a href="#AutoClicker-自动点击器应用" class="headerlink" title="AutoClicker - 自动点击器应用"></a>AutoClicker - 自动点击器应用</h1><hr>
-<h2 id="Project-Background-项目背景"><a href="#Project-Background-项目背景" class="headerlink" title="Project Background | 项目背景"></a><strong>Project Background | 项目背景</strong></h2><p>My mother often participates in time-limited sales, but manual operations are too slow. To solve this, I developed AutoClicker—an Android app that simulates screen clicks at user-defined times and coordinates. This project was optimized with AI-assisted debugging and is open-sourced on GitHub,.This app was developed to solve the challenge of time-sensitive operations (e.g., flash sales) by automating screen clicks at user-defined times and coordinates. Inspired by <strong>floating clock apps</strong> that display real-time information, this project adds a critical innovation: <strong>automated clicking functionality</strong> while showing precise timing in a floating window.<br>Since my mom started using this APP, snapping up items at the exact hour has become a piece of cake for her, and the success rate has soared. Every time she successfully grabs the desirable goods she wants, my mom can’t help but praise me, saying, “This kid is so smart! He developed such a useful APP for me!”<br><strong>开发背景：</strong> 我妈妈经常参与整点抢购，但由于手动操作速度有限，成功率低。为此，我开发了 AutoClicker，一款安卓自动点击工具，支持在设定的时间和坐标自动执行点击。灵感来源于悬浮时钟类APP的实时信息展示功能，但增加了关键创新：<strong>自动点击功能</strong>，并在悬浮窗中显示精确时间。此项目通过AI辅助完成代码优化和问题调试，现开源在GitHub。<br>自从妈妈开始用这款 APP，整点抢购对她来说就变得轻而易举，成功率直线上升。每次成功抢购到心仪好物，妈妈都忍不住夸我：“这孩子，可真机灵，给我开发了这么好用的APP！”</p>
-<hr>
-<h2 id="Technical-Highlights-技术亮点"><a href="#Technical-Highlights-技术亮点" class="headerlink" title="Technical Highlights | 技术亮点"></a><strong>Technical Highlights | 技术亮点</strong></h2><ol>
-<li><p><strong>Real-Time Floating Window | 实时悬浮窗</strong><br>Displays current time with <strong>second precision</strong> (e.g., <code>08:29:29</code>) before triggering clicks.<br><strong>功能亮点：</strong> 执行点击前，悬浮窗实时显示精确到<strong>秒级</strong>的当前时间（如 <code>08:29:29</code>）。  </p>
-</li>
-<li><p><strong>Hybrid Design | 混合设计</strong><br>Combines the time-display logic of floating clock apps with automated click simulation, addressing a gap in existing tools.<br><strong>设计创新：</strong> 融合悬浮时钟类APP的时间显示逻辑与自动点击功能，填补了现有工具的空白。  </p>
-</li>
-<li><p><strong>Precision Timing | 精准时序控制</strong><br>Uses <code>AlarmManager</code> and <code>RTC_WAKEUP</code> to achieve click timing with &lt;10ms error margin.<br><strong>技术优势：</strong> 基于 <code>AlarmManager</code> 和 <code>RTC_WAKEUP</code> 实现误差小于10毫秒的精准触发。  </p>
-</li>
-<li><p><strong>Cross-Process Coordination | 跨进程协同</strong><br>Coordinates between the floating window (UI), background service, and accessibility service.<br><strong>系统集成：</strong> 实现悬浮窗（UI）、后台服务和无障碍服务的跨进程协同。</p>
-</li>
-</ol>
-<hr>
-<h2 id="Core-Features-核心功能"><a href="#Core-Features-核心功能" class="headerlink" title="Core Features | 核心功能"></a><strong>Core Features | 核心功能</strong></h2><h3 id="1-Floating-Window-with-Time-Display-带时间显示的悬浮窗"><a href="#1-Floating-Window-with-Time-Display-带时间显示的悬浮窗" class="headerlink" title="1. Floating Window with Time Display | 带时间显示的悬浮窗"></a>1. Floating Window with Time Display | 带时间显示的悬浮窗</h3><ul>
-<li><strong>Real-Time Updates | 实时更新</strong><br>Continuously updates time using a <code>Handler</code> loop, synchronized with system clocks.<br><strong>实现原理：</strong> 通过 <code>Handler</code> 循环与系统时钟同步，持续更新时间。  </li>
-<li><strong>Visual Feedback | 视觉反馈</strong><br>Shows countdown or real-time clock to enhance user trust in timing accuracy.<br><strong>用户体验：</strong> 显示倒计时或实时时钟，增强用户对时间精度的信任。</li>
-</ul>
-<h3 id="2-Automated-Click-Workflow-自动点击流程"><a href="#2-Automated-Click-Workflow-自动点击流程" class="headerlink" title="2. Automated Click Workflow | 自动点击流程"></a>2. Automated Click Workflow | 自动点击流程</h3><p><strong>Demo Video</strong>:<a href="https://youtube.com/shorts/9eFLo0zvitk">https://youtube.com/shorts/9eFLo0zvitk</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[用户设置时间/坐标] --&gt; B[悬浮窗显示实时时间]</span><br><span class="line">    B --&gt; C&#123;到达指定时间?&#125;</span><br><span class="line">    C --&gt;|是| D[隐藏悬浮窗]</span><br><span class="line">    D --&gt; E[触发无障碍服务执行点击]</span><br><span class="line">    E --&gt; F[显示点击完成提示]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="Technical-Implementation-技术实现"><a href="#Technical-Implementation-技术实现" class="headerlink" title="Technical Implementation | 技术实现"></a><strong>Technical Implementation | 技术实现</strong></h2><h3 id="1-Floating-Window-Design-悬浮窗设计"><a href="#1-Floating-Window-Design-悬浮窗设计" class="headerlink" title="1. Floating Window Design | 悬浮窗设计"></a>1. Floating Window Design | 悬浮窗设计</h3><ul>
-<li><strong>参考悬浮时钟APP的架构：</strong><br>Used <code>WindowManager</code> to create an overlay view, similar to floating clock apps, but added dynamic time formatting and click-trigger logic.<br><strong>实现细节：</strong> 基于 <code>WindowManager</code> 创建覆盖层视图（参考悬浮时钟APP），但新增动态时间格式化和点击触发逻辑。  </li>
-<li><strong>代码片段：</strong>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 更新悬浮窗时间</span></span><br><span class="line">handler.postDelayed(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        textView.setText(getCurrentTimeWithMillis());</span><br><span class="line">        handler.postDelayed(<span class="built_in">this</span>, <span class="number">10</span>); <span class="comment">// 每10ms更新一次</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="number">10</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进"><a href="#2-Key-Improvements-Over-Floating-Clock-Apps-相较于悬浮时钟APP的改进" class="headerlink" title="2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进"></a>2. Key Improvements Over Floating Clock Apps | 相较于悬浮时钟APP的改进</h3><table>
-<thead>
-<tr>
-<th>Feature Comparison</th>
-<th>Floating Clock App</th>
-<th>AutoClicker</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Core Functionality</strong></td>
-<td>Time display only</td>
-<td>Time display + <strong>Auto-clicking</strong></td>
-</tr>
-<tr>
-<td><strong>Trigger Logic</strong></td>
-<td>None</td>
-<td>Millisecond-level timed triggering</td>
-</tr>
-<tr>
-<td><strong>System Permissions</strong></td>
-<td>Only requires floating window access</td>
-<td>Requires floating window + accessibility service permissions</td>
-</tr>
-</tbody></table>
-<p>Key differences explained:  </p>
-<ol>
-<li><strong>Core Functionality</strong>: Floating clock apps focus solely on time visualization with various display styles, while AutoClickers integrate timing functions with automated click operations for tasks like gaming&#x2F;shopping assistance.  </li>
-<li><strong>Trigger Mechanism</strong>: AutoClickers require precise timing configuration (millisecond accuracy) to execute automated actions, unlike passive clock displays.  </li>
-<li><strong>Permissions</strong>: AutoClickers need deeper system access (accessibility services) to simulate user interactions, whereas floating clocks only need basic overlay permissions.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>功能对比</th>
-<th>悬浮时钟APP</th>
-<th>AutoClicker</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>核心功能</strong></td>
-<td>仅显示时间</td>
-<td>时间显示 + <strong>自动点击</strong></td>
-</tr>
-<tr>
-<td><strong>触发逻辑</strong></td>
-<td>无</td>
-<td>毫秒级定时触发</td>
-</tr>
-<tr>
-<td><strong>系统权限</strong></td>
-<td>仅需悬浮窗权限</td>
-<td>需悬浮窗 + 无障碍服务权限</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="Challenges-Solutions-开发挑战与解决方案"><a href="#Challenges-Solutions-开发挑战与解决方案" class="headerlink" title="Challenges &amp; Solutions | 开发挑战与解决方案"></a><strong>Challenges &amp; Solutions | 开发挑战与解决方案</strong></h2><ol>
-<li><p><strong>悬浮窗与点击服务的协同</strong>  </p>
-<ul>
-<li><strong>Challenge:</strong> Coordinating floating window visibility with click execution.  </li>
-<li><strong>Solution:</strong> Hide the window via <code>Broadcast</code> before clicking and restore it afterward.  </li>
-<li>问题：悬浮窗需持续显示时间，但点击时需隐藏以避免遮挡。  </li>
-<li>解决：通过 <code>Broadcast</code> 在点击前隐藏悬浮窗，完成后恢复显示。</li>
-</ul>
-</li>
-<li><p><strong>跨版本兼容性</strong>  </p>
-<ul>
-<li><strong>Challenge:</strong> Android 12+ restrictions on exact alarms.  </li>
-<li><strong>Solution:</strong> Dynamically detect OS version and switch between <code>setExact()</code> and <code>setAlarmClock()</code>.  </li>
-<li>问题：Android 12+ 对精确闹钟的限制。  </li>
-<li>解决：动态检测版本并适配 <code>setExact()</code> 或 <code>setAlarmClock()</code>。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="Future-Plans-未来计划"><a href="#Future-Plans-未来计划" class="headerlink" title="Future Plans | 未来计划"></a><strong>Future Plans | 未来计划</strong></h2><ol>
-<li><strong>Multi-Window Support | 多悬浮窗支持</strong><br>Allow users to track multiple countdowns simultaneously.<br><strong>功能扩展：</strong> 支持同时追踪多个倒计时任务。  </li>
-<li><strong>Accessibility Event Filtering | 无障碍事件过滤</strong><br>Improve efficiency by filtering irrelevant <code>AccessibilityEvent</code> data.<br><strong>性能优化：</strong> 通过过滤无关的无障碍事件提升效率。</li>
-</ol>
-<hr>
-<p><strong>GitHub Repository:</strong> <a href="https://github.com/Minkai-Shi/AutoClicker">AutoClicker</a><br><strong>License:</strong> Apache 2.0  </p>
+    <title>Play with DFRobot Geiger Counter Module</title>
+    <url>/2024/07/21/Geiger-Counter/</url>
+    <content><![CDATA[<p>I saw an activity on the EEPW (Electronic Engineering&amp;Product World) forum about playing with the “DFRobot Geiger Counter Module”. I happened to have learned about Geiger counters in textbooks, so I bought a module to DIY. Place an order at the official DFrobot brand store on Taobao and it will arrive one day after placing the order.<br><img src="/upload/Geiger1.jpg" alt="pic1" title="pic1"><br>The official code provided by DFrobot Geiger counter is based on Arduino. The program architecture uses external interrupts for counting, and then refreshes the data every 3 seconds in the main loop, takes 3 data to calculate CPM value, and then converts CPM into uSv&#x2F;h or nSv&#x2F;h and displays it on OLED LCD.<br>Attempt to rewrite the code in MicroPython and optimize the count by storing data every 3 seconds and caching it 20 times for a total of 1 minute to calculate CPM. The CPM is calculated based on the cache time before reaching 1 minute, and the longer the cache time, the more stable the data changes.<br>The wiring of OLED and Geiger counters is consistent with the Arduino code mentioned earlier.<br>After obtaining the DFRobot Geiger counter module, I also bought an adapter pin so that it can be connected to the ESP32 board for debugging. The official Arduino routine uses pin D3 to connect the D of the DFRobot Geiger counter module, but it is not recommended to use pin 3 and Rx pin shared by the ESP32 development board’s digital pin. Instead, it should be debugged using pin 14.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;  </span></span><br><span class="line"><span class="string">DFrobot DFRobot Geiger Counter Module experiment</span></span><br><span class="line"><span class="string">pin assign : pin DFrobot Geiger Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         (D)--&gt;(14)  </span></span><br><span class="line"><span class="string">         (+)--&gt;(5V)  </span></span><br><span class="line"><span class="string">         (-)--&gt;(GND)  </span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">OLED(IIC) Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         GND--&gt;(GND)  </span></span><br><span class="line"><span class="string">         VCC--&gt;(5V)  </span></span><br><span class="line"><span class="string">         SCL--&gt;(18)  </span></span><br><span class="line"><span class="string">         SDA--&gt;(23)  </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>  </span><br><span class="line"><span class="comment">#Import Pin Module</span></span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> SoftI2C  </span><br><span class="line"><span class="keyword">from</span> ssd1306 <span class="keyword">import</span> SSD1306_I2C  <span class="comment">#I2C oled  </span></span><br><span class="line"><span class="comment">#Create software I2C object </span></span><br><span class="line">i2c = SoftI2C(sda=Pin(<span class="number">23</span>), scl=Pin(<span class="number">18</span>))  </span><br><span class="line"><span class="comment">#Create OLED object,Resolution of OLED,I2C interface</span></span><br><span class="line">oled = SSD1306_I2C(<span class="number">128</span>, <span class="number">64</span>, i2c)   </span><br><span class="line"><span class="comment">#Geiger in  fenbl</span></span><br><span class="line">Geiger_In=Pin(<span class="number">14</span>,Pin.IN,Pin.PULL_UP)  </span><br><span class="line"><span class="comment">#Geiger Counter external interrupt function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Geiger_In_irq</span>(<span class="params">Geiger_In</span>):  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    numPulse = numPulse + <span class="number">1</span>   </span><br><span class="line"><span class="comment">#Program entrance</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    BUFFER_SIZE = <span class="number">20</span>  </span><br><span class="line">    rows, cols = <span class="number">2</span>, BUFFER_SIZE  </span><br><span class="line">    mem_data = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(cols)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(rows)]  </span><br><span class="line">    numPulse = <span class="number">0</span>  </span><br><span class="line">    pos = <span class="number">0</span>      </span><br><span class="line">    oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen    </span></span><br><span class="line">    oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string </span></span><br><span class="line">    oled.show()  <span class="comment">#Execute Display     </span></span><br><span class="line">    Geiger_In.irq(Geiger_In_irq,Pin.IRQ_FALLING)  <span class="comment">#Configure external interrupt, trigger falling edge</span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:    </span><br><span class="line">        time.sleep_ms(<span class="number">3000</span>)  </span><br><span class="line">        mem_data[<span class="number">0</span>][pos] = time.ticks_ms()  </span><br><span class="line">        mem_data[<span class="number">1</span>][pos] = numPulse  </span><br><span class="line">        numPulse = <span class="number">0</span>  </span><br><span class="line">        cpm=<span class="number">0</span>  </span><br><span class="line">        pos_old = pos  </span><br><span class="line">        pos = (pos+<span class="number">1</span>)%BUFFER_SIZE          </span><br><span class="line">        numAll = <span class="number">0</span>  </span><br><span class="line">        time_now = mem_data[<span class="number">0</span>][pos_old]   </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, BUFFER_SIZE - <span class="number">1</span>):  </span><br><span class="line">            <span class="keyword">if</span> mem_data[<span class="number">0</span>][pos_old] != <span class="number">0</span>:  </span><br><span class="line">                numAll = numAll + mem_data[<span class="number">1</span>][pos_old]  </span><br><span class="line">                time_old = mem_data[<span class="number">0</span>][pos_old]  </span><br><span class="line">                <span class="keyword">if</span> pos_old == <span class="number">0</span>:  </span><br><span class="line">                    pos_old =  BUFFER_SIZE - <span class="number">1</span>  </span><br><span class="line">                <span class="keyword">else</span>:  </span><br><span class="line">                    pos_old = pos_old - <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">if</span> time_now-time_old &gt; <span class="number">0</span>:  </span><br><span class="line">            cpm = numAll*<span class="number">1000</span>*<span class="number">60</span>/(time_now-time_old)  </span><br><span class="line">              </span><br><span class="line">        str1 = <span class="string">&quot;&#123;:.0f&#125;&quot;</span>.<span class="built_in">format</span>(cpm)    <span class="comment">#CPM Convert to string </span></span><br><span class="line">        str2 = <span class="string">&quot;&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(cpm/<span class="number">151</span>)<span class="comment">#uSv/h Convert to string  </span></span><br><span class="line">        oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen </span></span><br><span class="line">        oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string</span></span><br><span class="line">        oled.text(<span class="string">&quot;CPM&quot;</span>,<span class="number">80</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM units  </span></span><br><span class="line">        oled.text(<span class="string">&quot;uSv/h&quot;</span>,<span class="number">80</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h uints  </span></span><br><span class="line">        oled.text(str1,<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM data</span></span><br><span class="line">        oled.text(str2,<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h data</span></span><br><span class="line">        oled.show()  <span class="comment">#Execute Display</span></span><br></pre></td></tr></table></figure>
+<p><img src="/upload/Geiger2.jpg" alt="pic2" title="pic2"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>My Experience of Imperial College Summer School</title>
+    <url>/2024/08/30/IC-SummerSchool/</url>
+    <content><![CDATA[<p>&emsp;&emsp;I had an exciting time attending Imperial College London’s Summer School from 5-16 August 2024. I participated in the engineering group, and the whole summer school was mainly composed of four parts: introduction of each engineering major, master classes, group activities, and cultural and sports activities.<br>&emsp;&emsp;On the first day of summer school, The geology professor introduced us to the classification and composition of engineering, including electrical and electronic engineering, computer science, bio-pharmaceuticals, civil engineering, aerospace engineering, etc., involving knowledge in mathematics, physics, chemistry, biology, computers, earth sciences, and so on. Then she shared her relationship with engineering from the perspective of enlightenment learning and coaching. In the following study, we began to understand and experience various engineering majors.<br>1.Design engineering:Engineering Challenge<br>&emsp;&emsp;The design engineering student introduced the campus layout, followed by his own learning content about instrument modification. He also showed several examples of his work, such as a piano with permanent magnets replacing the hammer, a six-string pickup that relies entirely on electronics to adjust tone and pitch, and touchscreens on the keys for changing pitch. We were then asked to visualize an imagined sound and use the provided materials to make a model of an instrument that could produce it, explaining how it works. Finally, we connected the microcontroller, microphone, and speaker with wires under instructions to create a device that relies on vibrating the microphone to produce sound and reliably changes pitch by short-circuiting the contact points.<br>2.Civil Engineering: Designning a High Speed Railway Bridge<br>&emsp;&emsp;After the mentor explained the subject content, application scenarios, and employment situation, a railway bridge design case activity was conducted, which provided us with the local terrain, transportation, population and vegetation density, crop distribution, and flood risk map. It was required to limit the slope and transition radius to maintain maximum speed and minimize the impact on the local environment and residents. While saving materials and facilitating construction, it ensured survival rate in floods. In group collaboration, we focused on analyzing geological and cultural material factors, dividing tasks, mapping, making models, and preparing report content. At the beginning, we attempted to overlap all the terrain and affected areas onto the same map in order to avoid all of these areas and achieve the optimal route. But soon we found that it was difficult to achieve this ideal state in practical situations, as demonstrated in the case presented this time. We adjusted the plan to avoid the route as a supplement, and directly resolved the conflict between the railway bridge and the natural and cultural environment. For example, we increased the height of the bridge in narrow flood areas and used more steel bars in vegetation cultivation areas to ensure strength while reducing the damage and occupation of land by bridge piers.<br>3.Mechanical Engineering: Heavy Lifting Challenge<br>&emsp;&emsp;The supervisor explained the classification of the discipline and provided us with a visual experience of the architecture related categories through examples. Subsequently, we were given the materials to complete the task of making a crane model. During the process, continuous improvements were made to the structure to meet the requirements, but the final result was not ideal. The root cause was the lack of clear and explicit design, which led to the consumption of material durability due to constant modifications. At the same time, the structure was too complex and neglected the analysis of the essential principles, increasing the difficulty of production and the failure rate.<br>4.Aerospace Engineering: Learn how to think like an Aeronautical Engineer<br>&emsp;&emsp;The aerospace engineering class is taught by a structural and material engineering professor, who introduces the sub disciplines under this discipline, the courses to be completed, annual activities, and location arrangements. At the beginning of the visit, we were taken to the wind tunnel to understand its purpose and operating principle. We used force analysis, wind tunnel data, and relevant aerodynamic formulas to determine the error between theoretical resistance and actual experimental resistance on site. Subsequently, we visited the rocket, aircraft, control test flight laboratory, and flight test simulation equipment to understand the important parameters and stall causes of aircraft during flight, as well as solutions. In the 3D printing laboratory, we visited relevant facilities and our mentor introduced us to some energy-saving solutions for hollowing out large solid parts during printing, and asked us to complete the design of the structure and support with minimal consumables. Finally, the senior answered the students’ questions and solved their problems.<br>5.Earth Science Engineering: Space Misson Planning<br>&emsp;&emsp;In the class, we used given formulas to calculate the selection of fuel and weight in the Earth Moon and Moon Earth orbits, understands the three stages of the entire rocket mission, and listened to the professor’s research on asteroids.<br>6.Electronic and Electrical Engineering: Information Session<br>&emsp;&emsp;The professor explained to us the subjects and academic activities that college students need to learn every year, and showed us the results of one of the activities over the years. This was originally a major that I was very interested in, but it seems that I did not get enough understanding through the arrangement of the course, and the course time was very short.<br>7.Chemical Engineering: introduction to Chemical Engineering<br>&emsp;&emsp;At the Huxley Lecture Theatre, the mentor gave a lecture on the learning content arrangement of chemical engineering and the work content of chemists. Afterwards, we visited the school’s carbon capture experimental factory and its monitoring and control room, and learned about the functions and operations of the instruments. Returning to the auditorium, we experienced a digital experiment that simulated the control of high-temperature environments in the production process using computer programs. By adjusting the upper and lower limits of temperature control and heating power, we achieved the minimum energy consumption, low-temperature practice, and triggering of programs. Finally, the mentor led us to conduct a hydrogen explosion experiment and explained some common chemical knowledge in class and production life.<br>&emsp;&emsp;In the process of learning about various engineering majors, we also took 2 master classes, Master class 1: application score requirements, process timetable, pre-examination arrangement, some voluntary declaration mechanisms and misunderstandings, subject selection, etc. Master’s Course 2: Self awareness, Opportunity Awareness, Decision making, and Plan Implementation. We discussed the factors above that should be considered in the plans and combined with the university schedule, provided us with the execution time for each stage of the  employment plan in our discipline. This is very helpful for me to make a long-term study plan.<br>&emsp;&emsp;What impressed me was the ideation workshops. In the last three days, each academic group will be disrupted and reorganized. Each new group will observe and discover a pain point in their daily life, and then design products to solve it, while considering the target audience, product characteristics, and significance of existence. After determining the product, each group develops a production and testing process plan, sketches and models, and colleagues shoot advertisements and promote them. At the beginning of the group activity, the school explained how to find pain points and design products that fit the scene. Before the presentation, they introduced how to relax the whole body to ensure better speaking effectiveness.<br>&emsp;&emsp;In the early design stage of group collaboration, I provided suggestions for product structure design and assisted in drawing sketches. In the preparation stage of the report, I designed and drew the logo of the group company to participate in the shooting of the advertisement, and participated in the PPT presentation in the final report. My group mentor recommended foreign mapping software to me, and I learned the relevant operation tutorials myself. With my own exploration and creativity, I successfully completed the design task. On the morning of the presentation, a teacher specializing in performance explained the essentials of relaxing the whole body before a speech, how to maintain a natural and appropriate posture during the speech, and how to control breath and volume. The most important thing is to relax the whole body, stretch the neck and throat, and ensure that the vocal cords relax and produce natural sounds; The relaxation of shoulders and cervical spine makes the speech posture more upright and straight; Relax the limbs to make the coordination of movements and expressions smoother. My mentor personally led everyone to practice related relaxation exercises. During the group presentation that day, I put the speech skills I learned into practice.<br>&emsp;&emsp;In addition to this, we also held a lot of activities such as ten pin bowling, Thames cruises, theatre, bus tours, and trips to the beach in Brighton. We got together, met different people in the world, and experienced the unique scenery and culture of United Kingdom, which made summer school life full of joy.<br>&emsp;&emsp;Overall impression of Imperial College London and its engineering. There is no clear boundary between Imperial College London’s campus and society, and you can experience various customs and traditions. The ancient museum auditorium and the brand new modern teaching building are intertwined, reflecting the diversity and development of a country’s history. The precise and complete equipment and tools in the laboratory building, as well as rigorous and serious rules and regulations, ensure that subject learning and scientific research activities can be carried out safely, standardly, and efficiently. The professor’s knowledge is beyond doubt, and as a mentor, the students in school are also enthusiastic and patient, with excellent academic abilities. Our life mentor is an outgoing and enthusiastic young man, with an African style hairstyle and a habit of patting the forehead, making him particularly prominent among the group gathering. For students from non English speaking countries, he is very tolerant and patiently guides them to participate in everyone’s English communication. During some driving or waiting times, he also enlivens the atmosphere, organizing everyone to play games or sing.<br>&emsp;&emsp;During the summer school period, I gained a deeper understanding of the engineering major, which is a comprehensive application of mathematics and physics, including many specific applications and combinations in subdivided fields. It is a discipline that applies theoretical knowledge such as mathematics, physics, chemistry, geology, and astronomy to daily life and production. In addition to proficient application of mathematical knowledge, this subject also requires us to have the observation ability to discover opportunities for knowledge application in life, the creativity to associate design solutions, and the execution ability to solve practical problems.<br>&emsp;&emsp;After attending the summer school, I felt that I require new requirements and goals for my self-development.<br>&emsp;&emsp;First, Oral expression still needs improvement, as I was unable to fully express my ideas in a timely and clear manner during group activities.<br>&emsp;&emsp;Second, In terms of daily life, I have not fully utilized the substitute items and clothing. In the future, I need to train and organize the use of items to enhance my storage ability.<br>&emsp;&emsp;Third, Culturally, I need to understand and respect local customs and religions, and try local entertainment projects appropriately in order to integrate into the collective.<br>&emsp;&emsp;Last, In terms of subjects, I will conduct in-depth exploration and research in various fields of interest to ensure that I have sufficient advance knowledge of the university subjects I am interested in.<br><img src="/upload/IC1.jpg" alt="IC1" title="IC1"><br><img src="/upload/IC2.jpg" alt="IC2" title="IC2"><br><img src="/upload/IC3.jpg" alt="IC3" title="IC3"><br><img src="/upload/IC4.jpg" alt="IC4" title="IC4"><br><img src="/upload/IC5.jpg" alt="IC5" title="IC5"><br><img src="/upload/IC6.jpg" alt="IC6" title="IC6"><br><img src="/upload/IC7.jpg" alt="IC7" title="IC7"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Making Pilot 743Pen tip suitable in Chinese made vacuum filler pen body</title>
+    <url>/2024/06/28/MakingPilot743Pen/</url>
+    <content><![CDATA[<p>Making Pilot 743Pen tip suitable in Chinese made vacuum filler pen body .<br>Remove the pen tip and tongue from the original pen for later use. The pen tip can be self polished and electroplated to make it look better. Choose a domestically produced pen holder of the same size and size as the 35th model. Remove the nib and tongue of the pen, and groove them on both sides of the back of the tongue to fit the 743 nib positioning buckle. Polish the surface curvature to attach the alloy plate to ensure normal use. After polishing, clean the plastic particles on the tongue to ensure fine and clean bristles. Use a blade to expand the ink guide groove and reinstall the nib together, and then fine tune them together.That’s all.<br><img src="/upload/Pilot1.jpg" alt="pic1" title="pic1"></p>
 ]]></content>
       <categories>
-        <category>Android Studio Kotlin</category>
+        <category>pen</category>
       </categories>
       <tags>
-        <tag>Android Studio Kotlin</tag>
+        <tag>pen</tag>
       </tags>
   </entry>
   <entry>
@@ -734,6 +519,221 @@
       </categories>
       <tags>
         <tag>EEPW Activity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sheaffer&#39;s Snorkel Pen Filling Structure Renew</title>
+    <url>/2024/04/28/Sheaffer-Snorkel-Pen-Renew/</url>
+    <content><![CDATA[<p>Sheaffer’s Snorkel Pen Filling Structure Renew </p>
+<ol>
+<li>Assembly sealing gasket: Unscrew the pen tip assembly, unscrew the breathing tube and take out the aging gasket, remove it and put on a new gasket</li>
+<li>Water dispenser assembly: Unscrew the pen holder, remove the water dispenser assembly from the pen holder end, use a screwdriver to completely push out the connector and aging ink cartridge from the small hole at the tail, clean and soak in hot water, remove the ink cartridge connection key and the insect glue that fixes the breathing tube, put on a new ink cartridge, and fix it with insect glue. Remove the breathing tube and clean the ink guide strip before reinstalling it in its original state<br><img src="/upload/Sheaffer1.jpg" alt="pic1" title="pic1"></li>
+<li>With a long straight screwdriver, unscrew the tail button screw, push out the TD tube from the pen holder, pick out the aging O-ring with a toothpick, clean the exhaust hole O-ring groove, apply a little glue, and use a toothpick to fully insert the new O-ring into the O-ring groove. When installing the tail button, replace the screw hole sealing gasket, and finally reinstall it in its original state</li>
+<li>Overall: Finally, apply lubricating oil to the threads of the water assembly, and also apply silicone oil to other threads to prevent water and air leakage.<br><img src="/upload/Sheaffer2.jpg" alt="pic2" title="pic2"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>pen</category>
+      </categories>
+      <tags>
+        <tag>pen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sheaffer&#39;s vaccum filling structure renew</title>
+    <url>/2024/06/26/Sheaffer-vaccum-Renew/</url>
+    <content><![CDATA[<p>Sheaffer’s vaccum filling structure renew , soaked in hot water at around 60 degrees Celsius to dissolve the tail seal insect glue. After tightening the tail button, continue to rotate clockwise to remove the tail seal. Unscrew the hard rubber screw on the piston head, clean the gap between the pen rod piston head and the original rubber of the tail seal, replace with a new piston plate, and reinstall the original tail seal sample. If the tail seal thread cannot be fixed by friction and becomes loose, stick it with insect glue<br><img src="/upload/Sheaffer3.jpg" alt="pic3" title="pic3"></p>
+]]></content>
+      <categories>
+        <category>pen</category>
+      </categories>
+      <tags>
+        <tag>pen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Snake Game Activity-1</title>
+    <url>/2024/09/16/Snake_Game_Activity-1/</url>
+    <content><![CDATA[<h1 id="Snake-Game-Activity-1"><a href="#Snake-Game-Activity-1" class="headerlink" title="Snake Game Activity-1"></a>Snake Game Activity-1</h1><p>The <strong>“Let’s do Activity”</strong> is a year-long campaign initiated by DigiKey and EEPW, titled <strong>“Learn Technology with E-Classroom, Complete Tasks for Rebates.”</strong> In 2024, there will be 4 sessions. Each session features technical experts recommending development boards&#x2F;instrument kits with strong playability and educational value, guiding participants through hands-on practice. The activity aims to help electronics enthusiasts learn practical technical knowledge, accumulate DIY experience, and become better versions of themselves!</p>
+<p>I participated in the <strong>Snake Game Activity</strong> of the <strong>2nd session</strong> of “Let’s do Activity.” Within the specified timeframe, participants place orders through the exclusive “DigiKey Purchase” link on the DigiKey official website. By completing basic tasks explained by instructors, they can receive a rebate on their order costs.</p>
+<p><strong>Highlights of This Session</strong>:<br>Implementing the Snake Game using <strong>Raspberry Pi Pico</strong>.</p>
+<p><strong>Activity Page</strong>:<br><a href="https://www.eepw.com.cn/event/action/digikey/diy_sec.html">https://www.eepw.com.cn/event/action/digikey/diy_sec.html</a></p>
+<p>As a high school student participating for the first time, I carefully selected products to meet requirements without exceeding the budget.</p>
+<p><strong>Provided Components</strong>:</p>
+<p><strong>Core Components (for basic tasks)</strong>:</p>
+<ul>
+<li><strong>Raspberry Pi Pico</strong> - ARM® Cortex®-M0+ MCU 32-bit Evaluation Board - SC0917 (Required)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM543 - RP2040 LCD 1.14” Display (Choose 1 of 3)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - PIM580 - LCD 2” Display (Choose 1 of 3)</li>
+<li><strong>Raspberry Pi Pico Evaluation Expansion Board</strong> - 103030400 - ST7789 LCD 1.14” Display (Choose 1 of 3)</li>
+</ul>
+<p><strong>Extended Components (for advanced tasks)</strong>:</p>
+<ul>
+<li><strong>Transistor</strong> - SS8550DTA - PNP Bipolar (BJT) 25 V 1.5 A 200MHz 1 W Through-Hole TO-92-3</li>
+<li><strong>Speaker</strong> - OWS-1330TA-8 - 8Ω General Speaker 500 mW 100 Hz~20 kHz Top Round</li>
+</ul>
+<p>Among the three screens, two had smaller sizes and resolutions (1.14”). The <strong>PIM580 PIOO DISPLAY PACK 2.0</strong> was larger but had tiny directional buttons, which made it unsuitable for game development. I chose the <strong>103030400</strong> model with directional buttons. Its display quality is decent, though limited in content capacity due to the small size. Additionally, I purchased a <strong>PIOO OMNIBUS (DUAL EXPANDER)</strong> board for the Pico. This dual expansion board is highly practical—after connecting the screen, the remaining slot allowed me to freely add components. For this project, I used it to connect a speaker without soldering.</p>
+<p>The screen uses the <strong>Waveshare Pico-LCD-1.14</strong> module. Waveshare provides official drivers and pre-ported LVGL driver examples, making development straightforward.<br><img src="/upload/snake1-1.jpg" alt="snake1-1" title="snake1-1"><br><img src="/upload/snake1-2.jpg" alt="snake1-2" title="snake1-2"><br><strong>My EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
+]]></content>
+      <categories>
+        <category>EEPW Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW Activity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Snake Game Activity-2</title>
+    <url>/2024/09/29/Snake_Game_Activity-2/</url>
+    <content><![CDATA[<h1 id="Snake-Game-Activity-2"><a href="#Snake-Game-Activity-2" class="headerlink" title="Snake Game Activity-2"></a>Snake Game Activity-2</h1><h1 id="Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements"><a href="#Colorful-Snake-Game-on-Raspberry-Pi-Pico-Development-Process-Achievements" class="headerlink" title="Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements"></a>Colorful Snake Game on Raspberry Pi Pico: Development Process &amp; Achievements</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="This-project-was-part-of-the-“Let’s-Do-Activity”-Session-2-organized-by-DigiKey-and-EEPW-focusing-on-developing-a-Snake-Game-using-the-Raspberry-Pi-Pico-microcontroller-The-goal-was-to-implement-core-game-mechanics-integrate-a-custom-GUI-with-LVGL-and-add-personalized-audio-effects-using-PWM-driven-speakers-Below-I-detail-my-journey-through-hardware-setup-software-development-and-creative-customization-This-project-was-awarded-the-EEPW-Excellence-Prize-for-its-innovative-integration-of-embedded-systems-recognized-for-technical-rigor-This-project-won-the-Excellence-Prize-of-Electronic-Engineering-World-EEPW-for-its-innovative-technical-implementation-The-prize-is-a-200-yuan-JD-com-e-voucher"><a href="#This-project-was-part-of-the-“Let’s-Do-Activity”-Session-2-organized-by-DigiKey-and-EEPW-focusing-on-developing-a-Snake-Game-using-the-Raspberry-Pi-Pico-microcontroller-The-goal-was-to-implement-core-game-mechanics-integrate-a-custom-GUI-with-LVGL-and-add-personalized-audio-effects-using-PWM-driven-speakers-Below-I-detail-my-journey-through-hardware-setup-software-development-and-creative-customization-This-project-was-awarded-the-EEPW-Excellence-Prize-for-its-innovative-integration-of-embedded-systems-recognized-for-technical-rigor-This-project-won-the-Excellence-Prize-of-Electronic-Engineering-World-EEPW-for-its-innovative-technical-implementation-The-prize-is-a-200-yuan-JD-com-e-voucher" class="headerlink" title="This project was part of the “Let’s Do Activity” (Session 2) organized by DigiKey and EEPW, focusing on developing a Snake Game using the Raspberry Pi Pico microcontroller. The goal was to implement core game mechanics, integrate a custom GUI with LVGL, and add personalized audio effects using PWM-driven speakers. Below, I detail my journey through hardware setup, software development, and creative customization.This project was awarded the EEPW Excellence Prize for its innovative integration of embedded systems, recognized for technical rigor.This project won the Excellence Prize of Electronic Engineering World (EEPW) for its innovative technical implementation. The prize is a 200-yuan JD.com e-voucher."></a>This project was part of the <a href="https://www.eepw.com.cn/event/action/digikey/diy_sec.html">“Let’s Do Activity” (Session 2)</a> organized by DigiKey and EEPW, focusing on developing a <em>Snake Game</em> using the <strong>Raspberry Pi Pico</strong> microcontroller. The goal was to implement core game mechanics, integrate a custom GUI with LVGL, and add personalized audio effects using PWM-driven speakers. Below, I detail my journey through hardware setup, software development, and creative customization.This project was awarded the <strong>EEPW Excellence Prize</strong> for its innovative integration of embedded systems, recognized for technical rigor.<br>This project won the Excellence Prize of Electronic Engineering World (EEPW) for its innovative technical implementation. The prize is a 200-yuan JD.com e-voucher.</h2><h2 id="Hardware-Setup"><a href="#Hardware-Setup" class="headerlink" title="Hardware Setup"></a>Hardware Setup</h2><h3 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h3><ul>
+<li><strong>Raspberry Pi Pico</strong> (ARM Cortex-M0+ MCU)  </li>
+<li><strong>Waveshare Pico-LCD-1.14</strong> (1.14” LCD with directional buttons)  </li>
+<li><strong>PIOO Omnibus (Dual Expander Board)</strong> for extended I&#x2F;O  </li>
+<li><strong>8Ω Speaker</strong> connected via PWM for audio effects</li>
+</ul>
+<p><strong>System Architecture</strong><br>The Pico was mounted on the Dual Expander Board’s central slot. The LCD occupied <strong>Deck 1</strong>, while <strong>Deck 2</strong> hosted the speaker via GPIO 27 (PWM output).<br><img src="http://uphotos.eepw.com.cn/1713930123/pics/1724036918676284.png" alt="System Diagram"></p>
+<hr>
+<h2 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h2><h3 id="Toolchain-Setup"><a href="#Toolchain-Setup" class="headerlink" title="Toolchain Setup"></a>Toolchain Setup</h3><p>Initially, I struggled with Keil MDK due to licensing and compilation issues. After days of troubleshooting, I switched to the <strong>official Pico SDK</strong> with <strong>VS Code</strong> and <strong>Visual Studio 2022</strong>, following these steps:  </p>
+<ol>
+<li><p>Install <strong>Pico C&#x2F;C++ SDK</strong>, CMake, and VS Code.  </p>
+</li>
+<li><p>Configure <code>PICO_SDK_PATH</code> in the developer PowerShell.  </p>
+</li>
+<li><p>Compile code using:  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build  </span><br><span class="line">cmake -G <span class="string">&quot;NMake Makefiles&quot;</span> ..  </span><br><span class="line">nmake  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Flashed the generated <code>.uf2</code> file to the Pico.</p>
+</li>
+</ol>
+<h3 id="LVGL-Integration-for-GUI"><a href="#LVGL-Integration-for-GUI" class="headerlink" title="LVGL Integration for GUI"></a>LVGL Integration for GUI</h3><p>The <strong>Waveshare LCD</strong> utilized LVGL (Light and Versatile Graphics Library) with optimizations:</p>
+<p>DMA Transfers: Reduced CPU usage to <strong>&lt;35%</strong> by offloading SPI data transfer.</p>
+<ul>
+<li><strong>Double Buffering</strong>: Ensured smooth animations by rendering in one buffer while transferring another.</li>
+<li><strong>Custom Widgets</strong>: Designed four interactive pages:<ul>
+<li><strong>Splash Screen</strong>: Displays the game logo.</li>
+<li><strong>Level Selection</strong>: Allows users to choose difficulty (Level 1-8).</li>
+<li><strong>Gameplay Interface</strong>: Renders the snake, food, and collision logic.</li>
+<li><strong>Results Page</strong>: Shows scores and game-over messages.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Game-Logic-Implementation"><a href="#Game-Logic-Implementation" class="headerlink" title="Game Logic Implementation"></a>Game Logic Implementation</h3><h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><ol>
+<li><strong>Movement Mechanics</strong><ul>
+<li>Directional constraints: Vertical movement allows only horizontal turns, and vice versa.</li>
+</ul>
+</li>
+<li><strong>Speed Scaling</strong><ul>
+<li>Progressive difficulty: From 300ms&#x2F;step (Level 1) to 80ms&#x2F;step (Level 8).</li>
+</ul>
+</li>
+<li><strong>Collision Detection</strong><ul>
+<li><strong>Food Consumption</strong>: Increases snake length and triggers sound effects.</li>
+<li><strong>Boundary&#x2F;Body Collision</strong>: Ends the game and resets progress.</li>
+</ul>
+</li>
+</ol>
+<h4 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h4><ul>
+<li><code>snake_body_t</code>: Stores coordinates of snake segments.</li>
+<li><code>my_eat_snake</code>: Manages snake length, position, and growth.</li>
+<li><code>my_snake_food</code>: Tracks food location and remaining count.</li>
+</ul>
+<hr>
+<h3 id="Personalized-Audio-System"><a href="#Personalized-Audio-System" class="headerlink" title="Personalized Audio System"></a>Personalized Audio System</h3><h4 id="PWM-Driven-Sound-Effects"><a href="#PWM-Driven-Sound-Effects" class="headerlink" title="PWM-Driven Sound Effects"></a>PWM-Driven Sound Effects</h4><p>The speaker was controlled via GPIO 27 using <strong>Pulse Width Modulation (PWM)</strong>. Key steps:</p>
+<ol>
+<li>PWM Configuration<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gpio_set_function(<span class="number">27</span>, GPIO_FUNC_PWM);  </span><br><span class="line">pwm_config config = pwm_get_default_config();  </span><br><span class="line">pwm_config_set_clkdiv(&amp;config, <span class="number">1.f</span>);  </span><br><span class="line">pwm_config_set_wrap(&amp;config, <span class="number">20000</span>);  </span><br><span class="line">pwm_init(slice_num, &amp;config, <span class="literal">true</span>); </span><br></pre></td></tr></table></figure></li>
+<li>Interrupt-Driven Audio Playback<ul>
+<li>Defined musical notes (e.g., <code>C4=262Hz</code>, <code>D4=294Hz</code>) in an array.</li>
+<li>Used <code>on_pwm_wrap()</code> interrupt to play:<ul>
+<li><strong>Background Music</strong>: Triggered during gameplay (<code>sound_state[0] = 1</code>).</li>
+<li><strong>Sound Effects</strong>: Played when eating food (<code>sound_state[1] = 1</code>) or game-over (<code>sound_state[1] = 2</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Challenges-Solutions"><a href="#Challenges-Solutions" class="headerlink" title="Challenges &amp; Solutions"></a>Challenges &amp; Solutions</h2><ol>
+<li>Development Environment<ul>
+<li>Issue: Keil MDK compatibility issues and compilation errors.</li>
+<li>Solution: Migrated to Pico SDK with VS Code, reducing build time by 50%.</li>
+</ul>
+</li>
+<li>Audio Quality Limitations<ul>
+<li>Issue: Distortion due to PWM signal noise.</li>
+<li>Solution: Implemented frequency modulation and fade effects to minimize noise.</li>
+</ul>
+</li>
+<li>Memory Optimization<ul>
+<li>Issue: LVGL memory spikes during animations.</li>
+<li>Solution: Reduced buffer sizes and simplified widget hierarchies.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Conclusion-Learning-Outcomes"><a href="#Conclusion-Learning-Outcomes" class="headerlink" title="Conclusion &amp; Learning Outcomes"></a>Conclusion &amp; Learning Outcomes</h2><p>This project enhanced my expertise in <strong>embedded systems, real-time programming</strong>, and <strong>GUI development</strong>. Key takeaways:</p>
+<ul>
+<li><strong>Adaptability</strong>: Successfully pivoted toolsets to overcome environmental hurdles.</li>
+<li><strong>Problem-Solving</strong>: Debugged hardware-software integration challenges.</li>
+<li><strong>Creativity</strong>: Designed a responsive GUI and dynamic audio system within resource constraints.</li>
+</ul>
+<p><strong>Full Code &amp; Documentation</strong>: <a href="https://github.com/Minkai-Shi/Snake-Game">GitHub Repository</a></p>
+<p><strong>Demo Video</strong>: <a href="https://youtu.be/m1qLWg0Lp00">https://youtu.be/m1qLWg0Lp00</a></p>
+<p><strong>EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a><br><a href="https://forum.eepw.com.cn/thread/384453/1">https://forum.eepw.com.cn/thread/384453/1</a><br><a href="https://forum.eepw.com.cn/thread/384471/1">https://forum.eepw.com.cn/thread/384471/1</a><br><a href="https://forum.eepw.com.cn/thread/384521/1">https://forum.eepw.com.cn/thread/384521/1</a></p>
+<hr>
+<h2 id="Relevance-for-Undergraduate-Studies"><a href="#Relevance-for-Undergraduate-Studies" class="headerlink" title="Relevance for Undergraduate Studies"></a>Relevance for Undergraduate Studies</h2><p>This project exemplifies my ability to:</p>
+<ul>
+<li>Apply theoretical concepts to practical implementations.</li>
+<li>Innovate under technical constraints.</li>
+<li>Collaborate with open-source communities (e.g., LVGL, Pico SDK).</li>
+</ul>
+<p>I look forward to expanding these skills in a university setting, particularly in courses related to embedded systems and human-computer interaction.</p>
+]]></content>
+      <categories>
+        <category>EEPW Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW Activity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Yongsheng 601 pump piston lubrication and sealing tutorial</title>
+    <url>/2024/03/30/Yongsheng-601-pump-piston-renew/</url>
+    <content><![CDATA[<p>Yongsheng 601 pump piston lubrication and sealing tutorial.<br><img src="/upload/pic4.jpg" alt="pic4" title="pic4"><br> Drain ink, repeatedly inhale and spit out clean water to ensure no high concentration of ink residue, use factory disassembly, wrench or pliers to unscrew the piston, clean the inner wall of the pen holder and the mixture of ink and water on the piston with a dust-free tissue.<br>  Apply a circle of silicone oil to the piston head groove, use the previous tool to rotate the pen holder back, press a few times before absorbing ink, and ensure that it is evenly distributed inside the pen holder,That’s all.</p>
+]]></content>
+      <categories>
+        <category>pen</category>
+      </categories>
+      <tags>
+        <tag>pen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/02/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Leica Barnac minor repairs (iiic)</title>
+    <url>/2024/02/16/repairs/</url>
+    <content><![CDATA[<p>   sometimes cause slow doors to fail and fail to trigger damping, resulting in 1~20 and B doors always being at a speed of 1&#x2F;30. It is possible that a small spring has pushed against the top cover.<br><img src="/upload/pic1.jpg" alt="pic1" title="pic1"><br>   Open the top cover, find it, and press it in the direction of the arrow in the diagram to make it slightly straight. Before reinstalling the cover, test the shutter speed to ensure that the spring tube is not too straight, causing damping to be triggered when the speed is above 1&#x2F;20<br><img src="/upload/pic2.jpg" alt="pic2" title="pic2"><br><img src="/upload/pic3.jpg" alt="pic3" title="pic3"></p>
+]]></content>
+      <categories>
+        <category>camera</category>
+      </categories>
+      <tags>
+        <tag>camera</tag>
       </tags>
   </entry>
 </search>
