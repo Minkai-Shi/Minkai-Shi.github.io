@@ -191,6 +191,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/20/System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/touxiang.jpg">
+      <meta itemprop="name" content="Minkai Shi">
+      <meta itemprop="description" content="Study">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minkai-Shi' Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/20/System/" class="post-title-link" itemprop="url">System</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-20 21:16:04 / Modified: 21:25:36" itemprop="dateCreated datePublished" datetime="2025-07-20T21:16:04+08:00">2025-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EEPW-Activity/" itemprop="url" rel="index"><span itemprop="name">EEPW Activity</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython"><a href="#Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython" class="headerlink" title="Bluetooth Power Monitoring System with ESP32 and MicroPython"></a>Bluetooth Power Monitoring System with ESP32 and MicroPython</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When browsing EEPW in March, I was instantly drawn to the <a target="_blank" rel="noopener" href="https://www.eepw.com.cn/event/action/digikey/diy_2025_first.html">“DigiKey DIY Power Monitoring and Control System”</a> event for 2025. Unfortunately, it coincided with my A-level final exams, leaving me no time to participate. After exams, seeing others’ projects sparked my determination to build my own version.  </p>
+<p>Using an ESP32 and MicroPython, I created a system that measures voltage, current, active&#x2F;reactive power, and transmits data via Bluetooth. Surprisingly, it’s practical for real applications like smart plug monitoring - proving textbook electrical theory can become tangible tools.</p>
+<p><strong>引言</strong><br>记得三月刷EEPW网站时，一眼就盯上了”2025年第1期——DigiKey陪你渡过春夏秋冬”活动里的DIY功率监测与控制系统。可惜当时正赶上ALEVEL期末大考，每天被试卷淹没，根本没时间报名。等大考结束，看着活动页面里别人分享的作品，心里直痒痒——既然错过了官方活动，不如自己动手复刻一个？</p>
+<p>于是我抱着”不能浪费假期”的想法，翻出家里的ESP32开发板，决定用MicroPython实现这个功能。我的目标很简单：让这个小东西能测家里插座的电压、电流，算出有功功率、无功功率这些物理课上听过的参数，再通过蓝牙传到手机上实时看数据。没想到折腾下来，它居然真能用到智能插座监测、分析电器耗电情况上——原来课本里的电学知识，真的能变成手里会干活的工具。</p>
+<h2 id="System-Architecture"><a href="#System-Architecture" class="headerlink" title="System Architecture"></a>System Architecture</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A[220V AC] --&gt; B[Voltage Transformer]</span><br><span class="line">    A --&gt; C[Current Sensor]</span><br><span class="line">    B --&gt; D[ADC GPIO34]</span><br><span class="line">    C --&gt; E[ADC GPIO39]</span><br><span class="line">    D --&gt; F[Recursive Fourier Transform]</span><br><span class="line">    E --&gt; F</span><br><span class="line">    F --&gt; G[Power Calculations]</span><br><span class="line">    G --&gt; H[BLE Transmission]</span><br><span class="line">    H --&gt; I[Mobile Device]</span><br><span class="line">    G --&gt; J[Relay Control GPIO2]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system uses recursive Fourier transform for efficient signal processing at 1kHz sampling rate. Key components include:</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/07/20/System/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/05/AutoClick/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -949,94 +1030,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/28/Sheaffer-Snorkel-Pen-Renew/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/upload/touxiang.jpg">
-      <meta itemprop="name" content="Minkai Shi">
-      <meta itemprop="description" content="Study">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Minkai-Shi' Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/28/Sheaffer-Snorkel-Pen-Renew/" class="post-title-link" itemprop="url">Sheaffer's Snorkel Pen Filling Structure Renew</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-04-28 16:35:10" itemprop="dateCreated datePublished" datetime="2024-04-28T16:35:10+08:00">2024-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-30 19:57:57" itemprop="dateModified" datetime="2024-06-30T19:57:57+08:00">2024-06-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pen/" itemprop="url" rel="index"><span itemprop="name">pen</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Sheaffer’s Snorkel Pen Filling Structure Renew </p>
-<ol>
-<li>Assembly sealing gasket: Unscrew the pen tip assembly, unscrew the breathing tube and take out the aging gasket, remove it and put on a new gasket</li>
-<li>Water dispenser assembly: Unscrew the pen holder, remove the water dispenser assembly from the pen holder end, use a screwdriver to completely push out the connector and aging ink cartridge from the small hole at the tail, clean and soak in hot water, remove the ink cartridge connection key and the insect glue that fixes the breathing tube, put on a new ink cartridge, and fix it with insect glue. Remove the breathing tube and clean the ink guide strip before reinstalling it in its original state<br><img src="/upload/Sheaffer1.jpg" alt="pic1" title="pic1"></li>
-<li>With a long straight screwdriver, unscrew the tail button screw, push out the TD tube from the pen holder, pick out the aging O-ring with a toothpick, clean the exhaust hole O-ring groove, apply a little glue, and use a toothpick to fully insert the new O-ring into the O-ring groove. When installing the tail button, replace the screw hole sealing gasket, and finally reinstall it in its original state</li>
-<li>Overall: Finally, apply lubricating oil to the threads of the water assembly, and also apply silicone oil to other threads to prevent water and air leakage.<br><img src="/upload/Sheaffer2.jpg" alt="pic2" title="pic2"></li>
-</ol>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/28/Sheaffer-Snorkel-Pen-Renew/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1108,7 +1101,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
