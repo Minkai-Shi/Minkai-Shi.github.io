@@ -502,7 +502,7 @@
       </tags>
   </entry>
   <entry>
-    <title>System</title>
+    <title>Power_Monitoring_System</title>
     <url>/2025/07/20/Power_Monitoring_System/</url>
     <content><![CDATA[<h1 id="Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython"><a href="#Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython" class="headerlink" title="Bluetooth Power Monitoring System with ESP32 and MicroPython"></a>Bluetooth Power Monitoring System with ESP32 and MicroPython</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When browsing EEPW in March, I was instantly drawn to the <a href="https://www.eepw.com.cn/event/action/digikey/diy_2025_first.html">“DigiKey DIY Power Monitoring and Control System”</a> event for 2025. Unfortunately, it coincided with my A-level final exams, leaving me no time to participate. After exams, seeing others’ projects sparked my determination to build my own version.  </p>
 <p>Using an ESP32 and MicroPython, I created a system that measures voltage, current, active&#x2F;reactive power, and transmits data via Bluetooth. Surprisingly, it’s practical for real applications like smart plug monitoring - proving textbook electrical theory can become tangible tools.</p>
