@@ -297,16 +297,16 @@
 
 <h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system uses recursive Fourier transform for efficient signal processing at 1kHz sampling rate. Key components include:</p>
 <ul>
-<li><strong>Voltage measurement</strong>: GPIO34 with 11dB attenuation</li>
-<li><strong>Current measurement</strong>: GPIO39 with 11dB attenuation</li>
+<li><strong>Voltage measurement</strong>: GPIO34 </li>
+<li><strong>Current measurement</strong>: GPIO39 </li>
 <li><strong>Recursive DFT</strong>: Constant O(1) complexity per sample</li>
 <li><strong>Relay control</strong>: GPIO2 with overload protection</li>
 <li><strong>BLE Service</strong>: Custom power monitoring service with multiple characteristics</li>
 </ul>
 <p><strong>技术实现</strong><br>系统采用递归傅里叶变换进行高效信号处理，采样率为1kHz。关键组件包括：</p>
 <ul>
-<li><strong>电压测量</strong>：GPIO34，11dB衰减</li>
-<li><strong>电流测量</strong>：GPIO39，11dB衰减</li>
+<li><strong>电压测量</strong>：GPIO34</li>
+<li><strong>电流测量</strong>：GPIO39</li>
 <li><strong>递归DFT</strong>：每个样本O(1)常数复杂度</li>
 <li><strong>继电器控制</strong>：GPIO2，带过载保护</li>
 <li><strong>BLE服务</strong>：定制电力监测服务，支持多个特性</li>
