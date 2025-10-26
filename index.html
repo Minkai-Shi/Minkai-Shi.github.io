@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-09-27 21:02:57" itemprop="dateModified" datetime="2025-09-27T21:02:57+08:00">2025-09-27</time>
+                <time title="Modified: 2025-10-19 20:33:16" itemprop="dateModified" datetime="2025-10-19T20:33:16+08:00">2025-10-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,9 +249,15 @@
 <p>Using an ESP32 and MicroPython, I created a system that measures voltage, current, active&#x2F;reactive power, and transmits data via Bluetooth. Surprisingly, it’s practical for real applications like smart plug monitoring - proving textbook electrical theory can become tangible tools.</p>
 <p><strong>引言</strong><br>记得三月刷EEPW网站时，一眼就盯上了”2025年第1期——DigiKey陪你渡过春夏秋冬”活动里的DIY功率监测与控制系统。可惜当时正赶上ALEVEL期末大考，每天被试卷淹没，根本没时间报名。等大考结束，看着活动页面里别人分享的作品，心里直痒痒——既然错过了官方活动，不如自己动手复刻一个？</p>
 <p>于是我抱着”不能浪费假期”的想法，翻出家里的ESP32开发板，决定用MicroPython实现这个功能。我的目标很简单：让这个小东西能测家里插座的电压、电流，算出有功功率、无功功率这些物理课上听过的参数，再通过蓝牙传到手机上实时看数据。没想到折腾下来，它居然真能用到智能插座监测、分析电器耗电情况上——原来课本里的电学知识，真的能变成手里会干活的工具。</p>
-<h2 id="System-Architecture"><a href="#System-Architecture" class="headerlink" title="System Architecture"></a>System Architecture</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A[220V AC] --&gt; B[Voltage Transformer]</span><br><span class="line">    A --&gt; C[Current Sensor]</span><br><span class="line">    B --&gt; D[ADC GPIO34]</span><br><span class="line">    C --&gt; E[ADC GPIO39]</span><br><span class="line">    D --&gt; F[Recursive Fourier Transform]</span><br><span class="line">    E --&gt; F</span><br><span class="line">    F --&gt; G[Power Calculations]</span><br><span class="line">    G --&gt; H[BLE Transmission]</span><br><span class="line">    H --&gt; I[Mobile Device]</span><br><span class="line">    G --&gt; J[Relay Control GPIO2]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system uses recursive Fourier transform for efficient signal processing at 1kHz sampling rate. Key components include:</p>
+<h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system adopts a <strong>1kHz sampling rate</strong> for 50Hz AC signal acquisition (each grid cycle corresponds to 20 samples), with core optimization focused on solving two critical issues: MicroPython’s efficiency bottleneck and poor data stability caused by interference. Key components include:</p>
+<ul>
+<li><strong>Voltage measurement</strong>: GPIO34 (12-bit ADC, signal scaled via voltage transformer)</li>
+<li><strong>Current measurement</strong>: GPIO39 (12-bit ADC, current sensor signal conversion)</li>
+<li><strong>Recursive DFT (RDFT)</strong>: Custom-implemented algorithm with O(1) per-sample complexity, addressing MicroPython’s efficiency limitations</li>
+<li><strong>Relay control</strong>: GPIO2 with overload protection</li>
+<li><strong>BLE Service</strong>: Custom power monitoring service with multiple characteristics</li>
+</ul>
+<p><strong>技术实现</strong><br>系统采用递归傅里叶变换进行高效信号处理，采样率为1kHz。关键组件包括：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/07/20/Power_Monitoring_System/#more" rel="contents">

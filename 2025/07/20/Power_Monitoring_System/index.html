@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/upload/Power2.jpg">
 <meta property="og:image" content="http://example.com/upload/Power3.jpg">
 <meta property="article:published_time" content="2025-07-20T13:16:04.000Z">
-<meta property="article:modified_time" content="2025-09-27T13:02:57.323Z">
+<meta property="article:modified_time" content="2025-10-19T12:33:16.308Z">
 <meta property="article:author" content="Minkai Shi">
 <meta property="article:tag" content="EEPW Activity">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-09-27 21:02:57" itemprop="dateModified" datetime="2025-09-27T21:02:57+08:00">2025-09-27</time>
+                <time title="Modified: 2025-10-19 20:33:16" itemprop="dateModified" datetime="2025-10-19T20:33:16+08:00">2025-10-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,13 +263,11 @@
 <p>Using an ESP32 and MicroPython, I created a system that measures voltage, current, active&#x2F;reactive power, and transmits data via Bluetooth. Surprisingly, it’s practical for real applications like smart plug monitoring - proving textbook electrical theory can become tangible tools.</p>
 <p><strong>引言</strong><br>记得三月刷EEPW网站时，一眼就盯上了”2025年第1期——DigiKey陪你渡过春夏秋冬”活动里的DIY功率监测与控制系统。可惜当时正赶上ALEVEL期末大考，每天被试卷淹没，根本没时间报名。等大考结束，看着活动页面里别人分享的作品，心里直痒痒——既然错过了官方活动，不如自己动手复刻一个？</p>
 <p>于是我抱着”不能浪费假期”的想法，翻出家里的ESP32开发板，决定用MicroPython实现这个功能。我的目标很简单：让这个小东西能测家里插座的电压、电流，算出有功功率、无功功率这些物理课上听过的参数，再通过蓝牙传到手机上实时看数据。没想到折腾下来，它居然真能用到智能插座监测、分析电器耗电情况上——原来课本里的电学知识，真的能变成手里会干活的工具。</p>
-<h2 id="System-Architecture"><a href="#System-Architecture" class="headerlink" title="System Architecture"></a>System Architecture</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A[220V AC] --&gt; B[Voltage Transformer]</span><br><span class="line">    A --&gt; C[Current Sensor]</span><br><span class="line">    B --&gt; D[ADC GPIO34]</span><br><span class="line">    C --&gt; E[ADC GPIO39]</span><br><span class="line">    D --&gt; F[Recursive Fourier Transform]</span><br><span class="line">    E --&gt; F</span><br><span class="line">    F --&gt; G[Power Calculations]</span><br><span class="line">    G --&gt; H[BLE Transmission]</span><br><span class="line">    H --&gt; I[Mobile Device]</span><br><span class="line">    G --&gt; J[Relay Control GPIO2]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system uses recursive Fourier transform for efficient signal processing at 1kHz sampling rate. Key components include:</p>
+<h2 id="Technical-Implementation"><a href="#Technical-Implementation" class="headerlink" title="Technical Implementation"></a>Technical Implementation</h2><p>The system adopts a <strong>1kHz sampling rate</strong> for 50Hz AC signal acquisition (each grid cycle corresponds to 20 samples), with core optimization focused on solving two critical issues: MicroPython’s efficiency bottleneck and poor data stability caused by interference. Key components include:</p>
 <ul>
-<li><strong>Voltage measurement</strong>: GPIO34 </li>
-<li><strong>Current measurement</strong>: GPIO39 </li>
-<li><strong>Recursive DFT</strong>: Constant O(1) complexity per sample</li>
+<li><strong>Voltage measurement</strong>: GPIO34 (12-bit ADC, signal scaled via voltage transformer)</li>
+<li><strong>Current measurement</strong>: GPIO39 (12-bit ADC, current sensor signal conversion)</li>
+<li><strong>Recursive DFT (RDFT)</strong>: Custom-implemented algorithm with O(1) per-sample complexity, addressing MicroPython’s efficiency limitations</li>
 <li><strong>Relay control</strong>: GPIO2 with overload protection</li>
 <li><strong>BLE Service</strong>: Custom power monitoring service with multiple characteristics</li>
 </ul>
@@ -281,16 +279,21 @@
 <li><strong>继电器控制</strong>：GPIO2，带过载保护</li>
 <li><strong>BLE服务</strong>：定制电力监测服务，支持多个特性</li>
 </ul>
-<h3 id="Core-Algorithm-Recursive-Fourier-Transform"><a href="#Core-Algorithm-Recursive-Fourier-Transform" class="headerlink" title="Core Algorithm: Recursive Fourier Transform"></a>Core Algorithm: Recursive Fourier Transform</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Recursive DFT implementation</span></span><br><span class="line">omega = <span class="number">2</span> * math.pi * <span class="number">50</span> / <span class="number">1000</span></span><br><span class="line">cos_omega = math.cos(omega)</span><br><span class="line">sin_omega = math.sin(omega)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_dft</span>(<span class="params">sample, old_sample, a, b</span>):</span><br><span class="line">    delta = sample - old_sample</span><br><span class="line">    temp_a = a + delta</span><br><span class="line">    a_new = cos_omega * temp_a - sin_omega * b</span><br><span class="line">    b_new = sin_omega * temp_a + cos_omega * b</span><br><span class="line">    <span class="keyword">return</span> a_new, b_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># Voltage processing</span></span><br><span class="line">V_a, V_b = update_dft(voltage_sample, old_sample_v, V_a, V_b)</span><br><span class="line">V_amplitude = math.sqrt(V_a ** <span class="number">2</span> + V_b ** <span class="number">2</span>) * VOLTAGE_SCALE / N</span><br></pre></td></tr></table></figure>
+<h3 id="Core-Algorithm-Recursive-Fourier-Transform-RDFT-——-Targeted-Solution-to-MicroPython’s-Efficiency-Bottleneck"><a href="#Core-Algorithm-Recursive-Fourier-Transform-RDFT-——-Targeted-Solution-to-MicroPython’s-Efficiency-Bottleneck" class="headerlink" title="Core Algorithm: Recursive Fourier Transform (RDFT) —— Targeted Solution to MicroPython’s Efficiency Bottleneck"></a>Core Algorithm: Recursive Fourier Transform (RDFT) —— Targeted Solution to MicroPython’s Efficiency Bottleneck</h3><h4 id="Algorithm-Design-Basis"><a href="#Algorithm-Design-Basis" class="headerlink" title="Algorithm Design Basis"></a>Algorithm Design Basis</h4><p>To address MicroPython’s low efficiency, the recursive Fourier transform was adopted to replace conventional algorithms (FFT, standard DFT, moving average). The core advantages are:</p>
+<ol>
+<li><strong>Real-time computation</strong>: Updates frequency domain coefficients immediately upon receiving a new sample, avoiding batch processing delays of FFT&#x2F;DFT.</li>
+<li><strong>Ultra-low complexity</strong>: Reduces per-sample computation complexity from O(N) (standard DFT) to O(1), perfectly matching MicroPython’s hardware constraints.</li>
+<li><strong>Grid frequency adaptation</strong>: Precisely locks the 50Hz fundamental frequency, ensuring accuracy while maintaining real-time performance.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Recursive DFT implementation</span></span><br><span class="line">omega = <span class="number">2</span> * math.pi * <span class="number">50</span> / <span class="number">1000</span></span><br><span class="line">cos_omega = math.cos(omega)</span><br><span class="line">sin_omega = math.sin(omega)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_dft</span>(<span class="params">sample, old_sample, a, b</span>):</span><br><span class="line">    delta = sample - old_sample</span><br><span class="line">    temp_a = a + delta</span><br><span class="line">    a_new = cos_omega * temp_a - sin_omega * b</span><br><span class="line">    b_new = sin_omega * temp_a + cos_omega * b</span><br><span class="line">    <span class="keyword">return</span> a_new, b_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># Voltage processing</span></span><br><span class="line">V_a, V_b = update_dft(voltage_sample, old_sample_v, V_a, V_b)</span><br><span class="line">V_amplitude = math.sqrt(V_a ** <span class="number">2</span> + V_b ** <span class="number">2</span>) * VOLTAGE_SCALE / N</span><br></pre></td></tr></table></figure>
 
 <h3 id="Relay-Control-Logic"><a href="#Relay-Control-Logic" class="headerlink" title="Relay Control Logic"></a>Relay Control Logic</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Overload protection</span></span><br><span class="line"><span class="keyword">if</span> I_amplitude &gt; <span class="number">1</span>:  <span class="comment"># 1A threshold</span></span><br><span class="line">    relay_pin.value(<span class="number">0</span>)  <span class="comment"># Cut power</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># Timed activation via BLE</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ble_handler</span>(<span class="params">event, data</span>):</span><br><span class="line">    <span class="keyword">if</span> event == ubluetooth.IRQ_GATTS_WRITE:</span><br><span class="line">        duration = struct.unpack(<span class="string">&#x27;&lt;f&#x27;</span>, value)[<span class="number">0</span>]  <span class="comment"># Duration in seconds</span></span><br><span class="line">        relay_pin.value(<span class="number">1</span>)</span><br><span class="line">        relay_timer.init(period=<span class="built_in">int</span>(duration*<span class="number">1000</span>), callback=turn_off_relay)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h2><ol>
 <li><p><strong>Real-time Power Monitoring</strong></p>
 <ul>
-<li>Voltage, current, active&#x2F;reactive power measurements</li>
-<li>1kHz sampling rate for 50Hz AC signals</li>
-<li>&lt;100ms update latency</li>
+<li>1kHz sampling rate, &lt;20ms data update latency (meets real-time requirements for 50Hz grid)</li>
+<li>RDFT algorithm reduces computation complexity from O(N) to O(1), breaking through MicroPython’s efficiency bottleneck</li>
 </ul>
 </li>
 <li><p><strong>Intelligent Protection</strong></p>
@@ -298,13 +301,6 @@
 <li>Automatic shutdown when current &gt;1A</li>
 <li>BLE-controlled timed activation</li>
 <li>Visual indicator (GPIO15 LED)</li>
-</ul>
-</li>
-<li><p><strong>Efficient Computation</strong></p>
-<ul>
-<li>Recursive DFT reduces computation by 80%</li>
-<li>Fixed-point arithmetic optimization</li>
-<li>Circular buffer memory management</li>
 </ul>
 </li>
 <li><p><strong>Wireless Connectivity</strong></p>
@@ -319,9 +315,8 @@
 <ol>
 <li><p><strong>实时电力监测</strong></p>
 <ul>
-<li>电压、电流、有功&#x2F;无功功率测量</li>
-<li>50Hz交流信号1kHz采样率</li>
-<li>&lt;100ms更新延迟</li>
+<li>1kHz采样率，&lt;20ms数据更新延迟（匹配50Hz电网实时性需求）</li>
+<li>递归DFT算法将计算复杂度从O(N)降至O(1)，突破MicroPython效率瓶颈</li>
 </ul>
 </li>
 <li><p><strong>智能保护</strong></p>
@@ -329,13 +324,6 @@
 <li>电流&gt;1A时自动断电</li>
 <li>BLE控制定时激活</li>
 <li>视觉指示器(GPIO15 LED)</li>
-</ul>
-</li>
-<li><p><strong>高效计算</strong></p>
-<ul>
-<li>递归DFT减少80%计算量</li>
-<li>定点算术优化</li>
-<li>循环缓冲区内存管理</li>
 </ul>
 </li>
 <li><p><strong>无线连接</strong></p>
@@ -480,8 +468,28 @@
 </ul>
 </li>
 </ol>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>This project demonstrates how accessible embedded systems can solve real-world power monitoring challenges. The recursive DFT implementation enables accurate measurements on resource-constrained hardware, while BLE connectivity provides user-friendly access to real-time data. Future enhancements could include WiFi integration for cloud logging and harmonic analysis capabilities.</p>
-<p><strong>结论</strong><br>本项目展示了嵌入式系统如何解决现实世界的电力监测挑战。递归DFT实现使得在资源有限的硬件上也能进行精确测量，而BLE连接为用户提供了友好的实时数据访问。未来增强功能可能包括用于云日志记录的WiFi集成和谐波分析功能。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>This project focuses on solving two core pain points in ESP32+MicroPython power monitoring systems: <strong>MicroPython’s efficiency bottleneck</strong> and <strong>poor data stability under grid interference</strong>. The key innovations are:</p>
+<ol>
+<li>Targeted adoption of recursive Fourier transform (RDFT) to break through MicroPython’s computational limitations — reducing complexity from O(N) to O(1) enables real-time 50Hz fundamental frequency extraction, which conventional algorithms cannot achieve.</li>
+<li>Synergistic optimization of 10-cycle extended data window and RDFT — smoothing interference while maintaining real-time performance, reducing data fluctuation from ±5% to ±1%.</li>
+</ol>
+<p>The system proves that low-cost embedded platforms can deliver professional-grade power monitoring performance through algorithm optimization and hardware-software synergy. Future enhancements will include:</p>
+<ul>
+<li>WiFi integration for cloud data logging and remote access via mobile apps.</li>
+<li>Expansion of RDFT to support harmonic analysis (2nd~13th harmonics) for comprehensive power quality evaluation.</li>
+<li>Machine learning-based load identification (classifying appliances via unique power consumption signatures).</li>
+</ul>
+<p><strong>结论</strong><br>本项目聚焦解决ESP32+MicroPython电力监测系统的两大核心痛点：<strong>MicroPython效率瓶颈</strong>与<strong>电网干扰下的数据稳定性差</strong>。关键创新点在于：</p>
+<ol>
+<li>针对性采用递归傅里叶变换（RDFT）突破MicroPython计算限制——将复杂度从O(N)降至O(1)，实现常规算法无法完成的50Hz基波实时提取。</li>
+<li>10周期扩展数据窗与RDFT协同优化——在平滑干扰的同时保持实时性，数据波动从±5%降至±1%。</li>
+</ol>
+<p>项目验证了：通过算法优化与软硬件协同，低成本嵌入式平台可实现专业级电力监测性能。未来优化方向包括：</p>
+<ul>
+<li>集成WiFi功能，支持云数据日志与手机APP远程访问。</li>
+<li>扩展RDFT算法至2~13次谐波分析，实现全面电能质量评估。</li>
+<li>引入机器学习实现负载识别（通过独特功耗特征分类电器类型）。</li>
+</ul>
 <p><img src="/upload/Power1.jpg" alt="Hardware Assembly"><br><img src="/upload/Power2.jpg" alt="Debug"><br><img src="/upload/Power3.jpg" alt="Debug"> </p>
 
     </div>
@@ -568,7 +576,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython"><span class="nav-number">1.</span> <span class="nav-text">Bluetooth Power Monitoring System with ESP32 and MicroPython</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">System Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Technical-Implementation"><span class="nav-number">1.3.</span> <span class="nav-text">Technical Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-Algorithm-Recursive-Fourier-Transform"><span class="nav-number">1.3.1.</span> <span class="nav-text">Core Algorithm: Recursive Fourier Transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relay-Control-Logic"><span class="nav-number">1.3.2.</span> <span class="nav-text">Relay Control Logic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Features"><span class="nav-number">1.4.</span> <span class="nav-text">Key Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Electrical-Engineering-Concepts"><span class="nav-number">1.5.</span> <span class="nav-text">Electrical Engineering Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development-Challenges"><span class="nav-number">1.6.</span> <span class="nav-text">Development Challenges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applications"><span class="nav-number">1.7.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">1.8.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bluetooth-Power-Monitoring-System-with-ESP32-and-MicroPython"><span class="nav-number">1.</span> <span class="nav-text">Bluetooth Power Monitoring System with ESP32 and MicroPython</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Technical-Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Technical Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-Algorithm-Recursive-Fourier-Transform-RDFT-%E2%80%94%E2%80%94-Targeted-Solution-to-MicroPython%E2%80%99s-Efficiency-Bottleneck"><span class="nav-number">1.2.1.</span> <span class="nav-text">Core Algorithm: Recursive Fourier Transform (RDFT) —— Targeted Solution to MicroPython’s Efficiency Bottleneck</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Algorithm-Design-Basis"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Algorithm Design Basis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relay-Control-Logic"><span class="nav-number">1.2.2.</span> <span class="nav-text">Relay Control Logic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Features"><span class="nav-number">1.3.</span> <span class="nav-text">Key Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Electrical-Engineering-Concepts"><span class="nav-number">1.4.</span> <span class="nav-text">Electrical Engineering Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development-Challenges"><span class="nav-number">1.5.</span> <span class="nav-text">Development Challenges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applications"><span class="nav-number">1.6.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">1.7.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
