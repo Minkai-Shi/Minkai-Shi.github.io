@@ -254,10 +254,10 @@
 <hr>
 ]]></content>
       <categories>
-        <category>EEPW Activity</category>
+        <category>EEPW &amp; EEWorld Activity</category>
       </categories>
       <tags>
-        <tag>EEPW Activity</tag>
+        <tag>EEPW &amp; EEWorld Activity</tag>
       </tags>
   </entry>
   <entry>
@@ -267,6 +267,12 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;  </span></span><br><span class="line"><span class="string">DFrobot DFRobot Geiger Counter Module experiment</span></span><br><span class="line"><span class="string">pin assign : pin DFrobot Geiger Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         (D)--&gt;(14)  </span></span><br><span class="line"><span class="string">         (+)--&gt;(5V)  </span></span><br><span class="line"><span class="string">         (-)--&gt;(GND)  </span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">OLED(IIC) Module--&gt;ESP32 IO  </span></span><br><span class="line"><span class="string">         GND--&gt;(GND)  </span></span><br><span class="line"><span class="string">         VCC--&gt;(5V)  </span></span><br><span class="line"><span class="string">         SCL--&gt;(18)  </span></span><br><span class="line"><span class="string">         SDA--&gt;(23)  </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>  </span><br><span class="line"><span class="comment">#Import Pin Module</span></span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> SoftI2C  </span><br><span class="line"><span class="keyword">from</span> ssd1306 <span class="keyword">import</span> SSD1306_I2C  <span class="comment">#I2C oled  </span></span><br><span class="line"><span class="comment">#Create software I2C object </span></span><br><span class="line">i2c = SoftI2C(sda=Pin(<span class="number">23</span>), scl=Pin(<span class="number">18</span>))  </span><br><span class="line"><span class="comment">#Create OLED object,Resolution of OLED,I2C interface</span></span><br><span class="line">oled = SSD1306_I2C(<span class="number">128</span>, <span class="number">64</span>, i2c)   </span><br><span class="line"><span class="comment">#Geiger in  fenbl</span></span><br><span class="line">Geiger_In=Pin(<span class="number">14</span>,Pin.IN,Pin.PULL_UP)  </span><br><span class="line"><span class="comment">#Geiger Counter external interrupt function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Geiger_In_irq</span>(<span class="params">Geiger_In</span>):  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    numPulse = numPulse + <span class="number">1</span>   </span><br><span class="line"><span class="comment">#Program entrance</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">global</span> numPulse  </span><br><span class="line">    BUFFER_SIZE = <span class="number">20</span>  </span><br><span class="line">    rows, cols = <span class="number">2</span>, BUFFER_SIZE  </span><br><span class="line">    mem_data = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(cols)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(rows)]  </span><br><span class="line">    numPulse = <span class="number">0</span>  </span><br><span class="line">    pos = <span class="number">0</span>      </span><br><span class="line">    oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen    </span></span><br><span class="line">    oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string </span></span><br><span class="line">    oled.show()  <span class="comment">#Execute Display     </span></span><br><span class="line">    Geiger_In.irq(Geiger_In_irq,Pin.IRQ_FALLING)  <span class="comment">#Configure external interrupt, trigger falling edge</span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:    </span><br><span class="line">        time.sleep_ms(<span class="number">3000</span>)  </span><br><span class="line">        mem_data[<span class="number">0</span>][pos] = time.ticks_ms()  </span><br><span class="line">        mem_data[<span class="number">1</span>][pos] = numPulse  </span><br><span class="line">        numPulse = <span class="number">0</span>  </span><br><span class="line">        cpm=<span class="number">0</span>  </span><br><span class="line">        pos_old = pos  </span><br><span class="line">        pos = (pos+<span class="number">1</span>)%BUFFER_SIZE          </span><br><span class="line">        numAll = <span class="number">0</span>  </span><br><span class="line">        time_now = mem_data[<span class="number">0</span>][pos_old]   </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, BUFFER_SIZE - <span class="number">1</span>):  </span><br><span class="line">            <span class="keyword">if</span> mem_data[<span class="number">0</span>][pos_old] != <span class="number">0</span>:  </span><br><span class="line">                numAll = numAll + mem_data[<span class="number">1</span>][pos_old]  </span><br><span class="line">                time_old = mem_data[<span class="number">0</span>][pos_old]  </span><br><span class="line">                <span class="keyword">if</span> pos_old == <span class="number">0</span>:  </span><br><span class="line">                    pos_old =  BUFFER_SIZE - <span class="number">1</span>  </span><br><span class="line">                <span class="keyword">else</span>:  </span><br><span class="line">                    pos_old = pos_old - <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">if</span> time_now-time_old &gt; <span class="number">0</span>:  </span><br><span class="line">            cpm = numAll*<span class="number">1000</span>*<span class="number">60</span>/(time_now-time_old)  </span><br><span class="line">              </span><br><span class="line">        str1 = <span class="string">&quot;&#123;:.0f&#125;&quot;</span>.<span class="built_in">format</span>(cpm)    <span class="comment">#CPM Convert to string </span></span><br><span class="line">        str2 = <span class="string">&quot;&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(cpm/<span class="number">151</span>)<span class="comment">#uSv/h Convert to string  </span></span><br><span class="line">        oled.fill(<span class="number">0</span>)  <span class="comment">#Clear screen </span></span><br><span class="line">        oled.text(<span class="string">&quot;Geiger Counter&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#display string</span></span><br><span class="line">        oled.text(<span class="string">&quot;CPM&quot;</span>,<span class="number">80</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM units  </span></span><br><span class="line">        oled.text(<span class="string">&quot;uSv/h&quot;</span>,<span class="number">80</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h uints  </span></span><br><span class="line">        oled.text(str1,<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>)  <span class="comment">#Display CPM data</span></span><br><span class="line">        oled.text(str2,<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)  <span class="comment">#Display uSv/h data</span></span><br><span class="line">        oled.show()  <span class="comment">#Execute Display</span></span><br></pre></td></tr></table></figure>
 <p><img src="/upload/Geiger2.jpg" alt="pic2" title="pic2"></p>
 ]]></content>
+      <categories>
+        <category>EEPW &amp; EEWorld Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW &amp; EEWorld Activity</tag>
+      </tags>
   </entry>
   <entry>
     <title>My Experience of Imperial College Summer School</title>
@@ -523,10 +529,10 @@
 <p><img src="/upload/Power1.jpg" alt="Hardware Assembly"><br><img src="/upload/Power2.jpg" alt="Debug"><br><img src="/upload/Power3.jpg" alt="Debug"> </p>
 ]]></content>
       <categories>
-        <category>EEPW Activity</category>
+        <category>EEPW &amp; EEWorld Activity</category>
       </categories>
       <tags>
-        <tag>EEPW Activity</tag>
+        <tag>EEPW &amp; EEWorld Activity</tag>
       </tags>
   </entry>
   <entry>
@@ -584,10 +590,10 @@
 <p>The screen uses the <strong>Waveshare Pico-LCD-1.14</strong> module. Waveshare provides official drivers and pre-ported LVGL driver examples, making development straightforward.<br><img src="/upload/snake1-1.jpg" alt="snake1-1" title="snake1-1"><br><img src="/upload/snake1-2.jpg" alt="snake1-2" title="snake1-2"><br><strong>My EEPW Forum Post</strong>:<br><a href="https://forum.eepw.com.cn/thread/384440/1">https://forum.eepw.com.cn/thread/384440/1</a></p>
 ]]></content>
       <categories>
-        <category>EEPW Activity</category>
+        <category>EEPW &amp; EEWorld Activity</category>
       </categories>
       <tags>
-        <tag>EEPW Activity</tag>
+        <tag>EEPW &amp; EEWorld Activity</tag>
       </tags>
   </entry>
   <entry>
@@ -696,10 +702,10 @@
 <p>I look forward to expanding these skills in a university setting, particularly in courses related to embedded systems and human-computer interaction.</p>
 ]]></content>
       <categories>
-        <category>EEPW Activity</category>
+        <category>EEPW &amp; EEWorld Activity</category>
       </categories>
       <tags>
-        <tag>EEPW Activity</tag>
+        <tag>EEPW &amp; EEWorld Activity</tag>
       </tags>
   </entry>
   <entry>
