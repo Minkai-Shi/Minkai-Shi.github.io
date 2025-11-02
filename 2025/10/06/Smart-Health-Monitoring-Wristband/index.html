@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统   A DIY low-power health monitoring wristband built on the MAX78000FTHR platform">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smart Health Monitoring Wristband">
+<meta property="og:url" content="http://example.com/2025/10/06/Smart-Health-Monitoring-Wristband/index.html">
+<meta property="og:site_name" content="Minkai-Shi&#39; Blog">
+<meta property="og:description" content="🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统   A DIY low-power health monitoring wristband built on the MAX78000FTHR platform">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img.shields.io/badge/Platform-MAX78000FTHR-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/Award-EEPW%20%26%20DigiKey%20DIY%20Challenge%202024-brightgreen.svg">
+<meta property="og:image" content="https://img.shields.io/badge/Language-C%2FC%2B%2B-lightgrey.svg">
+<meta property="og:image" content="https://img.shields.io/badge/Status-Completed-success.svg">
+<meta property="og:image" content="http://example.com/2025/10/06/Smart-Health-Monitoring-Wristband/images/SMART_HEALTH_BLOCK_DIAGRAM.png">
+<meta property="article:published_time" content="2025-10-06T11:27:40.000Z">
+<meta property="article:modified_time" content="2025-11-02T11:28:43.365Z">
+<meta property="article:author" content="Minkai Shi">
+<meta property="article:tag" content="EEPW &amp; EEWorld Activity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/badge/Platform-MAX78000FTHR-blue.svg">
+
+<link rel="canonical" href="http://example.com/2025/10/06/Smart-Health-Monitoring-Wristband/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Smart Health Monitoring Wristband | Minkai-Shi' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Minkai-Shi' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Study</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/06/Smart-Health-Monitoring-Wristband/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/touxiang.jpg">
+      <meta itemprop="name" content="Minkai Shi">
+      <meta itemprop="description" content="Study">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minkai-Shi' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Smart Health Monitoring Wristband
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-10-06 19:27:40" itemprop="dateCreated datePublished" datetime="2025-10-06T19:27:40+08:00">2025-10-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-02 19:28:43" itemprop="dateModified" datetime="2025-11-02T19:28:43+08:00">2025-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EEPW-EEWorld-Activity/" itemprop="url" rel="index"><span itemprop="name">EEPW & EEWorld Activity</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="🩺-Smart-Health-Monitoring-Wristband-智能健康监测手环"><a href="#🩺-Smart-Health-Monitoring-Wristband-智能健康监测手环" class="headerlink" title="🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环"></a>🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环</h1><h3 id="Embedded-System-Based-on-MAX78000FTHR-基于-MAX78000FTHR-的嵌入式系统"><a href="#Embedded-System-Based-on-MAX78000FTHR-基于-MAX78000FTHR-的嵌入式系统" class="headerlink" title="Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统"></a>Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统</h3><p><a href=""><img src="https://img.shields.io/badge/Platform-MAX78000FTHR-blue.svg" alt="Platform"></a><br><a href=""><img src="https://img.shields.io/badge/Award-EEPW%20%26%20DigiKey%20DIY%20Challenge%202024-brightgreen.svg" alt="Award"></a><br><a href=""><img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-lightgrey.svg" alt="Language"></a><br><a href=""><img src="https://img.shields.io/badge/Status-Completed-success.svg" alt="Status"></a>  </p>
+<p>A DIY low-power health monitoring wristband built on the MAX78000FTHR platform, focusing on <strong>embedded system design</strong> and <strong>real-time biosignal processing</strong>.<br>该项目基于 MAX78000FTHR 平台开发低功耗健康监测手环，重点展示嵌入式系统设计与实时生理信号处理能力。  </p>
+<hr>
+<h2 id="📷-Project-Overview-项目概述"><a href="#📷-Project-Overview-项目概述" class="headerlink" title="📷 Project Overview &#x2F; 项目概述"></a>📷 Project Overview &#x2F; 项目概述</h2><p align="center">
+  <img src="images/SMART_HEALTH_BLOCK_DIAGRAM.png" width="600" alt="System Block Diagram"/>
+</p>
+
+<p>With wearable health devices growing in popularity, this project explores <strong>how embedded systems acquire and process biosignals in real time</strong>.<br>随着可穿戴健康设备的普及，本项目旨在探索嵌入式系统如何实时采集与处理生理信号。  </p>
+<p><strong>Features &#x2F; 功能特点：</strong>  </p>
+<ul>
+<li>RGB LED 指示系统状态 &#x2F; RGB LED system status indication  </li>
+<li>实时心率与血氧测量（1Hz 刷新） &#x2F; Real-time HR &amp; SpO₂ (1Hz refresh)  </li>
+<li>OLED 三层菜单界面 &#x2F; OLED 3-level interactive menu  </li>
+<li>RTC 实时时钟显示 &#x2F; RTC timekeeping  </li>
+<li>双按键交互（SW1 菜单切换，SW2 确认） &#x2F; Button control (SW1 menu, SW2 confirm)</li>
+</ul>
+<hr>
+<h2 id="⚙️-Hardware-Architecture-硬件架构"><a href="#⚙️-Hardware-Architecture-硬件架构" class="headerlink" title="⚙️ Hardware Architecture &#x2F; 硬件架构"></a>⚙️ Hardware Architecture &#x2F; 硬件架构</h2><table>
+<thead>
+<tr>
+<th>Component &#x2F; 组件</th>
+<th>Model &#x2F; 型号</th>
+<th>Function &#x2F; 功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MCU</strong></td>
+<td>MAX78000FTHR</td>
+<td>Cortex-M4 MCU，支持 NPU 与 I²C 通信</td>
+</tr>
+<tr>
+<td><strong>Sensor &#x2F; 传感器</strong></td>
+<td>MAXREFDES117 (MAX30102)</td>
+<td>PPG 双通道红外&#x2F;红光心率与血氧采集</td>
+</tr>
+<tr>
+<td><strong>Display &#x2F; 显示屏</strong></td>
+<td>SSD1306 0.96” OLED</td>
+<td>实时数据显示 128×64 I²C 屏幕</td>
+</tr>
+<tr>
+<td><strong>Clock &#x2F; 时钟模块</strong></td>
+<td>DS3231 RTC</td>
+<td>硬件时钟模块</td>
+</tr>
+<tr>
+<td><strong>Accessories &#x2F; 配件</strong></td>
+<td>Breadboard, Jumpers</td>
+<td>原型连接，I²C 线长优化 &lt;5cm</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>The MAX78000’s built-in NPU allows for potential <strong>AI-based health analytics</strong>, while maintaining ultra-low power consumption.<br>MAX78000 内置神经网络加速单元 (NPU)，具备未来 AI 健康分析潜力，同时保持极低功耗。  </p>
+</blockquote>
+<hr>
+<h2 id="🧠-Development-Environment-开发环境"><a href="#🧠-Development-Environment-开发环境" class="headerlink" title="🧠 Development Environment &#x2F; 开发环境"></a>🧠 Development Environment &#x2F; 开发环境</h2><ul>
+<li><strong>IDE:</strong> Visual Studio Code + Cortex-Debug  </li>
+<li><strong>SDK:</strong> Analog Devices MSDK  </li>
+<li><strong>Toolchain:</strong> GCC ARM Embedded 10.3 + Makefile  </li>
+<li><strong>Communication:</strong> I²C @ 100kHz (optimized timing)  </li>
+<li><strong>Algorithms &#x2F; 算法：</strong>  <ul>
+<li>滑动窗口滤波 &#x2F; Sliding window filter  </li>
+<li>峰值检测 &#x2F; Peak detection  </li>
+<li>比率法血氧计算 &#x2F; Ratio-based SpO₂ estimation<br><em>(Adapted from <code>maxim_heart_rate_and_oxygen_saturation</code> in <code>algorithm.h</code>)</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="🔧-Key-Technical-Challenges-技术难点与解决方案"><a href="#🔧-Key-Technical-Challenges-技术难点与解决方案" class="headerlink" title="🔧 Key Technical Challenges &#x2F; 技术难点与解决方案"></a>🔧 Key Technical Challenges &#x2F; 技术难点与解决方案</h2><table>
+<thead>
+<tr>
+<th>Problem &#x2F; 问题</th>
+<th>Cause &#x2F; 原因</th>
+<th>Solution &#x2F; 解决方案</th>
+<th>Result &#x2F; 结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字库乱码 &#x2F; Font corruption</td>
+<td>C 注释转义错误</td>
+<td>重定义特殊字符</td>
+<td>字符显示正常</td>
+</tr>
+<tr>
+<td>I²C 信号不稳定</td>
+<td>面包板连线过长</td>
+<td>缩短连线至 &lt;5cm</td>
+<td>数据丢失率 &lt;0.1%</td>
+</tr>
+<tr>
+<td>OLED 文字镜像</td>
+<td>初始化寄存器错误</td>
+<td>调整 <code>0xC0/0xC8</code> 参数</td>
+<td>显示方向正确</td>
+</tr>
+<tr>
+<td>数据刷新延迟 200ms+</td>
+<td>同步读取与绘制阻塞</td>
+<td>分离采样与渲染中断</td>
+<td>延迟 &lt;50ms</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💻-Core-Functions-核心功能示例"><a href="#💻-Core-Functions-核心功能示例" class="headerlink" title="💻 Core Functions &#x2F; 核心功能示例"></a>💻 Core Functions &#x2F; 核心功能示例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RGB LED Control / RGB LED 控制</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">SetLEDs</span><span class="params">(<span class="type">uint8_t</span> state)</span> &#123;</span><br><span class="line">    MXC_I2C_WriteByte(I2C0, PMIC_ADDR, LED_REG, state);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// HR &amp; SpO₂ Calculation / 心率与血氧算法</span></span><br><span class="line">maxim_heart_rate_and_oxygen_saturation(ir_data, red_data,</span><br><span class="line">    &amp;spo2, &amp;heart_rate, &amp;valid_spo2, &amp;valid_hr);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🚀-Future-Work-后续计划"><a href="#🚀-Future-Work-后续计划" class="headerlink" title="🚀 Future Work &#x2F; 后续计划"></a>🚀 Future Work &#x2F; 后续计划</h2><ul>
+<li>设计定制 PCB，缩小体积 60%  </li>
+<li>基于 NPU 实现 CNN 异常心率检测  </li>
+<li>加入 BLE 蓝牙通信模块（MAX32660）  </li>
+<li>优化低功耗休眠模式，续航 7+ 天</li>
+</ul>
+<hr>
+<h2 id="🧭-Learnings-项目收获"><a href="#🧭-Learnings-项目收获" class="headerlink" title="🧭 Learnings &#x2F; 项目收获"></a>🧭 Learnings &#x2F; 项目收获</h2><p>This project deepened understanding of <strong>embedded firmware, biosignal processing, and system optimization</strong>, demonstrating how theory translates to real applications.<br>本项目加深了我对嵌入式固件开发、生理信号处理与系统优化的理解，实现了从理论到实践的完整闭环。  </p>
+<hr>
+<h2 id="📂-Repository-Structure-仓库结构"><a href="#📂-Repository-Structure-仓库结构" class="headerlink" title="📂 Repository Structure &#x2F; 仓库结构"></a>📂 Repository Structure &#x2F; 仓库结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">├── src/</span><br><span class="line">│   ├── main.c</span><br><span class="line">│   ├── algorithm.c</span><br><span class="line">│   ├── oled_menu.c</span><br><span class="line">│   └── rtc.c</span><br><span class="line">├── images/</span><br><span class="line">│   ├── SMART_HEALTH_BLOCK_DIAGRAM.png</span><br><span class="line">│   └── OLED_DISPLAY_SAMPLE.jpg</span><br><span class="line">├── docs/</span><br><span class="line">│   ├── circuit_diagram.pdf</span><br><span class="line">│   └── i2c_timing_log.csv</span><br><span class="line">└── README.md  ← You are here</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🙏-Acknowledgments-致谢"><a href="#🙏-Acknowledgments-致谢" class="headerlink" title="🙏 Acknowledgments &#x2F; 致谢"></a>🙏 Acknowledgments &#x2F; 致谢</h2><p>Special thanks to <strong>EEPW</strong> and <strong>DigiKey</strong> for hardware support.<br>特别感谢《电子工程与产品世界》和 DigiKey 提供硬件支持。  </p>
+<p>📘 <strong>Documentation includes:</strong> 源代码 · 电路图 · I²C 时序日志 · 校准数据<br>📎 <strong>GitHub Repository:</strong> [Add your repo link here &#x2F; 在此处添加仓库链接]  </p>
+<h2 id="🎥-Project-Demonstration-Video-项目演示视频"><a href="#🎥-Project-Demonstration-Video-项目演示视频" class="headerlink" title="🎥 Project Demonstration Video &#x2F; 项目演示视频"></a>🎥 Project Demonstration Video &#x2F; 项目演示视频</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/Fb3Psc4_ksg" title="DIY Smart Health Monitoring Wristband – YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard‑write; encrypted‑media; gyroscope; picture‑in‑picture" allowfullscreen></iframe>
+
+<blockquote>
+<p>📺 <a target="_blank" rel="noopener" href="https://youtu.be/Fb3Psc4_ksg">YouTube Video Link &#x2F; 视频链接</a></p>
+</blockquote>
+<hr>
+<h2 id="🌐-Official-Event-EEPW-Forum-Posts-官方活动与论坛帖子"><a href="#🌐-Official-Event-EEPW-Forum-Posts-官方活动与论坛帖子" class="headerlink" title="🌐 Official Event &amp; EEPW Forum Posts &#x2F; 官方活动与论坛帖子"></a>🌐 Official Event &amp; EEPW Forum Posts &#x2F; 官方活动与论坛帖子</h2><ul>
+<li><strong>EEPW x DigiKey Smart Wristband DIY Challenge (Official Page)</strong><br>🔗 <a target="_blank" rel="noopener" href="https://www.eepw.com.cn/event/action/digikey/diy_2025_sec.html">https://www.eepw.com.cn/event/action/digikey/diy_2025_sec.html</a></li>
+</ul>
+<h3 id="📄-My-EEPW-Forum-Posts-我在-EEPW-的参赛记录"><a href="#📄-My-EEPW-Forum-Posts-我在-EEPW-的参赛记录" class="headerlink" title="📄 My EEPW Forum Posts &#x2F; 我在 EEPW 的参赛记录"></a>📄 My EEPW Forum Posts &#x2F; 我在 EEPW 的参赛记录</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://forum.eepw.com.cn/thread/396901/1">Project Log #1 – Hardware Design and Wiring 硬件设计与布线</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://forum.eepw.com.cn/thread/396903/1">Project Log #2 – Algorithm Development and Debug 调试与算法实现</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://forum.eepw.com.cn/thread/396904/1">Project Log #3 – Final Testing and Optimization 测试与优化总结</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/EEPW-EEWorld-Activity/" rel="tag"># EEPW & EEWorld Activity</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/09/02/EEWORLD-Follow-Me-Season-3/" rel="prev" title="EEWORLD “Follow Me” Season 3 – Task 2">
+      <i class="fa fa-chevron-left"></i> EEWORLD “Follow Me” Season 3 – Task 2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81OTUyNS8zNTk4Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%A9%BA-Smart-Health-Monitoring-Wristband-%E6%99%BA%E8%83%BD%E5%81%A5%E5%BA%B7%E7%9B%91%E6%B5%8B%E6%89%8B%E7%8E%AF"><span class="nav-number">1.</span> <span class="nav-text">🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedded-System-Based-on-MAX78000FTHR-%E5%9F%BA%E4%BA%8E-MAX78000FTHR-%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.0.1.</span> <span class="nav-text">Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%B7-Project-Overview-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">📷 Project Overview &#x2F; 项目概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-Hardware-Architecture-%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">⚙️ Hardware Architecture &#x2F; 硬件架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-Development-Environment-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">🧠 Development Environment &#x2F; 开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-Key-Technical-Challenges-%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.4.</span> <span class="nav-text">🔧 Key Technical Challenges &#x2F; 技术难点与解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%BB-Core-Functions-%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">💻 Core Functions &#x2F; 核心功能示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-Future-Work-%E5%90%8E%E7%BB%AD%E8%AE%A1%E5%88%92"><span class="nav-number">1.6.</span> <span class="nav-text">🚀 Future Work &#x2F; 后续计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AD-Learnings-%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%8E%B7"><span class="nav-number">1.7.</span> <span class="nav-text">🧭 Learnings &#x2F; 项目收获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%82-Repository-Structure-%E4%BB%93%E5%BA%93%E7%BB%93%E6%9E%84"><span class="nav-number">1.8.</span> <span class="nav-text">📂 Repository Structure &#x2F; 仓库结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%99%8F-Acknowledgments-%E8%87%B4%E8%B0%A2"><span class="nav-number">1.9.</span> <span class="nav-text">🙏 Acknowledgments &#x2F; 致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%A5-Project-Demonstration-Video-%E9%A1%B9%E7%9B%AE%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91"><span class="nav-number">1.10.</span> <span class="nav-text">🎥 Project Demonstration Video &#x2F; 项目演示视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8C%90-Official-Event-EEPW-Forum-Posts-%E5%AE%98%E6%96%B9%E6%B4%BB%E5%8A%A8%E4%B8%8E%E8%AE%BA%E5%9D%9B%E5%B8%96%E5%AD%90"><span class="nav-number">1.11.</span> <span class="nav-text">🌐 Official Event &amp; EEPW Forum Posts &#x2F; 官方活动与论坛帖子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%84-My-EEPW-Forum-Posts-%E6%88%91%E5%9C%A8-EEPW-%E7%9A%84%E5%8F%82%E8%B5%9B%E8%AE%B0%E5%BD%95"><span class="nav-number">1.11.1.</span> <span class="nav-text">📄 My EEPW Forum Posts &#x2F; 我在 EEPW 的参赛记录</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Minkai Shi"
+      src="/upload/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Minkai Shi</p>
+  <div class="site-description" itemprop="description">Study</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Minkai Shi</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

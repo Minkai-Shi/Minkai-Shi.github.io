@@ -937,4 +937,149 @@
         <tag>EEPW &amp; EEWorld Activity</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Smart Health Monitoring Wristband</title>
+    <url>/2025/10/06/Smart-Health-Monitoring-Wristband/</url>
+    <content><![CDATA[<h1 id="🩺-Smart-Health-Monitoring-Wristband-智能健康监测手环"><a href="#🩺-Smart-Health-Monitoring-Wristband-智能健康监测手环" class="headerlink" title="🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环"></a>🩺 Smart Health Monitoring Wristband &#x2F; 智能健康监测手环</h1><h3 id="Embedded-System-Based-on-MAX78000FTHR-基于-MAX78000FTHR-的嵌入式系统"><a href="#Embedded-System-Based-on-MAX78000FTHR-基于-MAX78000FTHR-的嵌入式系统" class="headerlink" title="Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统"></a>Embedded System Based on MAX78000FTHR &#x2F; 基于 MAX78000FTHR 的嵌入式系统</h3><p><a href=""><img src="https://img.shields.io/badge/Platform-MAX78000FTHR-blue.svg" alt="Platform"></a><br><a href=""><img src="https://img.shields.io/badge/Award-EEPW%20%26%20DigiKey%20DIY%20Challenge%202024-brightgreen.svg" alt="Award"></a><br><a href=""><img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-lightgrey.svg" alt="Language"></a><br><a href=""><img src="https://img.shields.io/badge/Status-Completed-success.svg" alt="Status"></a>  </p>
+<p>A DIY low-power health monitoring wristband built on the MAX78000FTHR platform, focusing on <strong>embedded system design</strong> and <strong>real-time biosignal processing</strong>.<br>该项目基于 MAX78000FTHR 平台开发低功耗健康监测手环，重点展示嵌入式系统设计与实时生理信号处理能力。  </p>
+<hr>
+<h2 id="📷-Project-Overview-项目概述"><a href="#📷-Project-Overview-项目概述" class="headerlink" title="📷 Project Overview &#x2F; 项目概述"></a>📷 Project Overview &#x2F; 项目概述</h2><p align="center">
+  <img src="images/SMART_HEALTH_BLOCK_DIAGRAM.png" width="600" alt="System Block Diagram"/>
+</p>
+
+<p>With wearable health devices growing in popularity, this project explores <strong>how embedded systems acquire and process biosignals in real time</strong>.<br>随着可穿戴健康设备的普及，本项目旨在探索嵌入式系统如何实时采集与处理生理信号。  </p>
+<p><strong>Features &#x2F; 功能特点：</strong>  </p>
+<ul>
+<li>RGB LED 指示系统状态 &#x2F; RGB LED system status indication  </li>
+<li>实时心率与血氧测量（1Hz 刷新） &#x2F; Real-time HR &amp; SpO₂ (1Hz refresh)  </li>
+<li>OLED 三层菜单界面 &#x2F; OLED 3-level interactive menu  </li>
+<li>RTC 实时时钟显示 &#x2F; RTC timekeeping  </li>
+<li>双按键交互（SW1 菜单切换，SW2 确认） &#x2F; Button control (SW1 menu, SW2 confirm)</li>
+</ul>
+<hr>
+<h2 id="⚙️-Hardware-Architecture-硬件架构"><a href="#⚙️-Hardware-Architecture-硬件架构" class="headerlink" title="⚙️ Hardware Architecture &#x2F; 硬件架构"></a>⚙️ Hardware Architecture &#x2F; 硬件架构</h2><table>
+<thead>
+<tr>
+<th>Component &#x2F; 组件</th>
+<th>Model &#x2F; 型号</th>
+<th>Function &#x2F; 功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MCU</strong></td>
+<td>MAX78000FTHR</td>
+<td>Cortex-M4 MCU，支持 NPU 与 I²C 通信</td>
+</tr>
+<tr>
+<td><strong>Sensor &#x2F; 传感器</strong></td>
+<td>MAXREFDES117 (MAX30102)</td>
+<td>PPG 双通道红外&#x2F;红光心率与血氧采集</td>
+</tr>
+<tr>
+<td><strong>Display &#x2F; 显示屏</strong></td>
+<td>SSD1306 0.96” OLED</td>
+<td>实时数据显示 128×64 I²C 屏幕</td>
+</tr>
+<tr>
+<td><strong>Clock &#x2F; 时钟模块</strong></td>
+<td>DS3231 RTC</td>
+<td>硬件时钟模块</td>
+</tr>
+<tr>
+<td><strong>Accessories &#x2F; 配件</strong></td>
+<td>Breadboard, Jumpers</td>
+<td>原型连接，I²C 线长优化 &lt;5cm</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>The MAX78000’s built-in NPU allows for potential <strong>AI-based health analytics</strong>, while maintaining ultra-low power consumption.<br>MAX78000 内置神经网络加速单元 (NPU)，具备未来 AI 健康分析潜力，同时保持极低功耗。  </p>
+</blockquote>
+<hr>
+<h2 id="🧠-Development-Environment-开发环境"><a href="#🧠-Development-Environment-开发环境" class="headerlink" title="🧠 Development Environment &#x2F; 开发环境"></a>🧠 Development Environment &#x2F; 开发环境</h2><ul>
+<li><strong>IDE:</strong> Visual Studio Code + Cortex-Debug  </li>
+<li><strong>SDK:</strong> Analog Devices MSDK  </li>
+<li><strong>Toolchain:</strong> GCC ARM Embedded 10.3 + Makefile  </li>
+<li><strong>Communication:</strong> I²C @ 100kHz (optimized timing)  </li>
+<li><strong>Algorithms &#x2F; 算法：</strong>  <ul>
+<li>滑动窗口滤波 &#x2F; Sliding window filter  </li>
+<li>峰值检测 &#x2F; Peak detection  </li>
+<li>比率法血氧计算 &#x2F; Ratio-based SpO₂ estimation<br><em>(Adapted from <code>maxim_heart_rate_and_oxygen_saturation</code> in <code>algorithm.h</code>)</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="🔧-Key-Technical-Challenges-技术难点与解决方案"><a href="#🔧-Key-Technical-Challenges-技术难点与解决方案" class="headerlink" title="🔧 Key Technical Challenges &#x2F; 技术难点与解决方案"></a>🔧 Key Technical Challenges &#x2F; 技术难点与解决方案</h2><table>
+<thead>
+<tr>
+<th>Problem &#x2F; 问题</th>
+<th>Cause &#x2F; 原因</th>
+<th>Solution &#x2F; 解决方案</th>
+<th>Result &#x2F; 结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字库乱码 &#x2F; Font corruption</td>
+<td>C 注释转义错误</td>
+<td>重定义特殊字符</td>
+<td>字符显示正常</td>
+</tr>
+<tr>
+<td>I²C 信号不稳定</td>
+<td>面包板连线过长</td>
+<td>缩短连线至 &lt;5cm</td>
+<td>数据丢失率 &lt;0.1%</td>
+</tr>
+<tr>
+<td>OLED 文字镜像</td>
+<td>初始化寄存器错误</td>
+<td>调整 <code>0xC0/0xC8</code> 参数</td>
+<td>显示方向正确</td>
+</tr>
+<tr>
+<td>数据刷新延迟 200ms+</td>
+<td>同步读取与绘制阻塞</td>
+<td>分离采样与渲染中断</td>
+<td>延迟 &lt;50ms</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💻-Core-Functions-核心功能示例"><a href="#💻-Core-Functions-核心功能示例" class="headerlink" title="💻 Core Functions &#x2F; 核心功能示例"></a>💻 Core Functions &#x2F; 核心功能示例</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// RGB LED Control / RGB LED 控制</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">SetLEDs</span><span class="params">(<span class="type">uint8_t</span> state)</span> &#123;</span><br><span class="line">    MXC_I2C_WriteByte(I2C0, PMIC_ADDR, LED_REG, state);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// HR &amp; SpO₂ Calculation / 心率与血氧算法</span></span><br><span class="line">maxim_heart_rate_and_oxygen_saturation(ir_data, red_data,</span><br><span class="line">    &amp;spo2, &amp;heart_rate, &amp;valid_spo2, &amp;valid_hr);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🚀-Future-Work-后续计划"><a href="#🚀-Future-Work-后续计划" class="headerlink" title="🚀 Future Work &#x2F; 后续计划"></a>🚀 Future Work &#x2F; 后续计划</h2><ul>
+<li>设计定制 PCB，缩小体积 60%  </li>
+<li>基于 NPU 实现 CNN 异常心率检测  </li>
+<li>加入 BLE 蓝牙通信模块（MAX32660）  </li>
+<li>优化低功耗休眠模式，续航 7+ 天</li>
+</ul>
+<hr>
+<h2 id="🧭-Learnings-项目收获"><a href="#🧭-Learnings-项目收获" class="headerlink" title="🧭 Learnings &#x2F; 项目收获"></a>🧭 Learnings &#x2F; 项目收获</h2><p>This project deepened understanding of <strong>embedded firmware, biosignal processing, and system optimization</strong>, demonstrating how theory translates to real applications.<br>本项目加深了我对嵌入式固件开发、生理信号处理与系统优化的理解，实现了从理论到实践的完整闭环。  </p>
+<hr>
+<h2 id="📂-Repository-Structure-仓库结构"><a href="#📂-Repository-Structure-仓库结构" class="headerlink" title="📂 Repository Structure &#x2F; 仓库结构"></a>📂 Repository Structure &#x2F; 仓库结构</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── src/</span><br><span class="line">│   ├── main.c</span><br><span class="line">│   ├── algorithm.c</span><br><span class="line">│   ├── oled_menu.c</span><br><span class="line">│   └── rtc.c</span><br><span class="line">├── images/</span><br><span class="line">│   ├── SMART_HEALTH_BLOCK_DIAGRAM.png</span><br><span class="line">│   └── OLED_DISPLAY_SAMPLE.jpg</span><br><span class="line">├── docs/</span><br><span class="line">│   ├── circuit_diagram.pdf</span><br><span class="line">│   └── i2c_timing_log.csv</span><br><span class="line">└── README.md  ← You are here</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🙏-Acknowledgments-致谢"><a href="#🙏-Acknowledgments-致谢" class="headerlink" title="🙏 Acknowledgments &#x2F; 致谢"></a>🙏 Acknowledgments &#x2F; 致谢</h2><p>Special thanks to <strong>EEPW</strong> and <strong>DigiKey</strong> for hardware support.<br>特别感谢《电子工程与产品世界》和 DigiKey 提供硬件支持。  </p>
+<p>📘 <strong>Documentation includes:</strong> 源代码 · 电路图 · I²C 时序日志 · 校准数据<br>📎 <strong>GitHub Repository:</strong> [Add your repo link here &#x2F; 在此处添加仓库链接]  </p>
+<h2 id="🎥-Project-Demonstration-Video-项目演示视频"><a href="#🎥-Project-Demonstration-Video-项目演示视频" class="headerlink" title="🎥 Project Demonstration Video &#x2F; 项目演示视频"></a>🎥 Project Demonstration Video &#x2F; 项目演示视频</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/Fb3Psc4_ksg" title="DIY Smart Health Monitoring Wristband – YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard‑write; encrypted‑media; gyroscope; picture‑in‑picture" allowfullscreen></iframe>
+
+<blockquote>
+<p>📺 <a href="https://youtu.be/Fb3Psc4_ksg">YouTube Video Link &#x2F; 视频链接</a></p>
+</blockquote>
+<hr>
+<h2 id="🌐-Official-Event-EEPW-Forum-Posts-官方活动与论坛帖子"><a href="#🌐-Official-Event-EEPW-Forum-Posts-官方活动与论坛帖子" class="headerlink" title="🌐 Official Event &amp; EEPW Forum Posts &#x2F; 官方活动与论坛帖子"></a>🌐 Official Event &amp; EEPW Forum Posts &#x2F; 官方活动与论坛帖子</h2><ul>
+<li><strong>EEPW x DigiKey Smart Wristband DIY Challenge (Official Page)</strong><br>🔗 <a href="https://www.eepw.com.cn/event/action/digikey/diy_2025_sec.html">https://www.eepw.com.cn/event/action/digikey/diy_2025_sec.html</a></li>
+</ul>
+<h3 id="📄-My-EEPW-Forum-Posts-我在-EEPW-的参赛记录"><a href="#📄-My-EEPW-Forum-Posts-我在-EEPW-的参赛记录" class="headerlink" title="📄 My EEPW Forum Posts &#x2F; 我在 EEPW 的参赛记录"></a>📄 My EEPW Forum Posts &#x2F; 我在 EEPW 的参赛记录</h3><ol>
+<li><a href="https://forum.eepw.com.cn/thread/396901/1">Project Log #1 – Hardware Design and Wiring 硬件设计与布线</a>  </li>
+<li><a href="https://forum.eepw.com.cn/thread/396903/1">Project Log #2 – Algorithm Development and Debug 调试与算法实现</a>  </li>
+<li><a href="https://forum.eepw.com.cn/thread/396904/1">Project Log #3 – Final Testing and Optimization 测试与优化总结</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>EEPW &amp; EEWorld Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW &amp; EEWorld Activity</tag>
+      </tags>
+  </entry>
 </search>
