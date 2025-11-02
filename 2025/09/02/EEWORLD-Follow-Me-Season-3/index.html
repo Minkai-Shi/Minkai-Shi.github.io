@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="🔧 EEWORLD「Follow Me 第三季·第2期」任务 EEWORLD “Follow Me” Season 3 – Task 2     📎 作品发布帖 •   🌐 活动主页 •   📁 我的嵌入式项目合集    🧭 项目简介 | Project Overview中文说明本项目是我参与 EEWORLD × DigiKey 联合举办的「Follow Me 第三季·第2期」嵌入式实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEWORLD-Follow-Me-Season-3">
+<meta property="og:url" content="http://example.com/2025/09/02/EEWORLD-Follow-Me-Season-3/index.html">
+<meta property="og:site_name" content="Minkai-Shi&#39; Blog">
+<meta property="og:description" content="🔧 EEWORLD「Follow Me 第三季·第2期」任务 EEWORLD “Follow Me” Season 3 – Task 2     📎 作品发布帖 •   🌐 活动主页 •   📁 我的嵌入式项目合集    🧭 项目简介 | Project Overview中文说明本项目是我参与 EEWORLD × DigiKey 联合举办的「Follow Me 第三季·第2期」嵌入式实">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bbs.eeworld.com.cn/data/attachment/forum/202310/ee-demo.jpg">
+<meta property="article:published_time" content="2025-09-02T10:55:53.000Z">
+<meta property="article:modified_time" content="2025-11-02T10:57:04.504Z">
+<meta property="article:author" content="Minkai Shi">
+<meta property="article:tag" content="EEPW &amp; EEWorld Activity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bbs.eeworld.com.cn/data/attachment/forum/202310/ee-demo.jpg">
+
+<link rel="canonical" href="http://example.com/2025/09/02/EEWORLD-Follow-Me-Season-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>EEWORLD-Follow-Me-Season-3 | Minkai-Shi' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Minkai-Shi' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Study</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/02/EEWORLD-Follow-Me-Season-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/touxiang.jpg">
+      <meta itemprop="name" content="Minkai Shi">
+      <meta itemprop="description" content="Study">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Minkai-Shi' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EEWORLD-Follow-Me-Season-3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-09-02 18:55:53" itemprop="dateCreated datePublished" datetime="2025-09-02T18:55:53+08:00">2025-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-02 18:57:04" itemprop="dateModified" datetime="2025-11-02T18:57:04+08:00">2025-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EEPW-EEWorld-Activity/" itemprop="url" rel="index"><span itemprop="name">EEPW & EEWorld Activity</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- HEADER -->
+<h1 align="center">🔧 EEWORLD「Follow Me 第三季·第2期」任务</h1>
+<h3 align="center">EEWORLD “Follow Me” Season 3 – Task 2</h3>
+
+<p align="center">
+  <a target="_blank" rel="noopener" href="https://bbs.eeworld.com.cn/thread-1327003-1-1.html">📎 作品发布帖</a> •
+  <a target="_blank" rel="noopener" href="https://www.eeworld.com.cn/huodong/digikey_follow_me_2025_02/">🌐 活动主页</a> •
+  <a target="_blank" rel="noopener" href="https://minkai-shi.github.io/categories/EEPW-Activity/">📁 我的嵌入式项目合集</a>
+</p>
+
+<hr>
+<h2 id="🧭-项目简介-Project-Overview"><a href="#🧭-项目简介-Project-Overview" class="headerlink" title="🧭 项目简介 | Project Overview"></a>🧭 项目简介 | Project Overview</h2><p><strong>中文说明</strong><br>本项目是我参与 <strong>EEWORLD × DigiKey 联合举办的「Follow Me 第三季·第2期」嵌入式实践挑战</strong>。<br>活动旨在鼓励开发者亲手完成指定任务，从硬件连接、程序调试到功能扩展，完整体验嵌入式系统的开发流程。  </p>
+<p>我选择了基于 <strong>MCU 外设控制与通信调试</strong> 的任务方向，重点在于<strong>分析系统结构、验证通信接口、优化运行稳定性</strong>，并在论坛发布调试日志和经验总结。  </p>
+<p><strong>English Description</strong><br>This project documents my participation in <strong>EEWORLD &amp; DigiKey’s “Follow Me” Season 3 – Task 2</strong>,<br>a hands-on embedded systems challenge designed to promote <strong>practical engineering, debugging, and system design skills</strong>.  </p>
+<p>I focused on tasks related to <strong>MCU peripheral configuration, hardware communication, and stability optimization</strong>,<br>recording each stage from schematic understanding to firmware debugging on the official EEWORLD forum.</p>
+<hr>
+<h2 id="🎯-活动目标-Objectives"><a href="#🎯-活动目标-Objectives" class="headerlink" title="🎯 活动目标 | Objectives"></a>🎯 活动目标 | Objectives</h2><table>
+<thead>
+<tr>
+<th>中文</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 按照任务教程搭建系统硬件并完成代码调试</td>
+<td>✅ Reproduce and verify the assigned embedded project</td>
+</tr>
+<tr>
+<td>⚙️ 掌握外设接口初始化与数据通信机制</td>
+<td>⚙️ Understand peripheral initialization and data communication</td>
+</tr>
+<tr>
+<td>🔍 记录调试中遇到的问题与解决方法</td>
+<td>🔍 Document debugging issues and solutions</td>
+</tr>
+<tr>
+<td>🚀 尝试功能扩展与性能优化</td>
+<td>🚀 Extend system functionality and optimize performance</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-硬件与开发环境-Hardware-Tools"><a href="#⚙️-硬件与开发环境-Hardware-Tools" class="headerlink" title="⚙️ 硬件与开发环境 | Hardware &amp; Tools"></a>⚙️ 硬件与开发环境 | Hardware &amp; Tools</h2><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>说明</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主控平台</td>
+<td>STM32 &#x2F; MAX 系列开发板</td>
+<td>MCU Board</td>
+<td>STM32 or MAX development board</td>
+</tr>
+<tr>
+<td>外设模块</td>
+<td>OLED 屏幕 &#x2F; 传感器模块 &#x2F; 通信模块</td>
+<td>Peripherals</td>
+<td>OLED display, sensor, communication units</td>
+</tr>
+<tr>
+<td>通信接口</td>
+<td>I²C &#x2F; SPI &#x2F; UART</td>
+<td>Interface</td>
+<td>Data exchange and debugging</td>
+</tr>
+<tr>
+<td>开发软件</td>
+<td>VS Code</td>
+<td>Software</td>
+<td>Embedded C IDEs and toolchains</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧠-技术实现-Technical-Implementation"><a href="#🧠-技术实现-Technical-Implementation" class="headerlink" title="🧠 技术实现 | Technical Implementation"></a>🧠 技术实现 | Technical Implementation</h2><h3 id="1️⃣-外设初始化与通信验证-Peripheral-Initialization-Interface-Verification"><a href="#1️⃣-外设初始化与通信验证-Peripheral-Initialization-Interface-Verification" class="headerlink" title="1️⃣ 外设初始化与通信验证 | Peripheral Initialization &amp; Interface Verification"></a>1️⃣ 外设初始化与通信验证 | Peripheral Initialization &amp; Interface Verification</h3><ul>
+<li>确认 I²C 与 SPI 模块地址、通信速率与电源逻辑；</li>
+<li>在主循环中加入 LED 心跳指示，用于调试状态监控。</li>
+</ul>
+<blockquote>
+<p>Verified I²C&#x2F;SPI communication, analyzed signal timing using a logic analyzer,<br>and implemented LED heartbeat for runtime status indication.</p>
+</blockquote>
+<hr>
+<h3 id="2️⃣-固件适配与结构优化-Firmware-Adaptation-Optimization"><a href="#2️⃣-固件适配与结构优化-Firmware-Adaptation-Optimization" class="headerlink" title="2️⃣ 固件适配与结构优化 | Firmware Adaptation &amp; Optimization"></a>2️⃣ 固件适配与结构优化 | Firmware Adaptation &amp; Optimization</h3><ul>
+<li>基于 HAL 库重写驱动层结构，增强模块化与可读性；</li>
+<li>调整初始化顺序，确保外设与 OLED 屏幕正确同步；</li>
+<li>通过 UART 输出调试日志，便于后续问题定位。</li>
+</ul>
+<blockquote>
+<p>Rewrote driver initialization sequences to ensure synchronized peripheral startup.<br>Added UART logging for dynamic debugging and firmware validation.</p>
+</blockquote>
+<hr>
+<h3 id="3️⃣-问题与解决方案-Debugging-Solutions"><a href="#3️⃣-问题与解决方案-Debugging-Solutions" class="headerlink" title="3️⃣ 问题与解决方案 | Debugging &amp; Solutions"></a>3️⃣ 问题与解决方案 | Debugging &amp; Solutions</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>原因分析</th>
+<th>解决方法</th>
+<th>Issue</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OLED 显示闪烁</td>
+<td>初始化时序错误</td>
+<td>增加延时并重设复位逻辑</td>
+<td>OLED flicker</td>
+<td>Adjusted reset delay sequence</td>
+</tr>
+<tr>
+<td>I²C 超时</td>
+<td>导线过长造成信号干扰</td>
+<td>缩短连线并优化接地布局</td>
+<td>I²C timeout</td>
+<td>Rewired shorter SDA&#x2F;SCL paths</td>
+</tr>
+<tr>
+<td>编译警告</td>
+<td>类型不匹配</td>
+<td>修正宏定义与结构体声明</td>
+<td>Compiler warning</td>
+<td>Fixed type mismatches in headers</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📊-项目成果-Results"><a href="#📊-项目成果-Results" class="headerlink" title="📊 项目成果 | Results"></a>📊 项目成果 | Results</h2><ul>
+<li>成功完成任务功能并扩展稳定性测试；</li>
+<li>实现<strong>实时数据采集 + OLED 可视化显示</strong>；</li>
+<li>记录完整调试过程及经验总结。</li>
+</ul>
+<blockquote>
+<p>Achieved stable real-time sensor reading and OLED visualization,<br>with all debugging steps documented for reproducibility.</p>
+</blockquote>
+<p align="center">
+  <img src="https://bbs.eeworld.com.cn/data/attachment/forum/202310/ee-demo.jpg" width="70%">
+</p>
+
+<hr>
+<h2 id="💡-学习与收获-Learning-Outcomes"><a href="#💡-学习与收获-Learning-Outcomes" class="headerlink" title="💡 学习与收获 | Learning Outcomes"></a>💡 学习与收获 | Learning Outcomes</h2><table>
+<thead>
+<tr>
+<th>中文</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>📘 深入理解嵌入式系统调试流程与问题定位方法</td>
+<td>📘 Strengthened understanding of embedded debugging methodology</td>
+</tr>
+<tr>
+<td>🔬 掌握信号级别问题分析与外设配置技巧</td>
+<td>🔬 Gained experience in signal-level diagnostics</td>
+</tr>
+<tr>
+<td>🧩 培养系统化思维与工程严谨性</td>
+<td>🧩 Developed systematic problem-solving mindset</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>“每一次错误都让我离正确更近一步。”<br>“Every malfunction became a lesson — every successful fix, a confirmation of understanding.”</p>
+</blockquote>
+<hr>
+<h2 id="🧭-反思与延伸-Reflection-Future-Work"><a href="#🧭-反思与延伸-Reflection-Future-Work" class="headerlink" title="🧭 反思与延伸 | Reflection &amp; Future Work"></a>🧭 反思与延伸 | Reflection &amp; Future Work</h2><p><strong>中文：</strong><br>通过此次任务，我更加理解了工程师思维：<br>问题不是障碍，而是验证假设与改进设计的机会。<br>后续我将把这种调试与验证方法应用到更复杂的 AI 嵌入式系统（如 MAX78000 智能手环）中。</p>
+<p><strong>English:</strong><br>This task strengthened my engineering mindset —<br>to approach problems through analysis, hypothesis, and validation.<br>I plan to apply this methodology to larger-scale embedded AI systems such as the MAX78000 Health Monitoring Wristband.</p>
+<hr>
+<h2 id="🔗-参考与相关链接-References"><a href="#🔗-参考与相关链接-References" class="headerlink" title="🔗 参考与相关链接 | References"></a>🔗 参考与相关链接 | References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.eeworld.com.cn/huodong/digikey_follow_me_2025_02/">EEWORLD 活动主页 &#x2F; Official Event Page</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://bbs.eeworld.com.cn/thread-1327003-1-1.html">论坛作品发布帖 &#x2F; Project Submission</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://minkai-shi.github.io/categories/EEPW-Activity/">EEPW 项目合集 &#x2F; My Embedded Project Collection</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://www.digikey.com/">DigiKey 官方网站 &#x2F; DigiKey Official</a></li>
+</ul>
+<hr>
+<h2 id="🧩-标签-Tags"><a href="#🧩-标签-Tags" class="headerlink" title="🧩 标签 | Tags"></a>🧩 标签 | Tags</h2><p><code>Embedded Systems</code> · <code>Hardware Debugging</code> · <code>EEWORLD</code> · <code>DigiKey</code> · <code>I2C</code> · <code>Firmware Engineering</code></p>
+<hr>
+<p><strong>作者 &#x2F; Author:</strong> Minkai Shi<br><strong>日期 &#x2F; Date:</strong> 2025<br><strong>许可证 &#x2F; License:</strong> MIT  </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/EEPW-EEWorld-Activity/" rel="tag"># EEPW & EEWorld Activity</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/20/Power_Monitoring_System/" rel="prev" title="Power_Monitoring_System">
+      <i class="fa fa-chevron-left"></i> Power_Monitoring_System
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81OTUyNS8zNTk4Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">🔧 EEWORLD「Follow Me 第三季·第2期」任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.1.</span> <span class="nav-text">EEWORLD “Follow Me” Season 3 – Task 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AD-%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B-Project-Overview"><span class="nav-number">1.1.</span> <span class="nav-text">🧭 项目简介 | Project Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E6%B4%BB%E5%8A%A8%E7%9B%AE%E6%A0%87-Objectives"><span class="nav-number">1.2.</span> <span class="nav-text">🎯 活动目标 | Objectives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E7%A1%AC%E4%BB%B6%E4%B8%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-Hardware-Tools"><span class="nav-number">1.3.</span> <span class="nav-text">⚙️ 硬件与开发环境 | Hardware &amp; Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0-Technical-Implementation"><span class="nav-number">1.4.</span> <span class="nav-text">🧠 技术实现 | Technical Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%B8%8F%E2%83%A3-%E5%A4%96%E8%AE%BE%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E9%80%9A%E4%BF%A1%E9%AA%8C%E8%AF%81-Peripheral-Initialization-Interface-Verification"><span class="nav-number">1.4.1.</span> <span class="nav-text">1️⃣ 外设初始化与通信验证 | Peripheral Initialization &amp; Interface Verification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%B8%8F%E2%83%A3-%E5%9B%BA%E4%BB%B6%E9%80%82%E9%85%8D%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96-Firmware-Adaptation-Optimization"><span class="nav-number">1.4.2.</span> <span class="nav-text">2️⃣ 固件适配与结构优化 | Firmware Adaptation &amp; Optimization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%B8%8F%E2%83%A3-%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-Debugging-Solutions"><span class="nav-number">1.4.3.</span> <span class="nav-text">3️⃣ 问题与解决方案 | Debugging &amp; Solutions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8A-%E9%A1%B9%E7%9B%AE%E6%88%90%E6%9E%9C-Results"><span class="nav-number">1.5.</span> <span class="nav-text">📊 项目成果 | Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%94%B6%E8%8E%B7-Learning-Outcomes"><span class="nav-number">1.6.</span> <span class="nav-text">💡 学习与收获 | Learning Outcomes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AD-%E5%8F%8D%E6%80%9D%E4%B8%8E%E5%BB%B6%E4%BC%B8-Reflection-Future-Work"><span class="nav-number">1.7.</span> <span class="nav-text">🧭 反思与延伸 | Reflection &amp; Future Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%97-%E5%8F%82%E8%80%83%E4%B8%8E%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5-References"><span class="nav-number">1.8.</span> <span class="nav-text">🔗 参考与相关链接 | References</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E6%A0%87%E7%AD%BE-Tags"><span class="nav-number">1.9.</span> <span class="nav-text">🧩 标签 | Tags</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Minkai Shi"
+      src="/upload/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Minkai Shi</p>
+  <div class="site-description" itemprop="description">Study</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Minkai Shi</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

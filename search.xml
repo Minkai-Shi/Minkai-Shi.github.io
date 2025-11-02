@@ -750,4 +750,191 @@
         <tag>camera</tag>
       </tags>
   </entry>
+  <entry>
+    <title>EEWORLD-Follow-Me-Season-3</title>
+    <url>/2025/09/02/EEWORLD-Follow-Me-Season-3/</url>
+    <content><![CDATA[<!-- HEADER -->
+<h1 align="center">🔧 EEWORLD「Follow Me 第三季·第2期」任务</h1>
+<h3 align="center">EEWORLD “Follow Me” Season 3 – Task 2</h3>
+
+<p align="center">
+  <a href="https://bbs.eeworld.com.cn/thread-1327003-1-1.html">📎 作品发布帖</a> •
+  <a href="https://www.eeworld.com.cn/huodong/digikey_follow_me_2025_02/">🌐 活动主页</a> •
+  <a href="https://minkai-shi.github.io/categories/EEPW-Activity/">📁 我的嵌入式项目合集</a>
+</p>
+
+<hr>
+<h2 id="🧭-项目简介-Project-Overview"><a href="#🧭-项目简介-Project-Overview" class="headerlink" title="🧭 项目简介 | Project Overview"></a>🧭 项目简介 | Project Overview</h2><p><strong>中文说明</strong><br>本项目是我参与 <strong>EEWORLD × DigiKey 联合举办的「Follow Me 第三季·第2期」嵌入式实践挑战</strong>。<br>活动旨在鼓励开发者亲手完成指定任务，从硬件连接、程序调试到功能扩展，完整体验嵌入式系统的开发流程。  </p>
+<p>我选择了基于 <strong>MCU 外设控制与通信调试</strong> 的任务方向，重点在于<strong>分析系统结构、验证通信接口、优化运行稳定性</strong>，并在论坛发布调试日志和经验总结。  </p>
+<p><strong>English Description</strong><br>This project documents my participation in <strong>EEWORLD &amp; DigiKey’s “Follow Me” Season 3 – Task 2</strong>,<br>a hands-on embedded systems challenge designed to promote <strong>practical engineering, debugging, and system design skills</strong>.  </p>
+<p>I focused on tasks related to <strong>MCU peripheral configuration, hardware communication, and stability optimization</strong>,<br>recording each stage from schematic understanding to firmware debugging on the official EEWORLD forum.</p>
+<hr>
+<h2 id="🎯-活动目标-Objectives"><a href="#🎯-活动目标-Objectives" class="headerlink" title="🎯 活动目标 | Objectives"></a>🎯 活动目标 | Objectives</h2><table>
+<thead>
+<tr>
+<th>中文</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 按照任务教程搭建系统硬件并完成代码调试</td>
+<td>✅ Reproduce and verify the assigned embedded project</td>
+</tr>
+<tr>
+<td>⚙️ 掌握外设接口初始化与数据通信机制</td>
+<td>⚙️ Understand peripheral initialization and data communication</td>
+</tr>
+<tr>
+<td>🔍 记录调试中遇到的问题与解决方法</td>
+<td>🔍 Document debugging issues and solutions</td>
+</tr>
+<tr>
+<td>🚀 尝试功能扩展与性能优化</td>
+<td>🚀 Extend system functionality and optimize performance</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-硬件与开发环境-Hardware-Tools"><a href="#⚙️-硬件与开发环境-Hardware-Tools" class="headerlink" title="⚙️ 硬件与开发环境 | Hardware &amp; Tools"></a>⚙️ 硬件与开发环境 | Hardware &amp; Tools</h2><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>说明</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主控平台</td>
+<td>STM32 &#x2F; MAX 系列开发板</td>
+<td>MCU Board</td>
+<td>STM32 or MAX development board</td>
+</tr>
+<tr>
+<td>外设模块</td>
+<td>OLED 屏幕 &#x2F; 传感器模块 &#x2F; 通信模块</td>
+<td>Peripherals</td>
+<td>OLED display, sensor, communication units</td>
+</tr>
+<tr>
+<td>通信接口</td>
+<td>I²C &#x2F; SPI &#x2F; UART</td>
+<td>Interface</td>
+<td>Data exchange and debugging</td>
+</tr>
+<tr>
+<td>开发软件</td>
+<td>VS Code</td>
+<td>Software</td>
+<td>Embedded C IDEs and toolchains</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧠-技术实现-Technical-Implementation"><a href="#🧠-技术实现-Technical-Implementation" class="headerlink" title="🧠 技术实现 | Technical Implementation"></a>🧠 技术实现 | Technical Implementation</h2><h3 id="1️⃣-外设初始化与通信验证-Peripheral-Initialization-Interface-Verification"><a href="#1️⃣-外设初始化与通信验证-Peripheral-Initialization-Interface-Verification" class="headerlink" title="1️⃣ 外设初始化与通信验证 | Peripheral Initialization &amp; Interface Verification"></a>1️⃣ 外设初始化与通信验证 | Peripheral Initialization &amp; Interface Verification</h3><ul>
+<li>确认 I²C 与 SPI 模块地址、通信速率与电源逻辑；</li>
+<li>在主循环中加入 LED 心跳指示，用于调试状态监控。</li>
+</ul>
+<blockquote>
+<p>Verified I²C&#x2F;SPI communication, analyzed signal timing using a logic analyzer,<br>and implemented LED heartbeat for runtime status indication.</p>
+</blockquote>
+<hr>
+<h3 id="2️⃣-固件适配与结构优化-Firmware-Adaptation-Optimization"><a href="#2️⃣-固件适配与结构优化-Firmware-Adaptation-Optimization" class="headerlink" title="2️⃣ 固件适配与结构优化 | Firmware Adaptation &amp; Optimization"></a>2️⃣ 固件适配与结构优化 | Firmware Adaptation &amp; Optimization</h3><ul>
+<li>基于 HAL 库重写驱动层结构，增强模块化与可读性；</li>
+<li>调整初始化顺序，确保外设与 OLED 屏幕正确同步；</li>
+<li>通过 UART 输出调试日志，便于后续问题定位。</li>
+</ul>
+<blockquote>
+<p>Rewrote driver initialization sequences to ensure synchronized peripheral startup.<br>Added UART logging for dynamic debugging and firmware validation.</p>
+</blockquote>
+<hr>
+<h3 id="3️⃣-问题与解决方案-Debugging-Solutions"><a href="#3️⃣-问题与解决方案-Debugging-Solutions" class="headerlink" title="3️⃣ 问题与解决方案 | Debugging &amp; Solutions"></a>3️⃣ 问题与解决方案 | Debugging &amp; Solutions</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>原因分析</th>
+<th>解决方法</th>
+<th>Issue</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OLED 显示闪烁</td>
+<td>初始化时序错误</td>
+<td>增加延时并重设复位逻辑</td>
+<td>OLED flicker</td>
+<td>Adjusted reset delay sequence</td>
+</tr>
+<tr>
+<td>I²C 超时</td>
+<td>导线过长造成信号干扰</td>
+<td>缩短连线并优化接地布局</td>
+<td>I²C timeout</td>
+<td>Rewired shorter SDA&#x2F;SCL paths</td>
+</tr>
+<tr>
+<td>编译警告</td>
+<td>类型不匹配</td>
+<td>修正宏定义与结构体声明</td>
+<td>Compiler warning</td>
+<td>Fixed type mismatches in headers</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📊-项目成果-Results"><a href="#📊-项目成果-Results" class="headerlink" title="📊 项目成果 | Results"></a>📊 项目成果 | Results</h2><ul>
+<li>成功完成任务功能并扩展稳定性测试；</li>
+<li>实现<strong>实时数据采集 + OLED 可视化显示</strong>；</li>
+<li>记录完整调试过程及经验总结。</li>
+</ul>
+<blockquote>
+<p>Achieved stable real-time sensor reading and OLED visualization,<br>with all debugging steps documented for reproducibility.</p>
+</blockquote>
+<p align="center">
+  <img src="https://bbs.eeworld.com.cn/data/attachment/forum/202310/ee-demo.jpg" width="70%">
+</p>
+
+<hr>
+<h2 id="💡-学习与收获-Learning-Outcomes"><a href="#💡-学习与收获-Learning-Outcomes" class="headerlink" title="💡 学习与收获 | Learning Outcomes"></a>💡 学习与收获 | Learning Outcomes</h2><table>
+<thead>
+<tr>
+<th>中文</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>📘 深入理解嵌入式系统调试流程与问题定位方法</td>
+<td>📘 Strengthened understanding of embedded debugging methodology</td>
+</tr>
+<tr>
+<td>🔬 掌握信号级别问题分析与外设配置技巧</td>
+<td>🔬 Gained experience in signal-level diagnostics</td>
+</tr>
+<tr>
+<td>🧩 培养系统化思维与工程严谨性</td>
+<td>🧩 Developed systematic problem-solving mindset</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>“每一次错误都让我离正确更近一步。”<br>“Every malfunction became a lesson — every successful fix, a confirmation of understanding.”</p>
+</blockquote>
+<hr>
+<h2 id="🧭-反思与延伸-Reflection-Future-Work"><a href="#🧭-反思与延伸-Reflection-Future-Work" class="headerlink" title="🧭 反思与延伸 | Reflection &amp; Future Work"></a>🧭 反思与延伸 | Reflection &amp; Future Work</h2><p><strong>中文：</strong><br>通过此次任务，我更加理解了工程师思维：<br>问题不是障碍，而是验证假设与改进设计的机会。<br>后续我将把这种调试与验证方法应用到更复杂的 AI 嵌入式系统（如 MAX78000 智能手环）中。</p>
+<p><strong>English:</strong><br>This task strengthened my engineering mindset —<br>to approach problems through analysis, hypothesis, and validation.<br>I plan to apply this methodology to larger-scale embedded AI systems such as the MAX78000 Health Monitoring Wristband.</p>
+<hr>
+<h2 id="🔗-参考与相关链接-References"><a href="#🔗-参考与相关链接-References" class="headerlink" title="🔗 参考与相关链接 | References"></a>🔗 参考与相关链接 | References</h2><ul>
+<li><a href="https://www.eeworld.com.cn/huodong/digikey_follow_me_2025_02/">EEWORLD 活动主页 &#x2F; Official Event Page</a>  </li>
+<li><a href="https://bbs.eeworld.com.cn/thread-1327003-1-1.html">论坛作品发布帖 &#x2F; Project Submission</a>  </li>
+<li><a href="https://minkai-shi.github.io/categories/EEPW-Activity/">EEPW 项目合集 &#x2F; My Embedded Project Collection</a>  </li>
+<li><a href="https://www.digikey.com/">DigiKey 官方网站 &#x2F; DigiKey Official</a></li>
+</ul>
+<hr>
+<h2 id="🧩-标签-Tags"><a href="#🧩-标签-Tags" class="headerlink" title="🧩 标签 | Tags"></a>🧩 标签 | Tags</h2><p><code>Embedded Systems</code> · <code>Hardware Debugging</code> · <code>EEWORLD</code> · <code>DigiKey</code> · <code>I2C</code> · <code>Firmware Engineering</code></p>
+<hr>
+<p><strong>作者 &#x2F; Author:</strong> Minkai Shi<br><strong>日期 &#x2F; Date:</strong> 2025<br><strong>许可证 &#x2F; License:</strong> MIT  </p>
+]]></content>
+      <categories>
+        <category>EEPW &amp; EEWorld Activity</category>
+      </categories>
+      <tags>
+        <tag>EEPW &amp; EEWorld Activity</tag>
+      </tags>
+  </entry>
 </search>
