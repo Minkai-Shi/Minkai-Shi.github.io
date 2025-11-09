@@ -891,9 +891,9 @@
 </thead>
 <tbody><tr>
 <td>主控平台</td>
-<td>STM32 &#x2F; MAX 系列开发板</td>
-<td>MCU Board</td>
-<td>STM32 or MAX development board</td>
+<td>FRDM-MCXN947 开发板</td>
+<td>FRDM-MCXN947 development board</td>
+<td></td>
 </tr>
 <tr>
 <td>外设模块</td>
