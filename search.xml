@@ -893,7 +893,7 @@
 <td>主控平台</td>
 <td>FRDM-MCXN947 开发板</td>
 <td>FRDM-MCXN947 development board</td>
-<td></td>
+<td>This is a low-cost design and evaluation board based on the MCXN947 device, which integrates a dual-core Arm Cortex-M33 microcontroller and one Neural Processing Unit (NPU) in a single package. NXP provides tools and software support for the device, including hardware evaluation boards, software development Integrated Development Environment (IDE), sample applications, and drivers.</td>
 </tr>
 <tr>
 <td>外设模块</td>
